@@ -70,7 +70,7 @@ AudioContext
 OfflineAudioContext
 ```
 
-Most of the types represented by these interfaces _are_ visible in the API through normal use. For instance, to get a `PannerNode` instance a developer must currently use:
+Most of the types represented by these interfaces _are_ visible in the API through normal use. For instance, to get a `PannerNode` instance a developer currently uses:
 
 ```
 var panner = context.createPanner();
@@ -81,8 +81,9 @@ Where `context` is an instance of `AudioContext`  (or one of its subclasses). Pr
  1. Assuming that the static methods on the `context` are desirable shortcuts for wiring up the context of a `Node` instance to the `context` against which it runs, _how_ does that context get set in a way that would allow pure JS objects to describe it?
  2. By what privileged mechanism does the system create instances of these types if they do not have constructors?
  3. Are these types in any way subclassable? If not, why not?
+ 4. If the intent is to mirror other DOM APIs, it's curious to have `create*()` methods but no factory (e.g.: `createElement("tagname")`)
 
-Adding constructors and context-setting methods (or constructor params) for most of the interfaces that lack them would answer #'s 1 and 2. E.g.:
+Adding constructors and context-setting methods (or constructor params) for most of the interfaces that lack them would answer #'s 1 and 2 and largely obviate 4. E.g.:
 
 ```js
 // A possible de-sugaring for createPanner() when ctors are defined:
@@ -98,7 +99,9 @@ AudioContext.prototype.createPanner = function() {
 };
 ```
 
-This requires answering the follow-on questions "what happens if the context is invalid, changes, or is never set?", but those are reasonable to ask and their answers don't need to be complicated (certainly not for v1).
+Either constructor style allows these `AudioNode` types to conceptually be modeled more cleanly as JS objects which could self-host.
+
+Of course, this requires answering the follow-on questions "what happens if the context is invalid, changes, or is never set?", but those are reasonable to ask and their answers don't need to be complicated (certainly not for v1).
 
 An alternative design might locate the constructors on the context directly, but this seems to create as many problems as it solves.
 
