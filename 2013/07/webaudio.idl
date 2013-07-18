@@ -1,4 +1,4 @@
-/**************************************
+/***********************************
  * Extracted via the web inspector from:
  *
  *    https://dvcs.w3.org/hg/audio/raw-file/28a38310adae/webaudio/specification.html
@@ -14,7 +14,7 @@
  **/
 
 
-/**************************************
+/***********************************
  * 4.1
  **/
 callback DecodeSuccessCallback = void (AudioBuffer decodedData);
@@ -66,7 +66,7 @@ interface AudioContext : EventTarget {
 };
 
 
-/**************************************
+/***********************************
  * 4.1b
  **/
 [Constructor(unsigned long numberOfChannels, unsigned long length, float sampleRate)]
@@ -79,7 +79,7 @@ interface OfflineAudioContext : AudioContext {
 };
 
 
-/**************************************
+/***********************************
  * 4.1c
  **/
 interface OfflineAudioCompletionEvent : Event {
@@ -89,7 +89,7 @@ interface OfflineAudioCompletionEvent : Event {
 };
 
 
-/**************************************
+/***********************************
  * 4.2
  **/
 enum ChannelCountMode {
@@ -121,7 +121,7 @@ interface AudioNode : EventTarget {
 };
 
 
-/**************************************
+/***********************************
  * 4.4
  **/
 interface AudioDestinationNode : AudioNode {
@@ -131,7 +131,7 @@ interface AudioDestinationNode : AudioNode {
 };
 
 
-/**************************************
+/***********************************
  * 4.5
  **/
 interface AudioParam {

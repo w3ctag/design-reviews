@@ -139,14 +139,112 @@ AudioContext.prototype.decodeAudioData = function(data, success, error) {
 
 Note the `successCallback` parameter is now optional.
 
+### ISSUE: `ScriptProcessorNode` is Unfit For Purpose (Section 15)
+
+We harbor deep concerns about `ScriptProcessorNode` as currently defined. Notably:
+
+ * As currently defined, these nodes _must_ run on the UI thread -- giving rise, it seems, to many of the admonitions not to use them in Section 15.3.*. This is deeply at odds with the rest of the architecture which seeks to keep processing _off_ of the main thread to ensure low-latency.
+ * Since these functions run on the main thread, it's impossible to set execution constraints that might help reduce jitter; e.g., a different GC strategy or tight constraints on execution time slicing.
+
+This can be repaired. Here's a stab at it:
+
+```
+[Constructor(DOMString scriptURL, optional unsigned long bufferSize)]
+interface AudioWorker : Worker {
+
+};
+
+interface AudioProcessingEvent : Event {
+
+    readonly attribute double playbackTime;
+
+    transferrable attribute AudioBuffer buffer;
+
+};
+
+interface AudioWorkerGlobalScope : DedicatedWorkerGlobalScope {
+
+  attribute EventHandler onaudioprocess;
+
+};
+
+interface ScriptProcessorNode : AudioNode {
+
+  attribute EventHandler onaudioprocess;
+
+  readonly attribute long bufferSize;
+
+};
+
+partial interface AudioContext {
+
+  ScriptProcessorNode createScriptProcessor(
+  	DOMString scriptURL,
+    optional unsigned long bufferSize = 0,
+    optional unsigned long numberOfInputChannels = 2,
+    optional unsigned long numberOfOutputChannels = 2);
+
+}
+```
+
+The idea here is that to ensure low-latency processing, no copying of resulting buffers is done (using the Worker's [Transferrable](https://plus.sandbox.google.com/114636678211810483111/posts/isYunS2B6os) mechanism).
+
+Scripts are loaded from external URLs and can control their inbound/outbound buffering with a constructor arguments.
+
+Under this arrangement it's possible for the system to start to change the constraints that these scripts run under. GC can be turned off, runtime can be tightly controlled, and these scripts can even be run on the (higher priority) audio-processing thread.
+
+All of this is necessary to ensure that scripts are not second-class citizens in the architecture; attractive nuisances which can't actually be used in the real world due to their predictable down-sides.
+
+### ISSUE: Explaining ("De-sugaring") the `*Node` Types
+
+On the back of a repaired `ScriptProcessorNode` definition, the spec should contain tight descriptions of the built-in library of the `AudioNode` subclasses; preferably in the form of script which could be executed in a `ScriptProcessorNode`.
+
+*Obviously* we do not recommend that implementations lean on this sort of self-hosting for production systems. It is, however, clear that without such a detailed description of the expected algorithms, compatibility between implementations cannot be guaranteed, nor can conformance with the spec be meaningfully measured. This de-sugaring-as-spec-exercise would be helpful for the testing of the system and for users who will at a later time want to know _exactly_ what the system is expected to be doing for them.
+
+We imagine an appendix of the current spec that includes such de-sugarings and test suites built on them.
+
 ## Layering Considerations
 
-TODO(slightlyoff)
+Web Audio is very low-level and this is a virtue. By describing a graph that operates in terms of samples of bytes, it enables developers to tightly control the behavior of processing and ensure low-latency delivery of results.
 
-### High/Low-level Connectedness
+Today's Web Audio spec is an island: connected to its surroundings via loose ties, not integrated into the fabric of the platform as the natural basis and explanation of all audio processing -- despite being incredibly fit for that purpose.
 
-TODO(slightlyoff)
 
-## Other Architectural Issues
+### Web Audio and the `<audio>` element
 
-TODO(slightlyoff)
+Perhaps the most striking example of this comes from the presence in the platform of both Web Audio and the `<audio>` element. Given that the `<audio>` element is incredibly high-level, providing automation for loading, decoding, playback and UI to control these processes, it would appear that Web Audio lives at an all-together lower place in the conceptual stack. A natural consequence of this might be to re-interpret the `<audio>` element's playback functions _in terms of_ Web Audio. Similar descriptions can happen of the UI _in terms of_ Shadow DOM and the loading of audio data via XHR or the upcoming `fetch()` API. It's not necessary to re-interpret everything all at once, however.
+
+Web Audio acknowledges that the `<audio>` element performs valuable audio loading work today by allowing the creation of `SourceNode` instances from them:
+
+```js
+/***********************************
+  * 4.11 The MediaElementAudioSourceNode Interface
+  **/ 
+var mediaElement = document.getElementById('mediaElementID');
+var sourceNode = context.createMediaElementSource(mediaElement);
+sourceNode.connect(filterNode);
+````
+
+Lots of questions arise, particularly if we think of media element audio playback _as though_ it's low-level aspects were described in terms of Web Audio:
+
+ * What `AudioContext` do media elements use by default?
+ * Is that context available to script? Is there such a thing as a "default context"? 
+ * What does it mean to have multiple `AudioContext` instances for the same hardware device? Chris Wilson advises that they are simply sum'd, but how is _that_ described?
+ * By what mechanism is an `AudioContext` attached to hardware? If I have multiple contexts corresponding to independent bits of hardware...how does that even happen? `AudioContext` doesn't seem to support any parameters and there aren't any statics defined for "default" audio contexts corresponding to attached hardware (or methods for getting them).
+ * Can a media element be connected to multiple `AudioContext`s at the same time?
+ * Does `ctx.createMediaElementSource(n)` disconnect the output from the default context?
+ * If a second context calls `ctx2.createMediaElementSource(n)` on the same media element, is it disconnected from the first?
+ * Assuming it's possible to connect a media element to two contexts, effectively "wiring up" the output from one bit of processing to the other, is it possible to wire up the output of one context to another?
+ * Why are there both `MedaiaStreamAudioSourceNode` and `MediaElementAudioSourceNode` in the spec? What makes them different, particularly given that neither appear to have properties or methods and do nothing but inherit from `AudioNode`?
+
+All of this seems to indicate some confusion in, at a minimum, the types used in the design. For instance, we could answer many of the questions if we:
+
+ * Eliminate `MediaElementAudioSourceNode` and instead re-cast media elements as possessing `MediaStream audioStream` attributes which can be connected to `AudioContext`s
+ * Remove `createMediaElementSource()` in favor of `createMediaStreamSource()`
+ * Add constructors for all of these generated types; this would force explanation of how things are connected.
+
+There's also a confusing lack of clarity about what it means to call `createMediaStreamDestination()`. Why isn't it possible instead to simply route the `destination` of a context to a media element or treat `destination` as a `MediaStream`?
+
+## End Notes
+
+Lest the above be taken in a harsh light, we want to once again congratulate the Web Audio WG on delivering a high-quality design for a fundamental new capability that has been missing from the web. Nothing above is meant to subtract from that achievement; only to help cement the gains that Web Audio represents for the long-haul.
