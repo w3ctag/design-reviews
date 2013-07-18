@@ -209,9 +209,6 @@ Web Audio is very low-level and this is a virtue. By describing a graph that ope
 
 Today's Web Audio spec is an island: connected to its surroundings via loose ties, not integrated into the fabric of the platform as the natural basis and explanation of all audio processing -- despite being incredibly fit for that purpose.
 
-
-### Web Audio and the `<audio>` element
-
 Perhaps the most striking example of this comes from the presence in the platform of both Web Audio and the `<audio>` element. Given that the `<audio>` element is incredibly high-level, providing automation for loading, decoding, playback and UI to control these processes, it would appear that Web Audio lives at an all-together lower place in the conceptual stack. A natural consequence of this might be to re-interpret the `<audio>` element's playback functions _in terms of_ Web Audio. Similar descriptions can happen of the UI _in terms of_ Shadow DOM and the loading of audio data via XHR or the upcoming `fetch()` API. It's not necessary to re-interpret everything all at once, however.
 
 Web Audio acknowledges that the `<audio>` element performs valuable audio loading work today by allowing the creation of `SourceNode` instances from them:
@@ -237,13 +234,21 @@ Lots of questions arise, particularly if we think of media element audio playbac
  * Assuming it's possible to connect a media element to two contexts, effectively "wiring up" the output from one bit of processing to the other, is it possible to wire up the output of one context to another?
  * Why are there both `MedaiaStreamAudioSourceNode` and `MediaElementAudioSourceNode` in the spec? What makes them different, particularly given that neither appear to have properties or methods and do nothing but inherit from `AudioNode`?
 
-All of this seems to indicate some confusion in, at a minimum, the types used in the design. For instance, we could answer many of the questions if we:
+All of this seems to indicate some confusion in, at a minimum, the types used in the design. For instance, we could answer a few of the questions if we:
 
  * Eliminate `MediaElementAudioSourceNode` and instead re-cast media elements as possessing `MediaStream audioStream` attributes which can be connected to `AudioContext`s
  * Remove `createMediaElementSource()` in favor of `createMediaStreamSource()`
  * Add constructors for all of these generated types; this would force explanation of how things are connected.
 
-There's also a confusing lack of clarity about what it means to call `createMediaStreamDestination()`. Why isn't it possible instead to simply route the `destination` of a context to a media element or treat `destination` as a `MediaStream`?
+## Other Considerations
+
+Several questions arise in reading the examples:
+
+ * Why doesn't `context.createBufferSource()` take an optional buffer as a an argument? It would remove repetitive code like: `source1 = context.createBufferSource(); ... source1.buffer = someBuffer;`
+ * Why doesn't `AudioNode::connect()` return the passed `AudioNode destination`? It would enable a much terser chained style in some cases.
+ * Why don't the `create*()` methods (and their eventual ctor explanations) support parameters for connecting in/out? It seems that in most graph setup, this is one of the most common actions, and it's overly verbose today.
+ * Where does `param` come from in example 4.5.4? It's not marked constructable as per 4.5 and there doesn't appear to be a create() method for it documented anywhere. It's a ghost ;-)
+ * What language are the examples in Section 11 written in? Can it be executed?
 
 ## End Notes
 
