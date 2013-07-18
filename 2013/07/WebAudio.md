@@ -26,7 +26,7 @@ This is visible in [`webaudio.idl`](webaudio.idl) and [`webaudio_examples.js`](w
 
 *RESOLVED* by [changes that moved the duplicate names](https://dvcs.w3.org/hg/audio/rev/51bdf2d4e69c) to an [_informative_ section of the spec](https://dvcs.w3.org/hg/audio/raw-file/28a38310adae/webaudio/specification.html#OldNames)!
 
-Only listed here for completeness as it was  raised in our F2F meeting with Olivier Thereaux. Massive thanks to the authors and editors for re-considering their previous stance and bravely taking the opportunity attempt to sunset cruft. Nobody knows if it'll work in practice, but we want to be on record as vocally supporting your efforts here, and should it not work, in taking the appropriate share of the blame.
+Only listed here for completeness as it was  raised in our [F2F meeting](http://www.w3.org/2001/tag/2013/05/30-minutes#item05) with Olivier Thereaux. Massive thanks to the authors and editors for re-considering their previous stance and bravely taking the opportunity attempt to sunset cruft. Nobody knows if it'll work in practice, but we want to be on record as vocally supporting your efforts here, and should it not work, in taking the appropriate share of the blame.
 
 ### ISSUE: Constructibility & De-sugaring of static methods
 
