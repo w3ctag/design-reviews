@@ -99,8 +99,8 @@ AudioContext.prototype.createPanner = function() {
 };
 
 // An alternative that uses a positional context param:
-AudioContext.prototype.createPanner = function() {
-  return new PannerNode(this);
+AudioContext.prototype.createPanner = function(attributes) {
+  return new PannerNode(this, attributes);
 };
 ```
 
@@ -123,7 +123,10 @@ function playSound() {
 
     // Create a filter, panner, and gain node. 
     var lowpass = context.createBiquadFilter();
-    var panner = context.createPanner();
+    var panner = context.createPanner({ 
+      panningModel: "equalpoewr",
+      distanceModel: "linear"
+    });
     var gainNode2 = context.createGain();
 
     // Make connections 
@@ -298,6 +301,14 @@ On the back of a repaired `ScriptProcessorNode` definition, the spec should cont
 *Obviously* we do not recommend that implementations lean on this sort of self-hosting for production systems. It is, however, clear that without such a detailed description of the expected algorithms, compatibility between implementations cannot be guaranteed, nor can conformance with the spec be meaningfully measured. This de-sugaring-as-spec-exercise would be helpful for the testing of the system and for users who will at a later time want to know _exactly_ what the system is expected to be doing for them.
 
 We imagine an appendix of the current spec that includes such de-sugarings and test suites built on them.
+
+### ISSUE: Visible [Data Races](http://blog.regehr.org/archives/490)
+
+This topic has been debated on the [`public-audio` mailing list](http://lists.w3.org/Archives/Public/public-audio/2013JulSep/0162.html) and in [blogs](http://robert.ocallahan.org/2013/07/avoiding-copies-in-web-apis.html).
+
+It's reasonable to suggest that de-sugaring into a style that transfers ownership of buffers to nodes during processing is sufficient to close much of the problem down, but whatever the solution, we wish to be on the record as saying clearly that it is impermissible for Web Audio to unilaterally add visible data races to the JavaScript execution model.
+
+The Web Audio group is best suited to solve this issue, but we insist that no API be allowed to create visible data races from the perspective of linearly-executing JavaScript code.
 
 ## Layering Considerations
 
