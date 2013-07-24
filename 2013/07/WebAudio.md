@@ -4,7 +4,7 @@
 
 ## General Discussion
 
-The Web Audio API presents an architecture for low-latency audio processing and playback. It does this by creating _source_ and _destinations_. Processing nodes may be placed between these sources and destinations to modify the audio. Many of the most commonly used types of processing elements in audio engineering are required by the spec. This rich library of audio processing primitives combined with an architecture that ensures they can be run off of the main thread ensures the architecture presented by the API can map efficiently to many forms of hardware and, in general, that it will pose few hazards to portions of the web platform which are in contention for main-thread (JS, rendering) resources.
+The Web Audio API presents an architecture for low-latency audio processing and playback. It does this by creating _sources_ and _destinations_. Processing nodes may be placed between these sources and destinations to modify the audio. Many of the most commonly used types of processing elements in audio engineering are required by the spec. This rich library of audio processing primitives combined with an architecture that ensures they can be run off of the main thread ensures the architecture presented by the API can map efficiently to many forms of hardware and, in general, that it will pose few hazards to portions of the web platform which are in contention for main-thread (JS, rendering) resources.
 
 In addition to the library of "canned" node types, Web Audio specifies a `ScriptProcessorNode` type that enables processing of samples in script.
 
@@ -70,7 +70,7 @@ AudioContext
 OfflineAudioContext
 ```
 
-Most of the types represented by these interfaces _are_ visible in the API through normal use. For instance, to get a `PannerNode` instance a developer currently uses:
+Most of the types represented by the non-constructable interfaces _are_ visible in the API through normal use. For instance, to get a `PannerNode` instance a developer currently uses:
 
 ```
 var panner = context.createPanner();
@@ -97,6 +97,11 @@ AudioContext.prototype.createPanner = function() {
 AudioContext.prototype.createPanner = function() {
 	return new PannerNode({ context: this });
 };
+
+// An alternative that uses a positional context param:
+AudioContext.prototype.createPanner = function() {
+  return new PannerNode(this);
+};
 ```
 
 Either constructor style allows these `AudioNode` types to conceptually be modeled more cleanly as JS objects which could self-host.
@@ -104,6 +109,72 @@ Either constructor style allows these `AudioNode` types to conceptually be model
 Of course, this requires answering the follow-on questions "what happens if the context is invalid, changes, or is never set?", but those are reasonable to ask and their answers don't need to be complicated (certainly not for v1).
 
 An alternative design might locate the constructors on the context directly, but this seems to create as many problems as it solves.
+
+Using the constructor style from the last variant, we can re-work one of the examples from Section 7:
+
+```js
+...
+var context = new AudioContext();
+...
+
+function playSound() {
+    var oneShotSound = context.createBufferSource();
+    oneShotSound.buffer = dogBarkingBuffer;
+
+    // Create a filter, panner, and gain node. 
+    var lowpass = context.createBiquadFilter();
+    var panner = context.createPanner();
+    var gainNode2 = context.createGain();
+
+    // Make connections 
+    oneShotSound.connect(lowpass);
+    lowpass.connect(panner);
+    panner.connect(gainNode2);
+    gainNode2.connect(compressor);
+
+    oneShotSound.start(context.currentTime + 0.75);
+}
+```
+
+to:
+
+```js
+...
+var context = new AudioContext();
+...
+
+function playSound() {
+    var oneShotSound = new BufferSource(context, { buffer: dogBarkingBuffer });
+
+    // Create a filter, panner, and gain node. 
+    var lowpass = new BiquadFilterNode(context);
+    var panner = new PannerNode(context);
+    var gainNode2 = new GainNode(context);
+
+    // Make connections 
+    oneShotSound.connect(lowpass);
+    lowpass.connect(panner);
+    panner.connect(gainNode2);
+    gainNode2.connect(compressor);
+
+    oneShotSound.start(context.currentTime + 0.75);
+}
+```
+
+### ISSUE: Subclassing
+
+Related to a lack of constructors, but worth calling out independently, it's not currently possible to meaningfully compose node types, either through mixins or through subclassing. In JS, this sort of "is a" relationship is usually set up through the subclassing pattern:
+
+```js
+var SubNodeType = function() {
+  SuperNodeType.call(this);
+};
+SubNodeType.prototype = Object.create(SuperNodeType.prototype);
+SubNodeType.prototype.constructor = SubNodeType;
+// ...
+```
+
+There doesn't seem to be any way in the current design to enable this sort of composition. This is deeply unfortunate.
 
 ### ISSUE: Callbacks without Promises
 
@@ -138,6 +209,31 @@ AudioContext.prototype.decodeAudioData = function(data, success, error) {
 ```
 
 Note the `successCallback` parameter is now optional.
+
+What's the effect of this? Code can now be written like:
+
+```js
+// Wait for 3 samples to decode and then play them simultaneously:
+Promise.every(
+  ctx.decodeAudioData(buffer1),
+  ctx.decodeAudioData(buffer2),
+  ctx.decodeAudioData(buffer3)
+).then(function(samples) {
+  samples.forEach(function(buffer) {
+    (new BufferSource(context, { buffer: buffer })).start();
+  });  
+});
+```
+
+`OfflineAudioContext` can be similarly improved by vending a `Promise` from `startRendering()` which resolves when `oncomplete`:
+
+```js
+offlineContext.startRendering().then(function(renderedBuffer) {
+  // ...
+});
+```
+
+This is both terser and more composable than the current system.
 
 ### ISSUE: `ScriptProcessorNode` is Unfit For Purpose (Section 15)
 
@@ -224,10 +320,6 @@ sourceNode.connect(filterNode);
 
 Lots of questions arise, particularly if we think of media element audio playback _as though_ it's low-level aspects were described in terms of Web Audio:
 
- * What `AudioContext` do media elements use by default?
- * Is that context available to script? Is there such a thing as a "default context"? 
- * What does it mean to have multiple `AudioContext` instances for the same hardware device? Chris Wilson advises that they are simply sum'd, but how is _that_ described?
- * By what mechanism is an `AudioContext` attached to hardware? If I have multiple contexts corresponding to independent bits of hardware...how does that even happen? `AudioContext` doesn't seem to support any parameters and there aren't any statics defined for "default" audio contexts corresponding to attached hardware (or methods for getting them).
  * Can a media element be connected to multiple `AudioContext`s at the same time?
  * Does `ctx.createMediaElementSource(n)` disconnect the output from the default context?
  * If a second context calls `ctx2.createMediaElementSource(n)` on the same media element, is it disconnected from the first?
@@ -239,6 +331,13 @@ All of this seems to indicate some confusion in, at a minimum, the types used in
  * Eliminate `MediaElementAudioSourceNode` and instead re-cast media elements as possessing `MediaStream audioStream` attributes which can be connected to `AudioContext`s
  * Remove `createMediaElementSource()` in favor of `createMediaStreamSource()`
  * Add constructors for all of these generated types; this would force explanation of how things are connected.
+
+That leaves a few open issues for which we don't currently have suggestions but believe the WG should address:
+
+ * What `AudioContext` do media elements use by default?
+ * Is that context available to script? Is there such a thing as a "default context"? 
+ * What does it mean to have multiple `AudioContext` instances for the same hardware device? Chris Wilson advises that they are simply sum'd, but how is _that_ described?
+ * By what mechanism is an `AudioContext` attached to hardware? If I have multiple contexts corresponding to independent bits of hardware...how does that even happen? `AudioContext` doesn't seem to support any parameters and there aren't any statics defined for "default" audio contexts corresponding to attached hardware (or methods for getting them).
 
 ## Other Considerations
 
