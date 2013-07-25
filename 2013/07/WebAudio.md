@@ -310,9 +310,9 @@ It's reasonable to suggest that de-sugaring into a style that transfers ownershi
 
 The Web Audio group is best suited to solve this issue, but we insist that no API be allowed to create visible data races from the perspective of linearly-executing JavaScript code.
 
-### ISSUE: Lack of Serialization Primitives
+### ISSUE: Lack of Serialization Primitives & Introspection
 
-The IDL for the Web Audio node graph from any `AudioContext` doesn't define a serialization and there's no other way of easily cloning/walking an `AudioNode` graph. This lack of reflective API makes it deeply unlikely that systems can easily share graphs. This seems like a real drag on developer productivity. It also makes it difficult to clone some graph of processing from an Offline context to a real-time context or vice-versa.
+The IDL for the Web Audio node graph from any `AudioContext` doesn't define a serialization and there's no other way of easily cloning/walking an `AudioNode` graph. This lack of reflective API makes it deeply unlikely that systems can easily share graphs. This seems like a real drag on developer productivity. It also makes it difficult to clone some graph of processing from an `OfflineAudioContext` to a real-time context or vice-versa.
 
 A `toString()` or `toJSON()` method on `AudioContext` combined with a reflection API over the node graph would solve the issue.
 
