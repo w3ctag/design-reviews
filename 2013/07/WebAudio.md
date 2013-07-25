@@ -314,6 +314,8 @@ The Web Audio group is best suited to solve this issue, but we insist that no AP
 
 The IDL for the Web Audio node graph from any `AudioContext` doesn't define a serialization and there's no other way of easily cloning/walking an `AudioNode` graph. This lack of reflective API makes it deeply unlikely that systems can easily share graphs. This seems like a real drag on developer productivity. It also makes it difficult to clone some graph of processing from an Offline context to a real-time context or vice-versa.
 
+A `toString()` or `toJSON()` method on `AudioContext` combined with a reflection API over the node graph would solve the issue.
+
 ## Layering Considerations
 
 Web Audio is very low-level and this is a virtue. By describing a graph that operates in terms of samples of bytes, it enables developers to tightly control the behavior of processing and ensure low-latency delivery of results.
