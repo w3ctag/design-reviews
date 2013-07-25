@@ -310,6 +310,10 @@ It's reasonable to suggest that de-sugaring into a style that transfers ownershi
 
 The Web Audio group is best suited to solve this issue, but we insist that no API be allowed to create visible data races from the perspective of linearly-executing JavaScript code.
 
+### ISSUE: Lack of Serialization Primitives
+
+The IDL for the Web Audio node graph from any `AudioContext` doesn't define a serialization and there's no other way of easily cloning/walking an `AudioNode` graph. This lack of reflective API makes it deeply unlikely that systems can easily share graphs. This seems like a real drag on developer productivity. It also makes it difficult to clone some graph of processing from an Offline context to a real-time context or vice-versa.
+
 ## Layering Considerations
 
 Web Audio is very low-level and this is a virtue. By describing a graph that operates in terms of samples of bytes, it enables developers to tightly control the behavior of processing and ensure low-latency delivery of results.
@@ -359,6 +363,7 @@ Several questions arise in reading the examples:
  * Why don't the `create*()` methods (and their eventual ctor explanations) support parameters for connecting in/out? It seems that in most graph setup, this is one of the most common actions, and it's overly verbose today.
  * Where does `param` come from in example 4.5.4? It's not marked constructable as per 4.5 and there doesn't appear to be a create() method for it documented anywhere. It's a ghost ;-)
  * What language are the examples in Section 11 written in? Can it be executed?
+ * `OfflineAudioContext` is terribly named. In a browser, "offline" means something very different. `BulkProcessingContext` might be better.
 
 ## End Notes
 
