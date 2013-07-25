@@ -360,19 +360,6 @@ That leaves a few open issues for which we don't currently have suggestions but 
 
 Several questions arise in reading the examples:
 
- * Why doesn't `context.createBufferSource()` take an optional buffer as a an argument? It would turn repetitive code like: 
-
-  ```js
-  source1 = context.createBufferSource();
-  source1.buffer = someBuffer;
-  ```
-
-  into:
-
-  ```js
-  source1 = context.createBufferSource({ buffer: someBuffer });
-  ```
-
  * Why doesn't `AudioNode::connect()` return the passed `AudioNode destination`? It would enable a much terser chained style in some cases. Janessa Det provides the example of:
 
   ```js
@@ -394,7 +381,6 @@ Several questions arise in reading the examples:
       .connect(destination);
   ```
 
- * Why don't the `create*()` methods (and their eventual ctor explanations) support parameters for connecting in/out? It seems that in most graph setup, this is one of the most common actions, and it's overly verbose today.
  * Where does `param` come from in example 4.5.4? It's not marked constructable as per 4.5 and there doesn't appear to be a `create()` method for it documented anywhere. It's a ghost ;-)
  * What language are the examples in Section 11 written in? Can it be executed?
  * `OfflineAudioContext` is terribly named. In a browser, "offline" means something very different. `BulkProcessingContext` might be better.
