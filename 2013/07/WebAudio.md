@@ -2,16 +2,6 @@
 
 [Draft under discussion.](https://dvcs.w3.org/hg/audio/raw-file/28a38310adae/webaudio/specification.html)
 
-## General Discussion
-
-The Web Audio API presents an architecture for low-latency audio processing and playback. It does this by creating _sources_ and _destinations_. Processing nodes may be placed between these sources and destinations to modify the audio. Many of the most commonly used types of processing elements in audio engineering are required by the spec. This rich library of audio processing primitives combined with an architecture that ensures they can be run off of the main thread ensures the architecture presented by the API can map efficiently to many forms of hardware and, in general, that it will pose few hazards to portions of the web platform which are in contention for main-thread (JS, rendering) resources.
-
-In addition to the library of "canned" node types, Web Audio specifies a `ScriptProcessorNode` type that enables processing of samples in script.
-
-We note that the detailed attention given to low-latency processing and performance in a contended environment is emblematic of skilled design sense. We hold great hope that this API will bring the best of what modern audio hardware has to offer to the web platform and, if we may editorialize a bit, could not be more elated to see it progress. The following feedback is not meant to detract from the positive accomplishments that this design has achieved. They are offered in a spirit of collaboration and from a perspective of experience with the particulars web platform APIs.
-
-## API Hygiene
-
 We extracted the IDL and example code from the draft in question using a snippet run at the developer tool command line:
 
 ```js
@@ -21,6 +11,16 @@ Array.prototype.slice.call(
 ```
 
 This is visible in [`webaudio.idl`](webaudio.idl) and [`webaudio_examples.js`](webaudio_examples.js) in the current directory.
+
+## General Discussion
+
+The Web Audio API presents an architecture for low-latency audio processing and playback. It does this by creating _sources_ and _destinations_. Processing nodes may be placed between these sources and destinations to modify the audio. Many of the most commonly used types of processing elements in audio engineering are required by the spec. This rich library of audio processing primitives combined with an architecture that ensures they can be run off of the main thread ensures the architecture presented by the API can map efficiently to many forms of hardware and, in general, that it will pose few hazards to portions of the web platform which are in contention for main-thread (JS, rendering) resources.
+
+In addition to the library of "canned" node types, Web Audio specifies a `ScriptProcessorNode` type that enables processing of samples in script.
+
+We note that the detailed attention given to low-latency processing and performance in a contended environment is emblematic of skilled design sense. We hold great hope that this API will bring the best of what modern audio hardware has to offer to the web platform and, if we may editorialize a bit, could not be more elated to see it progress. The following feedback is not meant to detract from the positive accomplishments that this design has achieved. They are offered in a spirit of collaboration and from a perspective of experience with the particulars web platform APIs.
+
+## API Hygiene
 
 ### ISSUE: Duplicate Normative API
 
