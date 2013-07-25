@@ -122,12 +122,15 @@ function playSound() {
     oneShotSound.buffer = dogBarkingBuffer;
 
     // Create a filter, panner, and gain node. 
+    
     var lowpass = context.createBiquadFilter();
-    var panner = context.createPanner({ 
-      panningModel: "equalpoewr",
-      distanceModel: "linear"
-    });
+
+    var panner = context.createPanner();
+    panner.panningModel = "equalpower";
+    panner.distanceModel = "linear";
+
     var gainNode2 = context.createGain();
+    
 
     // Make connections 
     oneShotSound.connect(lowpass);
@@ -151,7 +154,10 @@ function playSound() {
 
     // Create a filter, panner, and gain node. 
     var lowpass = new BiquadFilterNode(context);
-    var panner = new PannerNode(context);
+    var panner = new PannerNode(context, { 
+      panningModel: "equalpower",
+      distanceModel: "linear"
+    });
     var gainNode2 = new GainNode(context);
 
     // Make connections 
