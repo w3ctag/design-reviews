@@ -223,7 +223,7 @@ Promise.every(
   ctx.decodeAudioData(buffer3)
 ).then(function(samples) {
   samples.forEach(function(buffer) {
-    (new BufferSource(context, { buffer: buffer })).start();
+    (new BufferSource(ctx, { buffer: buffer })).start();
   });  
 });
 ```
