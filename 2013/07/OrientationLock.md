@@ -1,6 +1,6 @@
 # Screen Orientation Lock - Draft Feedback
 
-Spec: http://www.w3.org/TR/screen-orientation/
+Spec: https://dvcs.w3.org/hg/screen-orientation/raw-file/tip/Overview.html
 
 * the somewhat liberal use of SHOULD in that spec is going to lead to user agents doing bad things. It basically says that UAs are allowed to return bogus orientation values. This will lead to Device Orientation all over again (where UA's returned laughably different values depending on which way one rotates their phone). 
 
