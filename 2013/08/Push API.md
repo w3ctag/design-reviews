@@ -26,9 +26,18 @@ It is also unclear what "User agents must not provide Push API access to webapps
 
 Specification doesn't define when this error may occur and why webapp might be disallowed to unregister.
 
-### ISSUE: Re-Registering push notifications
+## API Objects' Responsibilities
 
-It is unclear why push server failure revokes user's permission to provide push notifications. Suggestion: to define explicit `PushServiceFailure` message and to leave the decision of unregistering to webapp. It is also might be useful to have explicit `PushServiceOnline` message.
+### ISSUE: Access granting and push registering functionality stick together
+
+`PushManager.register` provides two heterogeneous functions:
+
+  * asking use permission,
+  * registering push notifications.
+
+This mixing leads to odd user agent behavior, i.e. push service failure forces webapp to ask permission again.
+
+Suggestion: split the functionality and provide separate methods to ask user permission (check if permission has already being granted) and to register push notifications. Provide different sets of errors for those purposes.
 
 ## API Objects' Interfaces
 
