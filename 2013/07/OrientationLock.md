@@ -14,7 +14,7 @@ Spec: https://dvcs.w3.org/hg/screen-orientation/raw-file/tip/Overview.html
 * The `unlockOrientation()` and `lockOrientation()` methods do the same thing.
   The methods should be merged into a `setOrientation()` method. Setting the
   orientation to `null` or the empty string just returns it to its default.
-  Could also add a "default" orientation keyword.
+  Could also add a "auto" orientation keyword.
 
 * If the spec can be changed to
   `setOrientation([TreatEmptyStringAs=null] Orientation value)`,
