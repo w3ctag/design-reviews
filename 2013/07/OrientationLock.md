@@ -14,7 +14,7 @@ Spec: http://www.w3.org/TR/screen-orientation/
 * The `unlockOrientation()` and `lockOrientation()` methods do the same thing.
   The methods should be merged into a `setOrientation()` method. Setting the
   orientation to `null` or the empty string just returns it to its default.
-  Could also add a "default" orientation keyword.
+  Could also add a "auto" orientation keyword.
 
 * If the spec can be changed to 
   `setOrientation([TreatEmptyStringAs=null] Orientation value)`, 
@@ -34,3 +34,4 @@ setOrientation(null).then(whatever);
  * The spec treats Screen as extending EventTarget, but Screen is not an
    EventTarget. Either the spec needs to make Screen and EventTarget or CSSOM 
    View needs to be updated to be an EventTarget. 
+
