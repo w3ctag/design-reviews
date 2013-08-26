@@ -16,8 +16,8 @@ Spec: https://dvcs.w3.org/hg/screen-orientation/raw-file/tip/Overview.html
   orientation to `null` or the empty string just returns it to its default.
   Could also add a "auto" orientation keyword.
 
-* If the spec can be changed to
-  `setOrientation([TreatEmptyStringAs=null] Orientation value)`,
+* If the spec can be changed to 
+  `setOrientation([TreatEmptyStringAs=null] Orientation value)`, 
   then it should vend a Promise. So then, for example:
 
 ```
@@ -32,5 +32,5 @@ setOrientation(null).then(whatever);
  * The spec does not define which task queue to use.  
 
  * The spec treats Screen as extending EventTarget, but Screen is not an
-   EventTarget. Either the spec needs to make Screen and EventTarget or CSSOM
-   View needs to be updated to be an EventTarget.
+   EventTarget. Either the spec needs to make Screen and EventTarget or CSSOM 
+   View needs to be updated to be an EventTarget. 
