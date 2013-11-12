@@ -1,0 +1,427 @@
+/***********************************
+ * Extracted via the web inspector from:
+ *
+ *    https://dvcs.w3.org/hg/webcrypto-api/file/dffe14c6052a/spec/Overview.html
+ *
+ * By running:
+ *
+ *    Array.prototype.slice.call(
+ *      document.querySelectorAll(".idl,.idl-code,.es-code")
+ *    ).map(function(n) { return n.innerText; }).join("\n\n\n");
+ *
+ * Reformatted for readability.
+ *
+ **/
+
+/***********************************
+ * 9
+ **/
+[NoInterfaceObject]
+interface RandomSource {
+  ArrayBufferView getRandomValues(ArrayBufferView array);
+};
+
+
+
+/***********************************
+ * 10
+ **/
+// TBD: ISSUE-28
+typedef (Algorithm or DOMString) AlgorithmIdentifier;
+
+dictionary Algorithm {
+  DOMString name;
+};
+
+
+
+/***********************************
+ * 11
+ **/
+enum KeyType {
+  "secret",
+  "public",
+  "private"
+};
+
+enum KeyUsage {
+  "encrypt",
+  "decrypt",
+  "sign",
+  "verify",
+  "deriveKey",
+  "deriveBits",
+  "wrapKey",
+  "unwrapKey"
+};
+
+interface Key {
+  readonly attribute KeyType type;
+  readonly attribute boolean extractable;
+  readonly attribute Algorithm algorithm;
+  readonly attribute KeyUsage[] usages;
+};
+
+
+
+/***********************************
+ * 12
+ **/
+interface Crypto {
+  readonly attribute SubtleCrypto subtle;
+};
+
+Crypto implements RandomSource;
+
+partial interface Window {
+  readonly attribute Crypto crypto;
+};
+
+
+
+/***********************************
+ * 13. SubtleCrypto interface
+ **/
+enum KeyFormat {
+  // An unformatted sequence of bytes. Intended for secret keys.
+  "raw",
+  // The DER encoding of the PrivateKeyInfo structure from RFC 5208.
+  "pkcs8",
+  // The DER encoding of the SubjectPublicKeyInfo structure from RFC 5280.
+  "spki",
+  // The key is represented as JSON according to the JSON Web Key format.
+  "jwk",
+};
+
+typedef (ArrayBuffer or ArrayBufferView) CryptoOperationData;
+
+interface SubtleCrypto {
+  Promise<any> encrypt(AlgorithmIdentifier algorithm,
+                       Key key,
+                       sequence<CryptoOperationData> data);
+  Promise<any> decrypt(AlgorithmIdentifier algorithm,
+                       Key key,
+                       sequence<CryptoOperationData> data);
+  Promise<any> sign(AlgorithmIdentifier algorithm,
+                    Key key,
+                    sequence<CryptoOperationData> data);
+  Promise<any> verify(AlgorithmIdentifier algorithm,
+                      Key key,
+                      CryptoOperationData signature,
+                      sequence<CryptoOperationData> data);
+  Promise<any> digest(AlgorithmIdentifier algorithm,
+                      sequence<CryptoOperationData> data);
+
+  Promise<any> generateKey(AlgorithmIdentifier algorithm,
+                           optional boolean extractable = false,
+                           optional KeyUsage[] keyUsages = []);
+  Promise<any> deriveKey(AlgorithmIdentifier algorithm,
+                         Key baseKey,
+                         AlgorithmIdentifier? derivedKeyType,
+                         optional boolean extractable = false,
+                         optional KeyUsage[] keyUsages = []);
+  Promise<any> deriveBits(AlgorithmIdentifier algorithm,
+                          Key baseKey,
+                          unsigned long length);
+
+  // TBD: ISSUE-35
+  Promise<any> importKey(KeyFormat format,
+                         CryptoOperationData keyData,
+                         AlgorithmIdentifier? algorithm,
+                         optional boolean extractable = false,
+                         optional KeyUsage[] keyUsages = []);
+  Promise<any> exportKey(KeyFormat format, Key key);
+
+  // Note: wrapKey and unwrapKey remain "Features at Risk"
+  Promise<any> wrapKey(KeyFormat format,
+                       Key key,
+                       Key wrappingKey,
+                       AlgorithmIdentifier wrapAlgorithm);
+  Promise<any> unwrapKey(KeyFormat format,
+                         CryptoOperationData wrappedKey,
+                         Key unwrappingKey,
+                         AlgorithmIdentifier unwrapAlgorithm,
+                         AlgorithmIdentifier? unwrappedKeyAlgorithm,
+                         optional boolean extractable = false,
+                         optional KeyUsage[] keyUsages = []);
+};
+
+
+
+
+/***********************************
+ * 14. WorkerCrypto interface
+ **/
+interface WorkerCrypto {
+};
+
+WorkerCrypto implements RandomSource;
+
+partial interface WorkerGlobalScope {
+  readonly attribute WorkerCrypto crypto;
+};
+
+
+
+/***********************************
+ * 15. BigInteger
+ **/
+typedef Uint8Array BigInteger;
+
+
+
+/***********************************
+ * 16. KeyPair
+ **/
+interface KeyPair {
+  Key publicKey;
+  Key privateKey;
+};
+
+
+
+/***********************************
+ * 17.4.3. RsaKeyGenParams dictionary
+ **/
+dictionary RsaKeyGenParams : Algorithm {
+  // The length, in bits, of the RSA modulus
+  unsigned long modulusLength;
+  // The RSA public exponent
+  BigInteger publicExponent;
+};
+
+
+
+/***********************************
+ * 17.5.3. RsaSsaParams dictionary
+ **/
+dictionary RsaSsaParams : Algorithm {
+  // The hash algorithm to use
+  AlgorithmIdentifier hash;
+};
+
+
+
+/***********************************
+ *
+ **/
+17.6.3. RsaPssParams dictionary
+
+dictionary RsaPssParams : Algorithm {
+  // The hash function to apply to the message
+  AlgorithmIdentifier hash;
+  // The desired length of the random salt
+  unsigned long saltLength;
+};
+
+
+
+/***********************************
+ * 17.7.3. RsaOaepParams dictionary
+ **/
+dictionary RsaOaepParams : Algorithm {
+  // The hash function to apply to the message
+  AlgorithmIdentifier hash;
+  // The optional label/application data to associate with the message
+  CryptoOperationData? label;
+};
+
+
+
+/***********************************
+ * 17.8.3. EcdsaParams dictionary
+ **/
+dictionary EcdsaParams : Algorithm {
+  // The hash algorithm to use
+  AlgorithmIdentifier hash;
+};
+
+
+
+/***********************************
+ * 17.8.4. EcKeyGenParams dictionary
+ **/
+enum NamedCurve {
+  // NIST recommended curve P-256, also known as secp256r1.
+  "P-256",
+  // NIST recommended curve P-384, also known as secp384r1.
+  "P-384",
+  // NIST recommended curve P-521, also known as secp521r1.
+  "P-521"
+};
+
+dictionary EcKeyGenParams : Algorithm {
+  // A named curve
+  NamedCurve namedCurve;
+};
+
+
+
+/***********************************
+ * 17.9.3. EcdhKeyDeriveParams dictionary
+ **/
+typedef Uint8Array ECPoint;
+
+dictionary EcdhKeyDeriveParams : Algorithm {
+  // The peer's EC public key.
+  ECPoint public;
+};
+
+
+
+/***********************************
+ * 17.10.3. AesCtrParams dictionary
+ **/
+dictionary AesCtrParams : Algorithm {
+  // The initial value of the counter block. counter MUST be 16 bytes
+  // (the AES block size). The counter bits are the rightmost length
+  // bits of the counter block. The rest of the counter block is for
+  // the nonce. The counter bits are incremented using the standard
+  // incrementing function specified in NIST SP 800-38A Appendix B.1:
+  // the counter bits are interpreted as a big-endian integer and
+  // incremented by one.
+  CryptoOperationData counter;
+  // The length, in bits, of the rightmost part of the counter block
+  // that is incremented.
+  [EnforceRange] octet length;
+};
+
+
+
+/***********************************
+ * 17.10.4. AesKeyGenParams dictionary
+ **/
+dictionary AesKeyGenParams : Algorithm {
+  // The length, in bits, of the key.
+  [EnforceRange] unsigned short length;
+};
+
+
+
+/***********************************
+ * 17.11.3. AesCbcParams dictionary
+ **/
+dictionary AesCbcParams : Algorithm {
+  // The initialization vector. MUST be 16 bytes.
+  CryptoOperationData iv;
+};
+
+
+
+/***********************************
+ * 17.13.3. AesGcmParams dictionary
+ **/
+dictionary AesGcmParams : Algorithm {
+  // The initialization vector to use. May be up to 2^56 bytes long.
+  CryptoOperationData iv;
+  // The additional authentication data to include.
+  CryptoOperationData? additionalData;
+  // The desired length of the authentication tag. May be 0 - 128.
+  [EnforceRange] octet? tagLength;
+};
+
+
+
+/***********************************
+ * 17.14.3. AesCfbParams dictionary
+ **/
+dictionary AesCfbParams : Algorithm {
+  // The initialization vector. MUST be 16 bytes.
+  CryptoOperationData iv;
+};
+
+
+
+/***********************************
+ * 17.15.3. HmacParams dictionary
+ **/
+dictionary HmacParams : Algorithm {
+  // The inner hash function to use.
+  AlgorithmIdentifier hash;
+};
+
+
+
+/***********************************
+ * 17.15.4. HmacKeyParams dictionary
+ **/
+dictionary HmacKeyParams : Algorithm {
+  // The inner hash function to use.
+  AlgorithmIdentifier hash;
+  // The length (in bytes) of the key to generate. If unspecified, the
+  // recommended length will be used, which is the size of the associated hash function's block
+  // size.
+  unsigned long length?
+};
+
+
+
+/***********************************
+ * 17.16.3. DhKeyGenParams dictionary
+ **/
+dictionary DhKeyGenParams : Algorithm {
+  // The prime p.
+  BigInteger prime;
+  // The base g.
+  BigInteger generator;
+};
+
+
+
+/***********************************
+ * 17.16.4. DhKeyDeriveParams dictionary
+ **/
+dictionary DhKeyDeriveParams : Algorithm {
+  // The peer's public value.
+  BigInteger public;
+};
+
+
+
+/***********************************
+ * 17.18.3. ConcatParams dictionary
+ **/
+dictionary ConcatParams : Algorithm {
+  // The digest method to use to derive the keying material.
+  AlgorithmIdentifier hash;
+
+  // A bit string corresponding to the AlgorithmId field of the OtherInfo parameter.
+  // The AlgorithmId indicates how the derived keying material will be parsed and for which
+  // algorithm(s) the derived secret keying material will be used.
+  CryptoOperationData algorithmId;
+
+  // A bit string that corresponds to the PartyUInfo field of the OtherInfo parameter.
+  CryptoOperationData partyUInfo;
+  // A bit string that corresponds to the PartyVInfo field of the OtherInfo parameter.
+  CryptoOperationData partyVInfo;
+  // An optional bit string that corresponds to the SuppPubInfo field of the OtherInfo parameter.
+  CryptoOperationData? publicInfo;
+  // An optional bit string that corresponds to the SuppPrivInfo field of the OtherInfo parameter.
+  CryptoOperationData? privateInfo;
+};
+
+
+
+/***********************************
+ * 17.19.3. HkdfCtrParams dictionary
+ **/
+dictionary HkdfCtrParams : Algorithm {
+  // The algorithm to use with HMAC (eg: SHA-256)
+  AlgorithmIdentifier hash;
+  // A bit string that corresponds to the label that identifies the purpose for the derived keying material.
+  CryptoOperationData label;
+  // A bit string that corresponds to the context of the key derivation, as described in Section 5 of NIST SP 800-108 [SP800-108]
+  CryptoOperationData context;
+};
+
+
+
+/***********************************
+ * 17.20.3. Pbkdf2Params dictionary
+ **/
+dictionary Pbkdf2Params : Algorithm {
+  CryptoOperationData salt;
+  [Clamp] unsigned long iterations;
+  AlgorithmIdentifier prf;
+  CryptoOperationData? password;
+};
