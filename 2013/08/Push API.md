@@ -2,29 +2,25 @@
 
 [Draft under discussion](https://dvcs.w3.org/hg/push/raw-file/tip/index.html)
 
-## API Field of Application
+## Open questions
 
-### ISSUE: Concepts unclear
+### Registration persistence
 
-The Push API spec introduces a number of new concepts. In our view following terms and ideas should be explicitly defined in the document:
+In its present state all acting parts (user agent, push server, app server) operate using formal identifiers (URLs, registrations ids) and every connection is reinstatable. The only major exception is "last mile" between user agent and app code: message routing there is bound to a temporary entity (function callback) which exists in runtime only. If runtime context is lost the connection cannot be reinstated.
 
-  * push service
-  * invoking a non-active webapp
-  * `pushRegistrationId` as a form of user identification
+We suggest to bind push messages to Service Workers. That would also resolve other questions, for example, what should happen when webapp calls window.location.reload().
 
-These concepts raise a lot of questions which should be clarified. For example:
+### Push server <-> App server protocol
 
-  * why is push service needed? How should app server deal with push server knowing nothing except endpoint URL? What information is passing through push service and how is user-agent authenticated?
-  * how are registrations preserved between sessions and different webapp instances? What is webapp in a sense of this spec? Do all same-origin webpages share the registrations?
-  * how should user-agent invoke an inactive webapp? How to invoke a webapp requested using POST (or PUT, or DELETE) method? How to invoke a webapp that is using History API to manipulate page URLs?
+Spec neither specifies nor refers this protocol. From developer's point of view it's unknown how app server should communicate with push service having just endpoint URL and registration id.
 
-### ISSUE: "Express permission" needs clarification
+### Private push servers
 
-It is also unclear what "User agents must not provide Push API access to webapps without the express permission of the user" means. Either "express permission" definition should be clarified or "MUST NOT" statement should be excluded.
+Do we allow user to change browser's default push server? If the answer is "yes", which spec covers push service interface?
 
-### ISSUE: `NoModificationAllowedError` needs clarification
+### Managing registrations
 
-Specification doesn't define when this error may occur and why webapp might be disallowed to unregister.
+Do we allow user to manage push registrations, i.e. view or delete registrations via user agent UI? In our view spec should recommend to implement such a possibility since currently we have to rely on webapp having some interface to unsubscribe.
 
 ## API Objects' Responsibilities
 
@@ -41,12 +37,6 @@ Suggestion: split the functionality and provide separate methods to ask user per
 
 ## API Objects' Interfaces
 
-### ISSUE: Indistinguishable registrations
-
-`PushManager` provides mechanisms to register more than one push notifications request. It seems like useful functionality when webapp has different message streams or message sources. But neither user nor webapp cannot tell which registration belongs to which message stream. So user will be just confused if application would ask his permission to show push notifications several times in a row, and webapp would have to invent some mechanism to share "registrationId <-> message stream" relation between sessions and app instances.
-
-Suggestion: allow webapp to provide (a) an alias for each registration, (b) some information for user regarding each registration.
-
 ### ISSUE: Bad names
 
 `PushManager` is limited to dealing with registrations. Suggestion: `PushRegistrationManager`.
@@ -58,3 +48,5 @@ Suggestion: allow webapp to provide (a) an alias for each registration, (b) some
 `AbortError` is raised when user doesn't grant permissions, not when registration is aborted. Suggestion: `PermissionDeniedError`.
 
 `PushRegisterMessage` name is confusing as it really occurs when push service failed, not when new registration granted. Suggestion: `PushServiceFailure`.
+
+`NoModificationAllowedError` is in fact a technical (network) error, not disallowance.
