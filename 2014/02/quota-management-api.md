@@ -2,35 +2,31 @@
 
 [Draft under discussion](https://dvcs.w3.org/hg/quota/raw-file/tip/Overview.html) — 2014-02-04 version
 
-In general this is a nice specification: simple, largely idiomatic, and easy to read and use. We have two categories of feedback: one on the overall model, and one on some minor ways in which the API could be more idiomatic to JavaScript.
+In our view, this specification does not meet its goals or satisfy any compelling use cases. The overall model proposed is underspecified with regard to current storage models, and does not provide appropriate future extensibility. Furthermore, it continues down the path of infobar fatigue, which we want to avoid.
 
 ## The Overall Model
 
-We're concerned that the model presented here, while a natural evolution of the platform's existing capabilities, is not a forward-thinking way to deal with the platform's storage APIs.
+The model presented here is an incremental evolution of the platform's existing capabilities, but is not a forward-thinking way to deal with the platform's storage APIs, and does not even provide that much value for those that already exist.
 
-For example, the distinction between "temporary" and "persistent" is not very useful, as it stands. What is the actionable difference between temporary and persistent storage? Can apps rely on persistent storage being there forever, no matter how much space they use up? How ephemeral is temporary storage—could it be evicted at any time, without warning? Besides which, the only possibly-persistent storage on the platform currently is the filesystem API, which is only implemented in one browser engine. It seems strange that there's no way for an app to say "this IndexedDB database is really important."
+For example, the distinction between "temporary" and "persistent" is underspecified. What is the actionable difference between temporary and persistent storage? Can apps rely on persistent storage being there forever, no matter how much space they use up? How ephemeral is temporary storage—could it be evicted at any time, without warning? Besides which, the only possibly-persistent storage on the platform currently is the filesystem API, which is only implemented in one browser engine. It seems strange that there's no way for an app to say "this IndexedDB database is really important." As a consequence, this distinction isn't useful to web authors.
 
-The current model provides ways to query the total amount of space used, in aggregate, by each storage type—but no way of knowing how much space the app is using on any given data. What happens if an app is denied access to more storage? As-is, it must simply guess at what items are most profitable to delete, in order to free up space.
+The current model provides ways to query the total amount of space used, in aggregate, by each storage type—but no way of knowing how much space the app is using on any given data. What happens if an app is denied access to more storage? As-is, it must simply guess at what items are most profitable to delete, in order to free up space, and then try again. And there's no way to know how much space something will take up before storing it. In summary, the ability to make decisions about what to store and what to delete must be largely based on trial and error.
 
-The idea of requesting more storage is yet another example of "infobar fatigue," asking users questions which they may not be able to answer intelligently.
+The idea of requesting more storage is yet another example of "infobar fatigue," asking users questions which they may not be able to answer intelligently. Borus Smus describes this problem in his post, ["Installable Webapps: Extend the Sandbox"](http://smus.com/installable-webapps/). Modern specifications need to empower the user agent to make more intelligent decisions on behalf of the user, but this specification's model of simply requesting more space almost inevitably requires infobars or similar UI.
 
-### A Proposal
+## Proposed Use Cases, Requirements, and Constraints
 
-One model which might serve better would be something like the following.
+Given the above critique, we can ask, what are the base-level assumptions that a quota management API should be considering? Some are implicit in the current spec which might not be the most accurate; the above feedback, coming from a different direction, contains a few others.
 
-Instead of apps asking for space, they are able to take up as much space as they want. However, when the user agent starts feeling space pressure, it can start the process of "evicting" storage from applications.
+We'd love to work with the editors on identifying these in detail to help drive future revisions of the API. Off the cuff, a few come to mind:
 
-When a user agent begins evicting storage from an application, it sends an event to the application—probably to its [Service Worker](https://github.com/slightlyoff/ServiceWorker), since that will be able to be run independently of the app's "tab" being open. This **eviction event** tells the application how much space the user agent is demanding be reclaimed.
-
-It is then the application's job to intelligently prioritize and decide how to free up that much space. If it cannot do so, then the user agent is within rights to start removing storage until the desired amount of space is freed up.
-
-To make this work, **new APIs will be necessary for determining how much space storage takes**. Without such APIs, an application cannot be expected to make decisions about which storages to remove when an eviction event comes up. Reviewing the list of storages currently encompassed by the Quota Management API, IndexedDB is probably the most important to provide this for, since it is the only cross-platform API besides Application Cache, which is not scriptable. Service worker's various caches will also likely want such features.
-
-### Features of this Proposal
-
-We believe this proposal is general and flexible enough to encompass the needs of web storage management, by allowing user agents to manage the details of eviction events. Most obviously, a user agent could respond to OS-level space pressure. But also, for example, if an application is rapidly filling up the hard disk, an eviction event can be fired before the write successfully completes, demanding that some of the filled-up space be given back immediately, and suspending all future writes until that eviction event is resolved.
-
-The order in which a user agent evicts storage from applications can be left up to the user agent as well. For example, "bookmarked" or "kept" applications could be told to evict storage last, only after apps that the user visited once two years ago are told to do their eviction. Frequently-visited, but non-bookmarked, applications could then be somewhere in the middle. If enough bookmarked applications are occupying storage, the user could even be presented with a choice as to which of them should be prioritized for eviction. The key thing is that, through this eviction event idea, the interface presented to each application is the same. Applications can be coded flexibly, as they must be, to react to the environment and user.
+- **Use case**: React to space pressure in the environment to delete caches or other unnecessary data
+- **Use case**: Ensure enough space will be available to store the result of a potentially-expensive computation or download, before performing that computation or download
+- **Requirement**: Be able to measure the space taken up by various storage artifacts
+- **Requirement**: Allow applications to choose the relative importance of keeping storage artifacts without regard for their storage medium (i.e. allow keeping important data in IndexedDB or unimportant caches in the filesystem)
+- **Requirement**: Give apps enough information to notify the user about evicted storage artifacts (e.g. removing the "downloaded" checkmark from a video that was removed in response to space pressure)
+- **Constraint**: Minimize user interaction ("infobars") except when unavoidable, e.g. for resolving a conflict between space pressure and an app's desire to keep a certain storage artifact inviolate
+- **Constraint**: Any APIs specified must be flexible enough that it is clear how to extend them to future storage types, e.g. ServiceWorker caches
 
 ## Idiomatic JavaScript Critiques
 
@@ -73,7 +69,7 @@ which, using the terminology of [bug 23682](https://www.w3.org/Bugs/Public/show_
 
 ### Use dictionaries instead of non-constructible classes
 
-`StorageInfo` is specified as a `[NoInterfaceObject]` class (WebIDL "interface"), with no constructor. The idea of a constructor-less class in JavaScript is fairly nonsensical. In this particular case, it makes no sense for `StorageInfo` to be a class, with the `StorageInfo.prototype` that comes along with it, containing the two getters `usage` and `quota`.
+`StorageInfo` is specified as a `[NoInterfaceObject]` class (WebIDL "interface"), with no constructor. The idea of a constructor-less class in JavaScript is fairly nonsensical (in JS a class is literally the same thing as a constructor). In this particular case, it makes no sense for `StorageInfo` to be a class, with the `StorageInfo.prototype` that comes along with it, containing the two getters `usage` and `quota`.
 
 In JavaScript, we would instead represent such an object as simply an object literal, e.g. `{ usage: 5, quota: 10 }`. This is not an instance of any class, and especially not of a non-constructible one that somehow springs into life without ever being `new`ed. It has `Object.prototype` as its prototype, and has no getters, simply properties. In WebIDL, this would be represented with a dictionary type:
 
@@ -86,7 +82,7 @@ dictionary StorageInfo {
 
 ### Don't use non-constructible classes as namespaces
 
-This is essentially the same issue as the previous one, but in this case we are discussing `StorageQuota`. Again, `navigator.storageQuota` has somehow sprung into being as the only instance of a class `StorageQuota`, which it is not possible to actually construct an instance of since it has no constructor. In JavaScript, you would set up `navigator.storageQuota` as a simple "namespace object," again with no prototype chain, simply though something like
+This is essentially the same issue as the previous one, but in this case we are discussing `StorageQuota`. Again, `navigator.storageQuota` has somehow sprung into being as the only instance of a class `StorageQuota`, which it is not possible to actually construct an instance of since it has no constructor. In JavaScript, you would set up `navigator.storageQuota` as a simple "namespace object," again with no specially-crafted prototype chain, simply though something like
 
 ```js
 navigator.storageQuota = {
