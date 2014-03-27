@@ -12,7 +12,7 @@ For example, the distinction between "temporary" and "persistent" is underspecif
 
 The current model provides ways to query the total amount of space used, in aggregate, by each storage type—but no way of knowing how much space the app is using on any given data. What happens if an app is denied access to more storage? As-is, it must simply guess at what items are most profitable to delete, in order to free up space, and then try again. And there's no way to know how much space something will take up before storing it. In summary, the ability to make decisions about what to store and what to delete must be largely based on trial and error.
 
-The idea of requesting more storage is yet another example of "infobar fatigue," asking users questions which they may not be able to answer intelligently. Borus Smus describes this problem in his post, ["Installable Webapps: Extend the Sandbox"](http://smus.com/installable-webapps/). Modern specifications need to empower the user agent to make more intelligent decisions on behalf of the user, but this specification's model of simply requesting more space almost inevitably requires infobars or similar UI.
+The idea of requesting more storage is yet another example of "infobar fatigue," asking users questions which they may not be able to answer intelligently. Boris Smus describes this problem in his post, ["Installable Webapps: Extend the Sandbox"](http://smus.com/installable-webapps/). Modern specifications need to empower the user agent to make more intelligent decisions on behalf of the user, but this specification's model of simply requesting more space almost inevitably requires infobars or similar UI.
 
 ## Proposed Use Cases, Requirements, and Constraints
 
