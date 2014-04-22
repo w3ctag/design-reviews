@@ -10,9 +10,10 @@ Specification says that CSS3 Transitions, CSS3 Animations and SVG animations "ca
 ### REQUEST: Computed Values
 Though specification describes computing animation values in details, API has no method of accessing computed values, except for calling getComputedStyle or accessing `.value` attributes; there is also no way to get current time fraction unless you use `effectCallback`. It seems wrong since low-level spec should provide such a basic thing.
 
-Also, specification says:
+### ISSUE: Statement needs clarification
 <blockquote>Changes to specified style, specified attribute values, and the state of the Web Animations model made within the same execution block must be synchronized when rendering such that the whole set of changes is rendered together.</blockquote>
-Exact meaning of that phrase isn't clear. In first, there is no definition of "execution block". In second, current implementations do render certain properties (e.g. width, margin) changes immediately after change is made, and some webapps rely on that fact.
+Exact meaning of that phrase isn't clear. Rendering process isn't exposed in JavaScript, so it seems meaningless to set such a restriction in the spec. Furthermore, current implementations *do* render certain properties (e.g. width, margin) changes immediately after change is made, and some webapps rely on that fact.
+Also, term "execution block" needs to be defined (probably, in terms of <a href="http://people.mozilla.org/~jorendorff/es6-draft.html#sec-execution-contexts">execution contexts</a>).
 
 ### ISSUE: Web Animations and requestAnimationFrame
 Specification doesn't mention requestAnimationFrame API at all, so it's totally unclear how Web Animations sampling algorithm relates to requestAnimationFrame one and how to use both of them in one webapp. It seems like, basically, Web Animations sampling does the same as rAF, i.e. executes callback at proper periods of time. Looks like rAF API can be built on top of Web Animations model.
@@ -27,7 +28,12 @@ There are no serialize/unserialize methods at all, though they seem useful in so
 ### ISSUE: Wrong leveling
 Relations between `AnimationPlayer`, `TimedItem` and `Timing` interfaces present very uncommon patterns: copying writable attributes from `Timing` to associated `TimedItem` as read-only attributes, setter on `AnimationPlayer.source` which calls methods, etc.
 
-It seems like a design problem. Representing "computed" timing should be separated from grouping functionality and delegated to some kind of dependent entity (like `getComputedStyle` in CSS is separated from `.style` property). It would also solve an issue with string/integer representation of duration.
+It seems like a design problem. Representing "computed" timing should be separated from grouping functionality and delegated to some kind of dependent entity (like `getComputedStyle` in CSS is separated from `.style` property).
+
+## API Objects' Responsibilities
+
+### ISSUE: `play` method
+`AnimationTimeline.play` method does two separate things: (a) create `AnimationPlayer` instance, (b) play this instance. Furthermore, the very name `play` is misleading, since `timeline.play` doesn't start playing `timeline` (compare with `element.animate`, which actually animates `element`). Probably, method should be renamed to `startAnimationPlayer`, and `AnimationPlayer` should be made constructable.
 
 ## API Objects' Interfaces
 
@@ -35,6 +41,3 @@ It seems like a design problem. Representing "computed" timing should be separat
 `TimedItem` and `TimedGroup` provide some methods similar to DOM ones, but names don't fully match:
   * DOM ParentNode: firstElementChild, lastElementChild, childElementCount
   * WA AnimationGroup: firstChild, lastChild, no "count" property
-
-### ISSUE: Bad naming
-  * `play` method of `Timeline` interface is in fact factory method for `AnimationPlayer` objects, so it should be named like `createPlayer`
