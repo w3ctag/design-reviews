@@ -43,3 +43,35 @@ It seems like a design problem. Representing "computed" timing should be separat
 `TimedItem` and `TimedGroup` provide some methods similar to DOM ones, but names don't fully match:
   * DOM ParentNode: firstElementChild, lastElementChild, childElementCount
   * WA AnimationGroup: firstChild, lastChild, no "count" property
+
+### REQUEST: A `finished` promise for `AnimationPlayer`
+
+The `"finish"` event for `AnimationPlayer` is a perfect candidate for our newly-minted [use promises for state transitions](https://github.com/w3ctag/promises-guide#more-general-state-transitions) guidance. The TAG is interested in encouraging the introduction of promises for such cases across a wide variety of specs, as it has many authoring benefits, and as more and more async operations transition to using promises, network effects will multiply their usefulness. But even restricting ourselves to the web animations API alone, it would enable code like:
+
+```js
+ap1.play();
+ap2.play();
+ap3.play();
+Promise.all([ap1.finished, ap2.finished]).then(() => {
+    setUpUINowThat1And2HaveStoppedMovingAround();
+    ap3.finished.then(() => {
+        completeAllUISetupNowThatEverythingIsStill();
+    });
+});
+```
+
+This could be made even more convenient if `play` returned that same promise, so that the code could become
+
+```js
+ap3.play();
+Promise.all([ap1.play(), ap2.play()]).then(() => {
+    setUpUINowThat1And2HaveStoppedMovingAround();
+    ap3.finished.then(() => {
+        completeAllUISetupNowThatEverythingIsStill();
+    });
+});
+```
+
+We realize the proposed name of `finished` clashes with the existing boolean property, and are happy to discuss alternatives. (Our first thought is to coalesce the booleans `paused` and `finished` into a single `state` enumeration.) Additionally, we are of mixed opinions as to whether the `"finish"` event should be kept alongside the promise.
+
+If this sounds intriguing, we will be happy to lend our help on promisifying the API, as we have done in the past [for web audio](https://github.com/WebAudio/web-audio-api/issues/252).
