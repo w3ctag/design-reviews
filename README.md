@@ -1,6 +1,6 @@
 # W3C TAG Specification Reviews
 
-This repository is for specification reviews by the W3C Technical Architecture Group; usually (but not always) from W3C Working Groups.
+This repository is for specification reviews by the [W3C Technical Architecture Group](http://www.w3.org/2001/tag/); usually (but not always) from W3C Working Groups.
 
 We use the issues list to track our reviews; you can request a review for your spec by adding a new issue.
 
