@@ -7,7 +7,7 @@
 ### REQUEST: Backwards Compatibility
 Specification says that CSS3 Transitions, CSS3 Animations and SVG animations "can be defined in terms of this model without any observable change", but does not provide any further information. Having an algorithm for describing those animations in terms of Web Animations would be very helpful.
 
-We undrestand, that Chrome team implemented those animations with Web Animations without breaking backwards compatibility, but it doesn't automatically implies that other teams will be able to do so, since Chrome model may differ with other browsers models and, in fact, actual specs.
+We understand, that Chrome team implemented those animations with Web Animations without breaking backwards compatibility, but it doesn't automatically implies that other teams will be able to do so, since Chrome model may differ with other browsers models and, in fact, actual specs.
 
 ### REQUEST: Computed Values
 Though specification describes computing animation values in details, API has no method of accessing computed values, except for calling getComputedStyle or accessing `.value` attributes; there is also no way to get current time fraction unless you use `effectCallback`. It seems wrong since low-level spec should provide such a basic thing.
