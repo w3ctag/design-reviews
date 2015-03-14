@@ -234,6 +234,15 @@ Object.observe(navigator.permissions, function(changes) {
 });
 ```
 
+### ISSUE: Visibility Unclear
+
+One assumes this API will be made available from both documents and Worker contexts, but this is not clear from the IDL in the spec. We'd expect to see a line like this preceding interface definitions:
+
+```
+[Exposed=(Window,Worker)]
+...
+```
+
 ### ISSUE: Constructibility
 
 TODO(slightlyoff)
