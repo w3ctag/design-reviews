@@ -48,22 +48,22 @@ We are deeply concerned, however, that the draft as currently proposed (which ca
 It's difficult to come out and say it so bluntly, but we must: this API has less than half of the scope and capability we hoped for in an API named the "Permissions API".
 
 
-We had expected a unification and normalization framework for permissions the web platform. Instead, what we see in this draft that has never aimed for this. A glance at the [original proposal](https://lists.w3.org/Archives/Public/public-webapps/2014JulSep/0389.html) and [associated document](https://docs.google.com/document/d/12xnZ_8P6rTpcGxBHiDPPCe7AUyCar-ndg8lh2KwMYkM/preview) show that, while the designers may have hopes of adding features in the future, at no time has a more capable version actually been proposed, however discussions [have flagged the lack of capability as an issue](https://lists.w3.org/Archives/Public/public-webapps/2014JulSep/0399.html), which to date seems unaddressed.
+We had expected a unification and normalization framework for permissions on the web platform. Instead, what we see in this draft is an API that has never aimed for this. A glance at the [original proposal](https://lists.w3.org/Archives/Public/public-webapps/2014JulSep/0389.html) and [associated document](https://docs.google.com/document/d/12xnZ_8P6rTpcGxBHiDPPCe7AUyCar-ndg8lh2KwMYkM/preview) show that, while the designers may have hopes of adding features in the future, at no time has a more capable version actually been proposed, however discussions [have flagged the lack of capability as an issue](https://lists.w3.org/Archives/Public/public-webapps/2014JulSep/0399.html), which to date seems unaddressed.
 
 ####  Insufficient Reflection
 
-It is frankly surprising that the Permissions API is missing the ability to model all of the permissions states of existing permission-granting APIs in the web platform. These include
+It is frankly surprising that the Permissions API is missing the ability to model all of the permissions states of existing permission-granting APIs in the web platform. These include:
 
-    - [Geolocation](http://dev.w3.org/geo/api/spec-source.html)
-    - [Push](https://w3c.github.io/push-api/)
-    - [Notifications](https://notifications.spec.whatwg.org/)
-    - [Background Notifications](https://gauntface.com/blog/2014/12/15/push-notifications-service-worker)
-    - [Storage Quota API](http://www.w3.org/TR/quota-api/)
-    - [Fullscreen](http://www.w3.org/TR/fullscreen/)
-    - [MIDI devices](http://www.w3.org/TR/webmidi/) and [System Exclusive device support](http://www.w3.org/TR/webmidi/#requesting-access-to-the-midi-system-with-system-exclusive-support)
-    - [Camera and Microphone access](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia)
-    - [Popup window creation (e.g., `window.open()`)](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)
-    - Gamepad access
+    - [Geolocation](http://dev.w3.org/geo/api/spec-source.html).
+    - [Push](https://w3c.github.io/push-api/).
+    - [Notifications](https://notifications.spec.whatwg.org/).
+    - [Background Notifications](https://gauntface.com/blog/2014/12/15/push-notifications-service-worker).
+    - [Storage Quota API](http://www.w3.org/TR/quota-api/).
+    - [Fullscreen](http://www.w3.org/TR/fullscreen/).
+    - [MIDI devices](http://www.w3.org/TR/webmidi/) and [System Exclusive device support](http://www.w3.org/TR/webmidi/#requesting-access-to-the-midi-system-with-system-exclusive-support).
+    - [Camera and Microphone access](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia).
+    - [Popup window creation (e.g., `window.open()`)](https://developer.mozilla.org/en-US/docs/Web/API/Window/open).
+    - Gamepad access.
 
 Other recently contentious APIs (battery status, CPU core count) might also merit representation via this API to provide a transition path to guarding state/permission requests with Promises should vendors change their minds.
 
