@@ -1,8 +1,11 @@
 # Permissions API Draft Feedback
 
-[Draft under discussion.](https://w3c.github.io/permissions/) ([At this revision](https://github.com/w3c/permissions/tree/8aad19292c5218fb0411c090a9dfde022828cf96))
+A previous version of this feedback, covering an [earlier version of the spec](https://github.com/w3c/permissions/tree/8aad19292c5218fb0411c090a9dfde022828cf96), is available [here](https://github.com/w3ctag/spec-reviews/blob/b7bc0e355fcffba11e1f1de30194d4eacffab187/2015/03/Permissions.md)
 
-We extracted the IDL and example code from the draft in question using a snippet run at the developer tool command line:
+
+[Draft under discussion.](https://w3c.github.io/permissions/) ([At this revision](https://github.com/w3c/permissions/tree/35ad98421a96b32aa22ec79b74064e9e8fc03d0d))
+
+We extracted IDL and example code from the draft in question using a snippet run at the developer tool command line:
 
 ```js
 Array.prototype.slice.call(
@@ -10,84 +13,152 @@ Array.prototype.slice.call(
 ).map(function(n) { return n.innerText; }).join("\n\n\n");
 ```
 
-There isn't much of it, so we replicate it here:
+The IDL is relatively terse, so we replicate it here for clarity:
 
 ```
-geolocation
-notifications
-push-notifications
-midi-sysex
+dictionary PermissionDescriptor {
+    required PermissionName name;
+};
 
-required PermissionName name
+enum PermissionName {
+    "geolocation",
+    "notifications",
+    "push",
+    "midi"
+};
 
-granted
-denied
-prompt
+dictionary PushPermissionDescriptor : PermissionDescriptor {
+    boolean userVisible = false;
+};
 
-readonly attribute Permission permission
-readonly attribute PermissionState status
-attribute EventHandler onchange
+dictionary MidiPermissionDescriptor : PermissionDescriptor {
+    boolean sysex = false;
+};
 
-static Promise<PermissionStatus> query((Permission or PermissionName) permission)
+enum PermissionState {
+    "granted",
+    "denied",
+    "prompt"
+};
+
+[Exposed=(Window,Worker)]
+interface PermissionStatus : EventTarget {
+    readonly    attribute PermissionState status;
+                attribute EventHandler    onchange;
+};
+
+[Exposed=(Window)]
+partial interface Navigator {
+    readonly    attribute Permissions permissions;;
+};
+
+[Exposed=(Worker)]
+partial interface WorkerNavigator {
+    readonly    attribute Permissions permissions;;
+};
+
+[Exposed=(Window,Worker)]
+interface Permissions {
+    Promise<PermissionStatus> query (PermissionDescriptor permission);
+};
+```
+
+The example code is similarly short:
+
+```js
+// Example 1
+navigator.permissions.query({name:'geolocation'}).then(function(result) {
+  if (result.status == 'granted') {
+    showLocalNewsWithGeolocation();
+  } else if (result.status == 'prompt') {
+    showButtonToEnableLocalNews();
+  }
+  // Don't do anything if the permission was denied.
+});
+
+
+// Example 2
+function updateNotificationButton(status) {
+  document.getElementById('chat-notification-button').disabled = (status == 'denied');
+}
+
+navigator.permissions.query({name:'notifications'}).then(function(result) {
+  updateNotificationButton(result.status);
+
+  result.addEventListener('change', function() {
+    updateNotificationButton(this.status);
+  });
+});
 ```
 
 ## General Discussion
 
-The document is currently, at best, confusing. This is to be expected in some measure for a work-in-progress draft.
+The document hast evolved considerably since we began to engage with the Editor (and others). A subset of comments in a [previous draft](https://github.com/w3ctag/spec-reviews/blob/b7bc0e355fcffba11e1f1de30194d4eacffab187/2015/03/Permissions.md)of our review have been addressed _very_ quickly. The TAG is incredibly grateful for the willingness to collaborate and hope the API will continue to evolve.
 
-Mounir Lamouri was kind enough to provide insight in a call with the TAG regarding some of the history and use-cases that the current draft addresses and we agree that there is some value; but that comes with major caveats. Particularly as Mounir pointed out that Chrome is rushing to ship a subset of this API in short order.
+We're _deeply_ gratified to see a plan for extensiblity outlined in a [separate document](https://github.com/w3c/permissions/blob/gh-pages/extensibility.md). We'd like to see an explainer that outlines use-cases and would love to see examples appear at the top of the spec as well.
 
-In particular, we believe that the Permissions API as critique of the existing ad-hoc, promise-unfriendly, haphazard system is timely, [as demonstrated to the TAG masterfully by Dominique Hazael-Massieux](https://github.com/dontcallmedom/web-permissions-req). We also wish there to be a solution for developers and users which unifies the confusing surface area of the various permission-requesting APIs in today's web platform.
+In general, there appears to be a lot right with the API, but major sections appear to be missing. This is to be expected in some measure for a work-in-progress draft.
 
-Further, we have reason to believe that the semantic gap identified by Mounir in conversation -- specifically the inability to determine if a request for a permission will cause UI to be shown in certain circumstances thanks to a lack of corresponding API surface area -- is important and a valuable semantic contribution of the current draft.
+Mounir Lamouri was kind enough to provide insight in a call with the TAG regarding some of the history and use-cases.
 
-We are deeply concerned, however, that the draft as currently proposed (which cannot be stressed enough; we hope for improvements and do not seek to stall or delay progress) is a small fraction of what is necessary to meet the (to us) obvious goal of replacing the ad-hoc API surface area with a more-extensible, more comprehensible, more unified approach to permissions on the web.
+The Permissions API could serve as both as of the existing ad-hoc, promise-unfriendly, haphazard system and a cure to many of those problems. Given the wealth of new APIs being proposed, it is also timely. Even the current permissions-gated API surface are is confusing to developers and users [as demonstrated to the TAG by Dominique Hazael-Massieux](https://github.com/dontcallmedom/web-permissions-req). We support a solution which unifies the surface area and conventions the various permission-requesting APIs in today's web platform; much as we have supported retrofitting APIs to use Promises.
+
+We're further convinced by the argument regarding a semantic gap between APIs. Mounir identified this -- specifically the inability to determine if a request for a permission will cause UI to be shown in certain circumstances thanks to a lack of corresponding API surface area -- as an important and a valuable problem to solve.
+
+We are deeply concerned, however, that the draft as currently proposed is a small fraction of what is necessary to meet the (to us) obvious goal of replacing ad-hoc APIs with a more-extensible, more comprehensible, more unified approach to permissions on the web.
 
 ### ISSUE: Low Sights
 
-It's difficult to come out and say it so bluntly, but we must: this API has less than half of the scope and capability we hoped for in an API named the "Permissions API".
+The current API represents less than half of the scope and capability we hoped for in an API named the "Permissions API".
 
-
-We had expected a unification and normalization framework for permissions the web platform. Instead, what we see in this draft that has never aimed for this. A glance at the [original proposal](https://lists.w3.org/Archives/Public/public-webapps/2014JulSep/0389.html) and [associated document](https://docs.google.com/document/d/12xnZ_8P6rTpcGxBHiDPPCe7AUyCar-ndg8lh2KwMYkM/preview) show that, while the designers may have hopes of adding features in the future, at no time has a more capable version actually been proposed, however discussions [have flagged the lack of capability as an issue](https://lists.w3.org/Archives/Public/public-webapps/2014JulSep/0399.html), which to date seems unaddressed.
+We had expected a unification and normalization framework for permissions the web platform. A glance at the [original proposal](https://lists.w3.org/Archives/Public/public-webapps/2014JulSep/0389.html) and [associated documents](https://docs.google.com/document/d/12xnZ_8P6rTpcGxBHiDPPCe7AUyCar-ndg8lh2KwMYkM/preview) shows that, while the designers may have hopes of adding features in the future, at no time has a more capable version actually been proposed. Discussions [have flagged the lack of capability as an issue](https://lists.w3.org/Archives/Public/public-webapps/2014JulSep/0399.html), which to date remain unaddressed.
 
 ####  Insufficient Reflection
 
-It is frankly surprising that the Permissions API is missing the ability to model all of the permissions states of existing permission-granting APIs in the web platform. These include
+The Permissions API does not currently model all of the permissions in the the web platform. These include
 
-    - [Geolocation](http://dev.w3.org/geo/api/spec-source.html)
-    - [Push](https://w3c.github.io/push-api/)
-    - [Notifications](https://notifications.spec.whatwg.org/)
-    - [Background Notifications](https://gauntface.com/blog/2014/12/15/push-notifications-service-worker)
-    - [Storage Quota API](http://www.w3.org/TR/quota-api/)
-    - [Fullscreen](http://www.w3.org/TR/fullscreen/)
-    - [MIDI devices](http://www.w3.org/TR/webmidi/) and [System Exclusive device support](http://www.w3.org/TR/webmidi/#requesting-access-to-the-midi-system-with-system-exclusive-support)
-    - [Camera and Microphone access](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia)
-    - [Popup window creation (e.g., `window.open()`)](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)
-    - Gamepad access
+  - [Geolocation](http://dev.w3.org/geo/api/spec-source.html)
+  - [Push](https://w3c.github.io/push-api/)
+  - [Notifications](https://notifications.spec.whatwg.org/)
+  - [Background Notifications](https://gauntface.com/blog/2014/12/15/push-notifications-service-worker)
+  - [Storage Quota API](http://www.w3.org/TR/quota-api/)
+  - [Fullscreen](http://www.w3.org/TR/fullscreen/)
+  - [MIDI devices](http://www.w3.org/TR/webmidi/) and [System Exclusive device support](http://www.w3.org/TR/webmidi/#requesting-access-to-the-midi-system-with-system-exclusive-support)
+  - [Camera and Microphone access](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia)
+  - [Popup window creation (e.g., `window.open()`)](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)
+  - Gamepad access
 
-Other recently contentious APIs (battery status, CPU core count) might also merit representation via this API to provide a transition path to guarding state/permission requests with Promises should vendors change their minds.
+Other recently contentious APIs (battery status, CPU core count) might also merit representation via this API as well.
 
-The `PermissionStatus` object is particularly problematic. The spec doesn't provide full IDL or JS to describe the behavior, but the overall design seems to suggest that a fixed list of states is appropriate to cover the permissions needs of the web platform. They are currently outlined as:
+Taking just the example of the [Geolocation API](http://dev.w3.org/geo/api/spec-source.html) (which is ostensibly reflected by this API), it isn't possible to formulate a request to `navigator.permissions.query()` that will determine if a request for [high-accuracy locations will show a prompt](http://dev.w3.org/geo/api/spec-source.html#high-accuracy). Same for repeated permission updates with [`watchPosition()`](http://dev.w3.org/geo/api/spec-source.html#watch-position).
 
+We expected to be able to formulate a request using the same vocabulary as the geolocation APIs's permission request function; e.g.:
+
+```js
+naviator.permissions.query({ name: "geolocation", enableHighAccuracy: true })
+  .then(/*...*/);
 ```
-granted
-denied
-prompt
+
+Similar problems exist for notifications: there's affordance for `notifications` and `push`. There isn't a way to reflect on generic background-context notifications. Perhaps an extension to the `notifications` query would allow this?
+
+```js
+naviator.permissions.query({ "notifications", background: true })
+  .then(/*...*/);
 ```
 
-Taking just the example of the [Geolocation API](http://dev.w3.org/geo/api/spec-source.html) (which is ostensibly reflected by this API), it isn't possible to formulate a request to `Permissions.query()` that will determine if a request for [high-accuracy locations will show a prompt](http://dev.w3.org/geo/api/spec-source.html#high-accuracy). Same for repeated permission updates with [`watchPosition()`](http://dev.w3.org/geo/api/spec-source.html#watch-position).
+The current solution -- the `userVisible` parameter flag in `PushPermissionsDescriptor` -- is perhaps useful, but it doesn't model the (logically independent) ability to show Notifications from the background context. That certain runtimes may fuse these concepts today doesn't seem to have bearing on the design question.
 
-The stated value of the Permissions API -- to help a developer determine if UI would be shown before a request for a permission is issued -- doesn't appear to be provided here.
+We're grateful to see permission descriptors added since our last review, as they provide a path towards extensible queries, e.g. for understanding how much quota is avaialble, however the return value (`PermissionState`) lacks all such nuance and remains a deep concern. It likely needs to be converted into a similarly extensible object; e.g.:
 
-Similar problems exist for notifications: there's affordance for `notifications` and `push-notifications` (which we understand to be delivery of Push messages which require attendant Notifications to be shown). There isn't, however, an attendant reflection on generic background-context notifications. As `push-notifications` is perhaps the only system that allows background notifications today, that seems explainable, but charting the path from the current states to more atomic sets with overlap is...unclear...in the current API.
-
-Extrapolating to APIs not currently covered, such as Quota, the 3-state values do not appear sufficient to model their behavior. This is worrying.
+```js
+{ "status": "granted", /* additional state here */ }
+```
 
 ####  Reflection _Only_
 
-The existing web platform APIs for requesting permissions are haphazard. This has lead to [work towards suggesting unified patterns which the TAG can get behind](https://gist.github.com/slightlyoff/43cd8c2f64a0719358fe).
+The existing web platform APIs for requesting permissions are haphazard. This has lead to [work suggesting unified patterns, which the TAG supports](https://gist.github.com/slightlyoff/43cd8c2f64a0719358fe).
 
-Looking at just the previously-discussed APIs (Geolocation and Notifications) we see distinct API styles that are calling out for unification and reform:
+Looking at just the previously-discussed APIs (Geolocation and [Push/Notifications](http://updates.html5rocks.com/2015/03/push-notificatons-on-the-open-web)) we see distinct API styles that are calling out for unification and reform:
 
 ##### Requesting the Notification Permission
 
@@ -155,16 +226,20 @@ var onsuccess = console.log.bind(console, "\\o/");
 var onfailure = console.log.bind(console, "(^⊙︿⊙^)~"");
 
 var permissions = navigator.permissions;
+var notificationOptions = {
+  name: "notifications",
+  // other options go here, e.g.:
+  background: true
+};
 
 document.querySelector("#enableNotificationToggle").onclick =
   function(e) {
     var options = {/* notification permission options here */};
-    permissions.query("notification", options).then(function(state) {
-      // Note "default" and not "prompt", see below.
-      if (state == "default") {
+    permissions.query(notificationOptions).then(function(state) {
+      if (state == "prompt") {
         // The inside of a click handler for a toggle is a respectful place to
         // ask for the permission if it isn't already granted.
-        permissions.request("notification", options).then(
+        permissions.request(notificationOptions).then(
           onsuccess,
           onfailure
         );
@@ -181,7 +256,7 @@ For maximum clarity, we'd like to see the Examples section move to front-matter.
 
 If that's not plausible, an attendant "explainer" document (e.g., [Service Workers](https://github.com/slightlyoff/ServiceWorker/blob/master/explainer.md), [Web Components](http://www.w3.org/TR/2013/WD-components-intro-20130606/)) can do a great deal to help the casual observer understand (non-normatively) the value of a proposal.
 
-Given the WIP (and lacking, see above) status of this document, an explainer or expanded set of examples seems in-order.
+On a related note, the addition of a design guide for permissions seems like a good future goal for this effort and something the TAG would happily collaborate on.
 
 ### ISSUE: Registry Maintenance
 
@@ -193,26 +268,15 @@ We would like to see a plan outlined by the editors of the spec for dealing with
 
 ### ISSUE: Symmetry
 
-As covered previously, the lack of symmetry between the capabilities that can be requested (independently of each other) and those modeled by the Permissions API is concerning.
-
-For instance, UAs may manage `highAccuracy` Geolocation requests independently from low-accuracy requests. This might imply entirely different management UI, request-time UI, etc.
-
-That the Permissions API does not model all of the available states, even for APIs it covers, is nearly-fatal to the current draft.
+RESOLVED: this issue was resolved in an update to the API
 
 ### ISSUE: API Location
 
-Static methods that operate on a conceptual collection of (stored) permissions, but which are located on a global `Permission` object, are weird to say the least.
-
-A better design would be to keep the `Permission` interface, make it constructible, but locate the collection and operations over the collection at a different place in the namespace. E.g. `navigator.permissions.query()` (etc.)
+RESOLVED: this issue was resolved in an update to the API
 
 ### ISSUE: `prompt` Is Inappropriate & Inadequate
 
-UAs are free to mediate permissions in whatever way they choose. We can imagine a Bizarro Browser that never asks users about permissions but instead exercises independent judgment about what to do in all cases.
-
-Web APIs must anticipate changes in form-factor, extra-API UI, and may play host to a legitimate diversity of views about what is in user's interests. This has happened many times already in the web's evolution and so the implications of name `"prompt"` for an intermediate state between `"granted"` and `"denied"` is difficult.
-
-It seems useful to be able to ask the UA if it _will_ prompt a user if a request for permission were made, but this is independent of the semantic about being in an undecided state. We therefore recommend that the the API be re-designed to separate these concerns.
-
+RESOLVED: this issue was resolved in discussion with the editor
 
 ### ISSUE: Inability to Enumerate
 
@@ -236,12 +300,7 @@ Object.observe(navigator.permissions, function(changes) {
 
 ### ISSUE: Visibility Unclear
 
-One assumes this API will be made available from both documents and Worker contexts, but this is not clear from the IDL in the spec. We'd expect to see a line like this preceding interface definitions:
-
-```
-[Exposed=(Window,Worker)]
-...
-```
+RESOLVED: this issue was resolved in an update to the API
 
 ### ISSUE: Constructibility
 
@@ -253,7 +312,7 @@ TODO(slightlyoff)
 
 ### ISSUE: Extensibility & Persistence
 
-TODO(slightlyoff, diracdeltas)
+PATIALLY RESOLVED: this issue was partially resolved by the [addition of an extensibility discussion document](https://github.com/w3c/permissions/blob/gh-pages/extensibility.md)
 
 ## Layering Considerations
 
