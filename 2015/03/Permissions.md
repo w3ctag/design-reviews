@@ -148,7 +148,7 @@ naviator.permissions.query({ "notifications", background: true })
 
 The current solution -- the `userVisible` parameter flag in `PushPermissionsDescriptor` -- is perhaps useful, but it doesn't model the (logically independent) ability to show Notifications from the background context. That certain runtimes may fuse these concepts today doesn't seem to have bearing on the design question.
 
-We're grateful to see permission descriptors added since our last review, as they provide a path towards extensible queries, e.g. for understanding how much quota is avaialble, however the return value (`PermissionState`) lacks all such nuance and remains a deep concern. It likely needs to be converted into a similarly extensible object; e.g.:
+We're grateful to see permission descriptors added since our last review, as they provide a path towards extensible queries, e.g. for understanding how much quota is available, however the return value (`PermissionState`) lacks all such nuance and remains a deep concern. It likely needs to be converted into a similarly extensible object; e.g.:
 
 ```js
 { "status": "granted", /* additional state here */ }
@@ -302,26 +302,40 @@ Object.observe(navigator.permissions, function(changes) {
 
 RESOLVED: this issue was resolved in an update to the API
 
-### ISSUE: Constructibility
+### ISSUE: Extensibility, Persistence, Subclassing, and Constructors
 
-TODO(slightlyoff)
+PATIALLY RESOLVED: this issue was partially resolved (for spec developers) through the [addition of an extensibility discussion document](https://github.com/w3c/permissions/blob/gh-pages/extensibility.md)
 
-### ISSUE: Subclassing
+The end-user extensibility of this API is unclear. Even if it isn't provided by this version, one would expect to see a clear "upgrade" path for this spec to enable the interfaces and types to become extensible over time. That path is unclear.
 
-TODO(slightlyoff)
+The issues start with construction: how does one create an instance of `Permissions`, `PermissionStatus`, or `PermissionDescriptor`? How are they configured? If the system accepts only "real" instances, how is that achieved in a desugaring to JavaScript?
 
-### ISSUE: Extensibility & Persistence
+A developer attempting to define their own custom permission would need some way, at a minimum, to create instances to vend to other systems and access to the same forgery-proof system. Serialization and persistence would also be expected (as the Permissions API is dealing in both questions already).
 
-PATIALLY RESOLVED: this issue was partially resolved by the [addition of an extensibility discussion document](https://github.com/w3c/permissions/blob/gh-pages/extensibility.md)
+Lastly, one would expect the ability to create subtypes (aka, "new permissions"). The lack of a de-sugaring or clear explanation of the semantics of the interfaces provided means subclassing isn't currently possible. This should be addressed as soon as possible.
+
+Similarly, it should be possible for a developer to create their own instance of the `Permissions` collection, persist it, etc.
+
+These are not minor points. Unless planned for carefully, the system may evolve in ways that are hostile to end-user extensibility which may create a great deal of future pain.
+
+We'd like to see a document that outlines a plan for end-user extensibility to ensure that it has been thought through.
+
+### ISSUE: Ad-hoc Collection Proliferation
+
+The `Permissions` collection has a single method, isn't `Map` or `Set` like, and operates entirely in Promises. That design choice leaves it feeling very much like the [`CacheStorage`](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) system, but without the same rich set of methods.
+
+At a minimum, the design should try to resolve their apparent API surface areas, and preferably also their persistence styles.
 
 ## Layering Considerations
 
-TODO(slightlyoff, diracdeltas)
+What are permissions? This seems like either a stupid question at first glance -- in browsers, they're things the browser allows (or doesn't allow) and their state is represented through an API such as this one.
 
-## Other Considerations
+At a deeper level, though, this question gets to the heart of many multi-actor interactions inside the web platform. Who is allowed to tweet on my behalf? What systems can access my address book from a social network (nevermind the browser or system address book)?
 
-TODO(slightlyoff, diracdeltas)
+While the surface layering question of persistence is important, the deeper issue about who -- in these sense of mapping onto the origin model and collaboration with browser UI about vending capabilities -- remains largely unexplored by the API presented.
+
+Perhaps this is to be expected for such an early draft of such a young spec, but these questions will not go away, even if they are solved in an ad-hoc way without system support.
 
 ## End Notes
 
-TODO(slightlyoff, diracdeltas)
+We're grateful to see so much forward progress, but suggest that the current draft not be published until _at least_ the issues with enumeration of permissions, string-ness of `PermissionState` (it should be an Object to enable extensibility), and lack of coverage of many existing APIs in the platform are resolved.
