@@ -115,7 +115,7 @@ We had expected a unification and normalization framework for permissions the we
 
 ####  Insufficient Reflection
 
-The Permissions API does not currently model all of the permissions in the the web platform. These include
+The Permissions API does not currently model all of the permissions in the the web platform. These include:
 
   - [Geolocation](http://dev.w3.org/geo/api/spec-source.html)
   - [Push](https://w3c.github.io/push-api/)
@@ -129,6 +129,8 @@ The Permissions API does not currently model all of the permissions in the the w
   - Gamepad access
 
 Other recently contentious APIs (battery status, CPU core count) might also merit representation via this API as well.
+
+The [Extensibility Guide](https://github.com/w3c/permissions/blob/gh-pages/extensibility.md) some of these cases which improves our confidence in the overall "bones" of the design. However the spec doesn't commit to any of these designs, meaning that it may be possible for the designs to drift in tone or style from the original entries. Designing them as a coherent package would create a stronger design language.
 
 Taking just the example of the [Geolocation API](http://dev.w3.org/geo/api/spec-source.html) (which is ostensibly reflected by this API), it isn't possible to formulate a request to `navigator.permissions.query()` that will determine if a request for [high-accuracy locations will show a prompt](http://dev.w3.org/geo/api/spec-source.html#high-accuracy). Same for repeated permission updates with [`watchPosition()`](http://dev.w3.org/geo/api/spec-source.html#watch-position).
 
@@ -146,13 +148,9 @@ naviator.permissions.query({ "notifications", background: true })
   .then(/*...*/);
 ```
 
-The current solution -- the `userVisible` parameter flag in `PushPermissionsDescriptor` -- is perhaps useful, but it doesn't model the (logically independent) ability to show Notifications from the background context. That certain runtimes may fuse these concepts today doesn't seem to have bearing on the design question.
+The current solution -- the `userVisible` parameter flag in `PushPermissionsDescriptor` -- is useful, but it doesn't model the (logically independent) ability to show Notifications from the background context. That certain runtimes may fuse these concepts today doesn't seem to have bearing on the design question.
 
-We're grateful to see permission descriptors added since our last review, as they provide a path towards extensible queries, e.g. for understanding how much quota is available, however the return value (`PermissionState`) lacks all such nuance and remains a deep concern. It likely needs to be converted into a similarly extensible object; e.g.:
-
-```js
-{ "status": "granted", /* additional state here */ }
-```
+We're grateful to see permission descriptors added since our last review, as they provide a path towards extensible queries, e.g. for understanding how much quota is available.
 
 ####  Reflection _Only_
 
