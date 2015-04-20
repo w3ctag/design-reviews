@@ -193,7 +193,7 @@ There is currently no Geolocation API for determining permission state before us
 
 ```js
 var onsuccess = console.log.bind(console, "\\o/");
-var onfailure = console.log.bind(console, "(^⊙︿⊙^)~"");
+var onfailure = console.log.bind(console, "(^⊙︿⊙^)~");
 // Note: does not return a Promise. Clear bug.
 navigator.geolocation.getCurrentPosition(onsuccess, onfailure,
                                         { maximumAge: 600000,
@@ -207,7 +207,7 @@ WebMIDI's style is more modern; it provides a [Promise-based API for requesting 
 
 ```js
 var onsuccess = console.log.bind(console, "\\o/");
-var onrejection = console.log.bind(console, "(^⊙︿⊙^)~"");
+var onrejection = console.log.bind(console, "(^⊙︿⊙^)~");
 navigator.requestMIDIAccess({ sysex: true }).then(onsuccess, onfailure);
 ```
 
@@ -221,7 +221,7 @@ We might imagine a different API that allows both query and request, and perhaps
 
 ```js
 var onsuccess = console.log.bind(console, "\\o/");
-var onfailure = console.log.bind(console, "(^⊙︿⊙^)~"");
+var onfailure = console.log.bind(console, "(^⊙︿⊙^)~");
 
 var permissions = navigator.permissions;
 var notificationOptions = {
