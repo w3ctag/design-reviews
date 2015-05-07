@@ -5,8 +5,7 @@
 ## General Discussion
 
 This draft defines a new Content Security Policy header for a page to assert
-that subresources should be automatically upgraded to their secure version. We
-think this is a great step towards reducing barriers that website publishers
+that subresources and navigations should be automatically upgraded to their secure version. We think this is a great step towards reducing barriers that website publishers
 face when transitioning from plaintext HTTP to secure connections.
 
 Most of the issues raised below were very promptly resolved by Mike West.
