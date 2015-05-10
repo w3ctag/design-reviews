@@ -31,7 +31,7 @@ https://github.com/w3c/webappsec/commit/0c0a5f5c0c78016104a1d0ce81a647923387eb9e
 ### ISSUE: Same-Origin vs Cross-Origin Behavior Unclear in Examples
 
 Talking to other TAG members about the spec, it became apparent that some of us
-thought the spec only applied upgrades to same-origin requests. I attribute
+thought the spec only applied upgrades to same-origin requests. I (Yan) attribute
 most of my confusion to the examples in Section 1.2. Example #1 uses the
 example of `<img src="http://example.com/image.png">` being upgraded on
 `https://example.com` and Example #2 explicitly says that `<a
@@ -104,30 +104,6 @@ through this mechanism. That way, on a page that has not set the CSP header,
 the known-upgradeable subresources could be upgraded anyway.
 
 This might be addressible via [CSP Pinning](http://w3c.github.io/webappsec/specs/csp-pinning/). However, CSP Pinning is scoped to a host (modulo include-subdomains), whereas in theory a resource could be safely upgraded on any host once the user agent has noted it is upgradeable. Unfortunately, this would cause non-deterministic behavior with mixed content blocking depending on a user's browsing history.
-
-### IDEA: Allow Sites to Signal That They Are Upgradeable Resources
-
-One downside of fetch (and FIrefox/Chrome/IE11/Opera's implementation of mixed content
-blocking) is that HSTS is applied after mixed content blocking has happened. So
-sites that are known to support HTTPS are *still* blocked.
-
-This spec allows a site to indicate that its subresouces should be upgraded.
-However, there is still no way for a site to say, "Upgrade me when I am
-a subresource, because I know I support HTTPS."
-
-PARTIALLY RESOLVED: After chatting with Mike West and Adam Langley, I am less
-convinced this is a good idea for two reasons:
-
-1. It introduces non-determinism for whether mixed content is blocked based on
-   browsing history, which will be confusing to site developers.
-2. Sites who do the work of turning on HTTPS can usually do the work of sending
-   the upgrade-insecure header at the same time, so this mechanism isn't
-   actually useful except as a belt-and-suspenders approach to the mixed
-   content problem.
-
-Given these factors, it doesn't seem worth the additional complexity to add
-a new signaling mechanism for upgrades or to move HSTS before mixed content
-checks.
 
 ## End Notes
 
