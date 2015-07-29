@@ -1,6 +1,8 @@
 Presentation API Review
 =====
+**DRAFT**
 
+Spec: http://w3c.github.io/presentation-api/
 
 Use cases: 
 * Shared poker game; large TV used to show the shared game state--individuals view their own hand.
