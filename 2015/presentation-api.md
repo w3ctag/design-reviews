@@ -85,9 +85,9 @@ As currently specified, the presentation API is sufficiently different than the 
 
 > Instead, the group proposes to extend the HTMLMediaElement interface with a "remote" attribute. The main benefit of this approach is that application developers can then reuse the usual methods and properties exposed by the local HTMLMediaElement interface to control the video playback (play, pause, currentTime, playbackRate, etc.) on the remote screen.
 
-It would may more more sense to "cast" an HTMLVideoElement to a second screen if the ergonomics of the presentation API more closely matched the fullScreen spec--which is something that could be considered.
+It would make more more sense to "cast" a HTMLVideoElement to a second screen if the ergonomics of the presentation API more closely matched the fullScreen spec--which is something that could be considered.
 
-Today, we are conflating the notion of a "remote control" browsing context (this specification), with the idea of pure presentation of an element (fullscreen API + casting). Both scenarios seem to have merit, but I agree that they tend to get muddied--even in the use-case document.
+Today, I see conflating the notion of a "remote control" browsing context (this specification), with the idea of pure presentation of an element (fullscreen API + casting). Both scenarios seem to have merit, but I agree that they tend to get muddied--even in the use-case document.
 
 **6. Security and privacy considerations**
 
