@@ -69,7 +69,7 @@ The need to avoid or show in-page UI to the user depending on whether a feature 
 
 > The group notes that a generic true/false is not enough in many situations where the URL to present may require additional capabilities. That is the reason why the "getAvailability" function takes the URL to present as parameter, to allow the user agent to filter screens.
 
-[Link to fingerprinting finding.] Indeed there may be more information that is necessary to reveal in order to negotiate a connection. We ask that any such information that may lead to fingerprinting be associated with a user-controllable mechanism to purge/clear this data to avoid unwanted residual fingerprinting.
+[see TAG finding on unsanctioned tracking](http://www.w3.org/2001/tag/doc/unsanctioned-tracking/) Indeed there may be more information that is necessary to reveal in order to negotiate a connection. We ask that any such information that may lead to fingerprinting be associated with a user-controllable mechanism to purge/clear this data to avoid unwanted residual fingerprinting.
 
 **4. Dealing with legacy content**
 
