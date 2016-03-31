@@ -27,3 +27,4 @@ We use the [issues list](https://github.com/w3ctag/spec-reviews/issues) to track
 
 Note that we do **not** usually use the issue itself to perform the review; we prefer to engage with the specification authors and/or Working Group (as appropriate) directly, using their feedback mechanisms (e.g., issues list, mailing list, WG meetings). 
 
+Generally speaking, we will discuss and review in our own issue list and cross-link to relevant issues in the specs we are reviewing. See https://github.com/w3ctag/spec-reviews/issues/112
