@@ -23,7 +23,7 @@ In some cases (but not all), we prepare a review document. The ones we have prep
  * [Web Crypto API](./2013/11/WebCrypto.md)
 
 ## How reviews are performed/prioritized
-We use the [issues list](https://github.com/w3ctag/spec-reviews/issues) to track our reviews; you can request a review for your spec by adding a new issue. _Please include a link to the relevant specification(s)_.
+We use the [issues list](https://github.com/w3ctag/spec-reviews/issues) to track our reviews; you can request a review for your spec by adding a new issue. _Please include a link to the relevant specification(s)_. As well, please include info on timeliness of the required review, whether a security review / privacy been done and the expectation of what happens next after the review.
 
 Note that we do **not** usually use the issue itself to perform the review; we prefer to engage with the specification authors and/or Working Group (as appropriate) directly, using their feedback mechanisms (e.g., issues list, mailing list, WG meetings). 
 
