@@ -1,8 +1,13 @@
 # W3C TAG Specification Reviews
 This repository is for specification reviews by the [W3C Technical Architecture Group](http://www.w3.org/2001/tag/); usually (but not always) from W3C Working Groups.
 
-## Reviewed specifications 
-In some cases (but not all), we prepare a review document. The ones we have prepared thus far: 
+## How reviews are performed/prioritized
+We use the [issues list](https://github.com/w3ctag/spec-reviews/issues) to track our reviews; you can request a review for your spec by adding a new issue. _Please include a link to the relevant specification(s)_. As well, please include info on timeliness of the required review, whether a security review / privacy been done and the expectation of what happens next after the review. We have included a useful template for new issues that should lead you through the process. In most cases the review will be completed and documented in the comments field of the issue itself.
+
+Generally speaking, we will discuss and review in our own issue list and cross-link to relevant issues in the specs we are reviewing. See https://github.com/w3ctag/spec-reviews/issues/112
+
+## More detailed reviews
+In some cases we have prepared more detailed review documents in response to request for review. The ones we have prepared thus far are: 
 
  * [CSS Font Display](./2015/09/CSS-Font-Display.md)
  * [CSS Regions](./2015/01/CSS Regions.md)
@@ -22,9 +27,3 @@ In some cases (but not all), we prepare a review document. The ones we have prep
  * [Web Audio API](./2013/07/WebAudio.md)
  * [Web Crypto API](./2013/11/WebCrypto.md)
 
-## How reviews are performed/prioritized
-We use the [issues list](https://github.com/w3ctag/spec-reviews/issues) to track our reviews; you can request a review for your spec by adding a new issue. _Please include a link to the relevant specification(s)_. As well, please include info on timeliness of the required review, whether a security review / privacy been done and the expectation of what happens next after the review.
-
-Note that we do **not** usually use the issue itself to perform the review; we prefer to engage with the specification authors and/or Working Group (as appropriate) directly, using their feedback mechanisms (e.g., issues list, mailing list, WG meetings). 
-
-Generally speaking, we will discuss and review in our own issue list and cross-link to relevant issues in the specs we are reviewing. See https://github.com/w3ctag/spec-reviews/issues/112
