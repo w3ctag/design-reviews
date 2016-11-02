@@ -15,7 +15,7 @@ Further details (optional):
 
 You should also know that...
 
-<please tell us anything you think is relevant to this review>
+[please tell us anything you think is relevant to this review]
 
 We'd prefer the TAG provide feedback as (please select one):
 
