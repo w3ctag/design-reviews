@@ -316,7 +316,7 @@ There are a few concerns that come up when reading the spec:
 
  - Moving the global event handlers and methods under `navigator.vr` is great in https://github.com/w3c/webvr/pull/116
 
-- `getFrameData()` populating an in-param is very strange. One supposes this is the ["bring your own buffer" analogue from the Streams API](https://streams.spec.whatwg.org/#byob-readers), but it's odd that this is not similarly low-level. If this is about binary packed data, why not take a buffer? And if it's not about packed binary data, what possible reason is there to design around the JS object model (instead of, e.g., improving GC heuristics about specific object types as we have seen, e.g., for short-lived "enum" style objects and Promises).
+ - `getFrameData()` populating an in-param is very strange. One supposes this is the ["bring your own buffer" analogue from the Streams API](https://streams.spec.whatwg.org/#byob-readers), but it's odd that this is not similarly low-level. If this is about binary packed data, why not take a buffer? And if it's not about packed binary data, what possible reason is there to design around the JS object model (instead of, e.g., improving GC heuristics about specific object types as we have seen, e.g., for short-lived "enum" style objects and Promises).
 
  - Can `resetPose()` fail? If so, should it return a promise or potentially throw an exception?
 
