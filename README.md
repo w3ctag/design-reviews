@@ -10,7 +10,7 @@ Generally speaking, we will discuss and review in our own issue list and cross-l
 In some cases we have prepared more detailed review documents in response to request for review. The ones we have prepared thus far are: 
 
  * [CSS Font Display](./2015/09/CSS-Font-Display.md)
- * [CSS Regions](./2015/01/CSS Regions.md)
+ * [CSS Regions](./2015/01/CSS%20Regions.md)
  * [Encrypted Media Extensions](./2014/10/eme.md)
  * [File URI](./2015/07/file_uri.md)
  * [Fingerprinting Guidance for Web Authors](./2015/05/fingerprint.md)
@@ -20,10 +20,10 @@ In some cases we have prepared more detailed review documents in response to req
  * [Orientation Lock API](./2013/07/OrientationLock.md)
  * [Permissions API](./2015/03/Permissions.md)
  * [Presentation API](./2015/presentation-api.md)
- * [Push API](./2013/08/Push API.md)
+ * [Push API](./2013/08/Push%20API.md)
  * [Quota Management API](./2014/02/quota-management-api.md)
  * [Upgrade Insecure Connection](./2015/04/Upgrade_Insecure.md)
- * [Web Animations API](./2013/10/Web Animations.md)
+ * [Web Animations API](./2013/10/Web%20Animations.md)
  * [Web Audio API](./2013/07/WebAudio.md)
  * [Web Crypto API](./2013/11/WebCrypto.md)
 
