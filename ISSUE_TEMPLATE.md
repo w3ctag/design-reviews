@@ -5,6 +5,7 @@ I'm requesting a TAG review of:
   - Name: [feature or document name]
   - Specification URL: [spec url]
   - Explainer, Requirements Doc, or Example code: [url]
+  - Tests: [wpt folder(s), if available]
   - Primary contacts: [github usernames]
 
 Further details (optional):
