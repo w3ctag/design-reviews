@@ -1,4 +1,4 @@
-Dear Sirs and Madam of TAG!
+Hello TAG!
 
 I'm requesting a TAG review of:
 
