@@ -1,4 +1,4 @@
-Hello TAG！
+Bonjour TAG,
 
 I'm requesting a TAG review of:
 
