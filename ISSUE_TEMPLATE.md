@@ -28,8 +28,4 @@ We'd prefer the TAG provide feedback as (please select one):
 
 _Please preview the issue and check that the links work before submitting_
 
-For background, some decent explainers:
-
-  https://github.com/w3c/ServiceWorker/blob/master/explainer.md
-  https://github.com/zkoch/paymentrequest/blob/gh-pages/docs/explainer.md
-  https://github.com/WICG/IntersectionObserver/blob/gh-pages/explainer.md (although this one includes IDL, which an explainer should not)
+For background, see our [explanation of how to write a good explainer](https://w3ctag.github.io/explainers).
