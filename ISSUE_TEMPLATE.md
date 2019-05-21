@@ -1,19 +1,21 @@
-Góðan dag TAG！
+こんにちはTAG!
 
 I'm requesting a TAG review of:
 
   - Name: [feature or document name]
   - Specification URL: [spec url]
-  - Explainer, Requirements Doc, or Example code: [url]
+  - Explainer (containing user needs and example code)¹: [url]
   - GitHub issues (if you prefer feedback filed there): [url]
   - Tests: [wpt folder(s), if available]
   - Primary contacts: [github usernames]
 
-Further details (optional):
+Further details:
 
   - Relevant time constraints or deadlines: [please provide]
   - [ ] I have read and filled out the [Self-Review Questionnare on Security and Privacy](https://www.w3.org/TR/security-privacy-questionnaire/). The [assessment is here](url).
   - [ ] I have reviewed the TAG's [API Design Principles](https://w3ctag.github.io/design-principles/)
+  - The group where the work on this specification is:
+  - Links to major pieces of multi-stakeholder review or discussion of this specification: 
 
 You should also know that...
 
@@ -29,4 +31,4 @@ We'd prefer the TAG provide feedback as (please select one):
 
 _Please preview the issue and check that the links work before submitting_
 
-For background, see our [explanation of how to write a good explainer](https://w3ctag.github.io/explainers).
+¹ For background, see our [explanation of how to write a good explainer](https://w3ctag.github.io/explainers).
