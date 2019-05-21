@@ -16,6 +16,7 @@ Further details:
   - [ ] I have reviewed the TAG's [API Design Principles](https://w3ctag.github.io/design-principles/)
   - The group where the work on this specification is:
   - Links to major pieces of multi-stakeholder review or discussion of this specification: 
+  - Links to major unresolved issues or opposition with this specification:
 
 You should also know that...
 
