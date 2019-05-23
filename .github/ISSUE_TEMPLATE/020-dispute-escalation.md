@@ -31,9 +31,9 @@ What steps have already been taken to come to an agreement:
 
 We'd prefer the TAG provide feedback as (please select one):
 
-  - [ ] open issues in our GitHub repo for each point of feedback
-  - [ ] open a single issue in our GitHub repo for the entire review
+  - [ ] leave a comment in the following GitHub issue: [url]
   - [ ] leave review feedback as a comment in this issue and @-notify [github usernames]
+  - [ ] open a new issue in our GitHub repo with the feedback
 
 --------------------------
 
