@@ -25,6 +25,9 @@ Further details:
   - [ ] I have read and filled out the [Self-Review Questionnare on Security and Privacy](https://www.w3.org/TR/security-privacy-questionnaire/). The [assessment is here](url).
   - [ ] I have reviewed the TAG's [API Design Principles](https://w3ctag.github.io/design-principles/)
   - The group where the work on this specification is:
+
+We recommend the explainer to be in [Markdown](https://github.github.com/gfm/). On top of the [usual information expected in the explainer](https://w3ctag.github.io/explainers), it is strongly recommended to add:
+
   - Links to major pieces of multi-stakeholder review or discussion of this specification: 
   - Links to major unresolved issues or opposition with this specification:
 
@@ -40,6 +43,6 @@ We'd prefer the TAG provide feedback as (please select one):
 
 --------------------------
 
-_Please preview the issue and check that the links work before submitting_
+_Please preview the issue and check that the links work before submitting._ In particular, if anything links to a Google document, please make sure anyone with the link can access the document.
 
 ¹ For background, see our [explanation of how to write a good explainer](https://w3ctag.github.io/explainers).
