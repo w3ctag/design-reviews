@@ -7,7 +7,7 @@ I'm requesting a TAG review of:
   - Explainer (containing user needs and example code)¹: [url]
   - GitHub issues (if you prefer feedback filed there): [url]
   - Tests: [wpt folder(s), if available]
-  - Primary contacts: [github usernames]
+  - Primary contacts (and their relationship to the specification): [github usernames]
 
 Further details:
 
