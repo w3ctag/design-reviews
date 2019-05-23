@@ -21,6 +21,8 @@ I'm requesting the TAG express an opinion on a dispute related to:
   - Links to major unresolved issues or opposition with this specification:
   - Relevant time constraints or deadlines: [please provide]
 
+We recommend the explainer to be in Markdown.
+
 Explanation of the issue that we'd like the TAG's opinion on:
 
 We'd prefer the TAG provide feedback as (please select one):
@@ -31,6 +33,6 @@ We'd prefer the TAG provide feedback as (please select one):
 
 --------------------------
 
-_Please preview the issue and check that the links work before submitting_
+_Please preview the issue and check that the links work before submitting._ In particular, if anything links to a Google document, please make sure anyone with the link can access the document.
 
 ¹ For background, see our [explanation of how to write a good explainer](https://w3ctag.github.io/explainers).
