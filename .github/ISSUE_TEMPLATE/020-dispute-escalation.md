@@ -37,6 +37,6 @@ We'd prefer the TAG provide feedback as (please select one):
 
 --------------------------
 
-_Please preview the issue and check that the links work before submitting._ In particular, if anything links to a Google document, please make sure anyone with the link can access the document.
+_Please preview the issue and check that the links work before submitting._ In particular, if anything links to a URL which requires authentication (e.g. Google document), please make sure anyone with the link can access the document.
 
 ¹ For background, see our [explanation of how to write a good explainer](https://w3ctag.github.io/explainers).
