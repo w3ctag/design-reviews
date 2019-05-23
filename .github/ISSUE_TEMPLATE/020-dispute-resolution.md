@@ -25,6 +25,10 @@ We recommend the explainer to be in Markdown.
 
 Explanation of the issue that we'd like the TAG's opinion on:
 
+Links to the positions of each side in the dispute (e.g., specific github comments):
+
+What steps have already been taken to come to an agreement:
+
 We'd prefer the TAG provide feedback as (please select one):
 
   - [ ] open issues in our GitHub repo for each point of feedback
