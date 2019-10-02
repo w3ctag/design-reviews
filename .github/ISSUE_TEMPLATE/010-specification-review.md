@@ -8,7 +8,7 @@ assignees: ''
 
 ---
 
-こんにちはTAG!
+Hello TAG!
 
 I'm requesting a TAG review of:
 
