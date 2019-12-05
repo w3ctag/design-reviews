@@ -24,7 +24,7 @@ Further details:
   - Relevant time constraints or deadlines: [please provide]
   - [ ] I have read and filled out the [Self-Review Questionnare on Security and Privacy](https://www.w3.org/TR/security-privacy-questionnaire/). The [assessment is here](url).
   - [ ] I have reviewed the TAG's [API Design Principles](https://w3ctag.github.io/design-principles/)
-  - The group where the work on this specification is:
+  - The group where the work on this specification is (or is intended to be in the future):
 
 We recommend the explainer to be in [Markdown](https://github.github.com/gfm/). On top of the [usual information expected in the explainer](https://w3ctag.github.io/explainers), it is strongly recommended to add:
 
