@@ -17,7 +17,8 @@ I'm requesting a TAG review of:
   - Explainer (containing user needs and example code)¹: [url]
   - GitHub issues (if you prefer feedback filed there): [url]
   - Tests: [wpt folder(s), if available]
-  - Primary contacts (and their relationship to the specification): [github usernames]
+  - Primary contacts (and their relationship to the specification): [github usernames and affiliation]
+  - Organization/project driving the specification: [organization or project name] 
 
 Further details:
 
@@ -30,6 +31,7 @@ We recommend the explainer to be in [Markdown](https://github.github.com/gfm/). 
 
   - Links to major pieces of multi-stakeholder review or discussion of this specification: 
   - Links to major unresolved issues or opposition with this specification:
+  - Links to external status/issue trackers for this specification (publicly visible, e.g. Chrome Status):
 
 You should also know that...
 
