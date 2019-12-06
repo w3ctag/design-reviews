@@ -3,7 +3,7 @@ name: Early design review
 about: 'If you''d like the TAG to offer thoughts and guidance on an early-stage design
   direction '
 title: ''
-labels: 'Progress: untriaged', 'Review type: early review'
+labels: Progress: untriaged, Review type: early review
 assignees: ''
 
 ---
