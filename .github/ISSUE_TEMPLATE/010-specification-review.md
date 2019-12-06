@@ -30,7 +30,7 @@ Further details:
   - [ ] I have reviewed the TAG's [API Design Principles](https://w3ctag.github.io/design-principles/)
   - Relevant time constraints or deadlines: [please provide]
   - The group where the work on this specification is being done:
-  - Major unresolved issues or opposition with this specification:
+  - Major unresolved issues with or opposition to this specification:
   - This work is being funded by: 
 
 You should also know that...
