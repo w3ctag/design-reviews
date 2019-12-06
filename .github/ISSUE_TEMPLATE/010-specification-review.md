@@ -40,7 +40,9 @@ You should also know that...
 We'd prefer the TAG provide feedback as (please delete all but the desired option):
 
   🐛 open issues in our GitHub repo for **each point of feedback**
+
   ☂️ open a single issue in our GitHub repo **for the entire review**
+
   💬 leave review feedback as a **comment in this issue** and @-notify [github usernames]
 
 ------------------------------------------------------------------------------------
