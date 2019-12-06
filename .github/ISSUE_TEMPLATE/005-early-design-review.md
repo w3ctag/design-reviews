@@ -27,7 +27,7 @@ Further details:
   - [ ] I have reviewed the TAG's [API Design Principles](https://w3ctag.github.io/design-principles/)
   - The group where the work on this design is being done (or is intended to be done in the future):
   - Existing major pieces of multi-stakeholder review or discussion of this design: 
-  - Major unresolved issues or opposition with this design:
+  - Major unresolved issues with or opposition to this design:
   - This work is being funded by: 
 
 You should also know that...
@@ -37,7 +37,9 @@ You should also know that...
 We'd prefer the TAG provide feedback as (please delete all but the desired option):
 
   🐛open issues in our GitHub repo for **each point of feedback**
-  🦋open a single issue in our GitHub repo **for the entire review**
+
+  ☂️ open a single issue in our GitHub repo **for the entire review**
+
   💬leave review feedback as a **comment in this issue** and @-notify [github usernames]
 
 ------------------------------------------------------------------------------------
@@ -50,4 +52,4 @@ In particular:
 
 ¹ For background, see our [explanation of how to write a good explainer](https://w3ctag.github.io/explainers). We recommend the explainer to be in [Markdown](https://github.github.com/gfm/).
 
-² Even for early-stage ideas, a Security and Privacy questionnaire helps us understand potential Security and Privacy issues and mitigations for your design, and can save us asking redundant questions. See https://www.w3.org/TR/security-privacy-questionnaire/.
+² Even for early-stage ideas, a Security and Privacy questionnaire helps us understand potential security and privacy issues and mitigations for your design, and can save us asking redundant questions. See https://www.w3.org/TR/security-privacy-questionnaire/.
