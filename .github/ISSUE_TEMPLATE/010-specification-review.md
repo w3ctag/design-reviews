@@ -10,41 +10,46 @@ assignees: ''
 
 Hello TAG!
 
-I'm requesting a TAG review of:
+I'm requesting a TAG review of [feature name].
 
-  - Name: [feature or document name]
+[One paragraph summary of idea, ideally copy-pasted from Explainer introduction]
+
+  - Explainer¹ (minimally containing user needs and example code): [url]
   - Specification URL: [spec url]
-  - Explainer (containing user needs and example code)¹: [url]
-  - GitHub issues (if you prefer feedback filed there): [url]
   - Tests: [wpt folder(s), if available]
-  - Primary contacts (and their relationship to the specification): [github usernames and affiliation]
-  - Organization/project driving the specification: [organization or project name] 
+  - Security and Privacy self-review²: [url]
+  - GitHub repo (if you prefer feedback filed there): [url]
+  - Primary contacts (and their relationship to the specification): 
+      - [name] ([github username]), [organization/s] (repeat as necessary)
+  - Organization(s)/project(s) driving the specification: [organization and/or project name] 
+  - Existing major pieces of multi-stakeholder review or discussion of this specification: 
+  - External status/issue trackers for this specification (publicly visible, e.g. Chrome Status):
 
 Further details:
 
-  - Relevant time constraints or deadlines: [please provide]
-  - [ ] I have read and filled out the [Self-Review Questionnare on Security and Privacy](https://www.w3.org/TR/security-privacy-questionnaire/). The [assessment is here](url).
   - [ ] I have reviewed the TAG's [API Design Principles](https://w3ctag.github.io/design-principles/)
-  - The group where the work on this specification is (or is intended to be in the future):
-
-We recommend the explainer to be in [Markdown](https://github.github.com/gfm/). On top of the [usual information expected in the explainer](https://w3ctag.github.io/explainers), it is strongly recommended to add:
-
-  - Links to major pieces of multi-stakeholder review or discussion of this specification: 
-  - Links to major unresolved issues or opposition with this specification:
-  - Links to external status/issue trackers for this specification (publicly visible, e.g. Chrome Status):
+  - Relevant time constraints or deadlines: [please provide]
+  - The group where the work on this specification is being done:
+  - Major unresolved issues or opposition with this specification:
+  - This work is being funded by: 
 
 You should also know that...
 
 [please tell us anything you think is relevant to this review]
 
-We'd prefer the TAG provide feedback as (please select one):
+We'd prefer the TAG provide feedback as (please delete all but the desired option):
 
-  - [ ] open issues in our GitHub repo for each point of feedback
-  - [ ] open a single issue in our GitHub repo for the entire review
-  - [ ] leave review feedback as a comment in this issue and @-notify [github usernames]
+  🐛open issues in our GitHub repo for **each point of feedback**
+  🦋open a single issue in our GitHub repo **for the entire review**
+  💬leave review feedback as a **comment in this issue** and @-notify [github usernames]
 
---------------------------
+------------------------------------------------------------------------------------
+CAREFULLY READ AND DELETE CONTENT BELOW THIS LINE BEFORE SUBMITTING
 
-_Please preview the issue and check that the links work before submitting._ In particular, if anything links to a URL which requires authentication (e.g. Google document), please make sure anyone with the link can access the document.
+Please preview the issue and check that the links work before submitting.
 
-¹ For background, see our [explanation of how to write a good explainer](https://w3ctag.github.io/explainers).
+In particular, if anything links to a URL which requires authentication (e.g. Google document), please make sure anyone with the link can access the document. We would prefer fully public documents though, since we work in the open.
+
+¹ We require an explainer to give the relevant context for the spec review, even if the spec has some background information. For background, see our [explanation of how to write a good explainer](https://w3ctag.github.io/explainers). We recommend the explainer to be in [Markdown](https://github.github.com/gfm/).
+
+² A Security and Privacy questionnaire helps us understand potential Security and Privacy issues and mitigations for your design, and can save us asking redundant questions. See https://www.w3.org/TR/security-privacy-questionnaire/.
