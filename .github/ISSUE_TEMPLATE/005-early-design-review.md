@@ -17,8 +17,8 @@ I'm requesting a TAG review of [feature name].
   - Explainer¹ (minimally containing user needs and example code): [url]
   - Security and Privacy self-review²: [url]
   - GitHub repo (if you prefer feedback filed there): [url]
-  - Primary contacts (and their relationship to the specification): 
-      - [name] ([github username]), [organization/s] (repeat as necessary)
+  - Primary contacts (and their relationship to the specification):
+      - [name] ([github username]), [organization/s] (repeat as necessary, we recommend including group chairs and editors in this list)
   - Organization/project driving the design: [organization and/or project name] 
   - External status/issue trackers for this feature (publicly visible, e.g. Chrome Status):
 
