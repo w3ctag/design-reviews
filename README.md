@@ -6,6 +6,9 @@ We use the [issues list](https://github.com/w3ctag/spec-reviews/issues) to track
 
 Generally speaking, we will discuss and review in our own issue list and cross-link to relevant issues in the specs we are reviewing. See https://github.com/w3ctag/spec-reviews/issues/112
 
+## Code of Conduct
+Discussions in this repo are subject to the [W3C Code of Ethics and Professional Conduct](https://www.w3.org/Consortium/cepc/).
+
 ## More detailed reviews
 In some cases we have prepared more detailed review documents in response to request for review. The ones we have prepared thus far are: 
 
