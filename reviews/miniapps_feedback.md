@@ -1,16 +1,16 @@
-# TAG Review / Statement on MiniApps Specs
+# TAG Review / Statement on MiniApp Specs
 
 This document is in reference to 3 TAG review requests from the MiniApps community group:
 
-*   [MiniApps URI Scheme](https://github.com/w3ctag/design-reviews/issues/478) #478
-*   [MiniApps Manifest](https://github.com/w3ctag/design-reviews/issues/524) #524
-*   [MiniApps LifeCycle](https://github.com/w3ctag/design-reviews/issues/523) #523
+*   [MiniApp URI Scheme](https://github.com/w3ctag/design-reviews/issues/478) #478
+*   [MiniApp Manifest](https://github.com/w3ctag/design-reviews/issues/524) #524
+*   [MiniApp LifeCycle](https://github.com/w3ctag/design-reviews/issues/523) #523
 
 We welcome these review requests. The TAG wants to play a positive role here.
 
 In addition, the TAG are concerned with the overall security model of the web and we want to ensure that any work on miniapps takes full advantage of the work done in w3c and elsewhere to create this robust model.
 
-In reviewing these requests and also reviewing some of the additional work of the Miniapps CG, the TAG has become concerned with the direction this work is taking.
+In reviewing these requests and also reviewing some of the additional work of the MiniApp CG, the TAG has become concerned with the direction this work is taking.
 
 
 # The Goal of One Web
@@ -47,7 +47,7 @@ At Fukuoka, we specifically talked about the manifest file as one of the points 
 
 ### New feedback
 
-Since this initial feedback, the miniapps CG has written a number of draft specifications and has recently requested TAG review in 3 areas: Miniapps URL, MiniApps Manifest and Miniapps Lifecycle. We would like to see these documents express use cases and requirements, and offer pointers to other components of the web platform that might be responsive. The TAG advises that Minapps work should build on other web platform specifications that share its needs or technical design, and not diverge from the web platform with a set of parallel web technologies. We therefore recommend that a series of cross-group task forces be created to ensure that the requirements and use cases identified by the MiniApps CG are adequately represented and merged with the relevant web platform specifications. We will also work with the W3C Team and appropriate working group contacts to help ensure that those groups are receptive to these incoming requirements. We strongly feel that the miniapps work should not fork existing web technologies. If any deliverables have been identified by the CG which cannot be mapped onto existing web technologies then there may be scope for opening up a working group, however that group should be chartered with distinct deliverables only for those additional technologies; in other instances, it should coordinate to send requirements, feedback, or potential extensions to the groups where relevant technology is being developed.
+Since this initial feedback, the MiniApp CG has written a number of draft specifications and has recently requested TAG review in 3 areas: Miniapps URL, MiniApps Manifest and Miniapps Lifecycle. We would like to see these documents express use cases and requirements, and offer pointers to other components of the web platform that might be responsive. The TAG advises that Minapps work should build on other web platform specifications that share its needs or technical design, and not diverge from the web platform with a set of parallel web technologies. We therefore recommend that a series of cross-group task forces be created to ensure that the requirements and use cases identified by the MiniApp CG are adequately represented and merged with the relevant web platform specifications. We will also work with the W3C Team and appropriate working group contacts to help ensure that those groups are receptive to these incoming requirements. We strongly feel that the miniapps work should not fork existing web technologies. If any deliverables have been identified by the CG which cannot be mapped onto existing web technologies then there may be scope for opening up a working group, however that group should be chartered with distinct deliverables only for those additional technologies; in other instances, it should coordinate to send requirements, feedback, or potential extensions to the groups where relevant technology is being developed.
 
 
 ### Miniapps Manifest
@@ -57,7 +57,7 @@ Since this initial feedback, the miniapps CG has written a number of draft speci
 1. Our position is that canonically for this purpose there should only be one manifest - webapp manifest.
 2. The proposed manifest, as specified, is incompatible with the existing manifest but we believe this incompatibility can be fixed.
 3. We need to extend the WebApp manifest for features that are necessary for miniapps - this is in line with [our TAG guidance on manifest files.](https://w3ctag.github.io/design-principles/#extend-manifests)
-4. A task force between the miniapps CG and webapps working group should map MiniApps features into WebApp manifest. If this presents issues because of CSP then we need to example what the rationale is for not wanting CSP. If there is a good rationale then it might be necessary to make a modification to the webapp manifest to accommodate this.
+4. A task force between the MiniApp CG and webapps working group should map MiniApps features into WebApp manifest. If this presents issues because of CSP then we need to example what the rationale is for not wanting CSP. If there is a good rationale then it might be necessary to make a modification to the webapp manifest to accommodate this.
 
 
 ### Miniapps URL
@@ -91,7 +91,7 @@ While multiple technical proposals are healthy for the advancement of technology
 
 ### Specific Recommendation
 
-* Start discussions between MiniApps CG and WebApps WG to bring Manifest requirements into WebApps to cover MinIApps use cases. **W3C Team** should facilitate.
+* Start discussions between MiniApp CG and WebApps WG to bring Manifest requirements into WebApps to cover MinIApps use cases. **W3C Team** should facilitate.
 
 ### Annex: 2019 TPAC TAG Feedback on Miniapps
 
