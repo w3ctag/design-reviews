@@ -91,7 +91,7 @@ While multiple technical proposals are healthy for the advancement of technology
 
 ### Specific Recommendation
 
-. Start discussions between MiniApps CG and WebApps WG to bring Manifest requirements into WebApps to cover MinIApps use cases. **W3C Team** should facilitate.
+* Start discussions between MiniApps CG and WebApps WG to bring Manifest requirements into WebApps to cover MinIApps use cases. **W3C Team** should facilitate.
 
 ### Annex: 2019 TPAC TAG Feedback on Miniapps
 
