@@ -21,8 +21,8 @@ I'm requesting a TAG review of [feature name].
   - GitHub repo (if you prefer feedback filed there): [url]
   - Primary contacts (and their relationship to the specification):
       - [name] ([github username]), [organization/s] (repeat as necessary, we recommend including group chairs and editors in this list)
-  - Organization(s)/project(s) driving the specification: [organization and/or project name] 
-  - Key pieces of existing multi-stakeholder review or discussion of this specification: 
+  - Organization(s)/project(s) driving the specification: [organization and/or project name]
+  - Key pieces of existing multi-stakeholder review or discussion of this specification:
   - External status/issue trackers for this specification (publicly visible, e.g. Chrome Status):
 
 Further details:
@@ -32,7 +32,7 @@ Further details:
   - The group where the work on this specification is currently being done:
   - The group where standardization of this work is intended to be done (if current group is a community group or other incubation venue):
   - Major unresolved issues with or opposition to this specification:
-  - This work is being funded by: 
+  - This work is being funded by:
 
 You should also know that...
 
