@@ -27,7 +27,7 @@ I'm requesting a TAG review of [feature name].
 
 Further details:
 
-  - [ ] I have reviewed the TAG's [API Design Principles](https://w3ctag.github.io/design-principles/)
+  - [ ] I have reviewed the TAG's [Web Platform Design Principles](https://w3ctag.github.io/design-principles/)
   - Relevant time constraints or deadlines: [please provide]
   - The group where the work on this specification is currently being done:
   - The group where standardization of this work is intended to be done (if current group is a community group or other incubation venue):
