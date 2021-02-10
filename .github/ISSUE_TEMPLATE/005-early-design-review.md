@@ -8,7 +8,7 @@ assignees: ''
 
 ---
 
-HIQaH! QaH! TAG!
+Ya ya yawm TAG!
 
 I'm requesting a TAG review of [feature name].
 
