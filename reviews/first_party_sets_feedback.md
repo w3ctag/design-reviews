@@ -14,7 +14,7 @@ The "Security on the Web" TAG draft from 2011 goes over some of the history of h
 
 Although the web has moved on in many respects since 2011, it's worth noting that the architectural plank of the origin has remained relatively steady. We, the web standards community, should therefore be especially careful before weakening or loosening how the concept of origin works and how it is applied. If, for example, the proposal were tightening the same-origin restriction on cookies, our concern would primarily be pragmatic—about the compatibility impact of the change—and not architectural.
 
-The First Party Sets proposal it has the potential to expand the scope of an origin to cover multiple origins. Given some of the [comments](https://github.com/w3ctag/design-reviews/issues/342#issuecomment-799709089) on our issue, we are concerned that this proposal weakens the concept of origin without considering the full implications of this action.
+The First Party Sets proposal has the potential to expand the scope of an origin to cover multiple origins. Given some of the [comments](https://github.com/w3ctag/design-reviews/issues/342#issuecomment-799709089) on our issue, we are concerned that this proposal weakens the concept of origin without considering the full implications of this action.
 
 ## Vagueness of Scope
 
