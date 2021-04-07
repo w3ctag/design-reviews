@@ -51,7 +51,7 @@ The First Party Sets proprosal is part of a raft of privacy-related proposals fr
 
 The "Privacy Sandbox" initiative proposes (among other things) to restrict "third-party cookies", which would align with other browsers and with general industry trends. However, this proposal seeks to redefine what it means to be a third-party cookie. In that context, the efficacy of the "Privacy Sandbox" initiative is thrown into question.
 
-## Web User Agents Serve Web Users
+## Web User Agents Put Web Users First
 
 When people use the web they expect the user agent (browser) to not take away their choices due to commercial considerations. As currently designed, First Party Sets could let a user agent or browser approve sites as a set in the interest of those sites or cookie-issuers (like advertisers), rather than in the interest of the user. If a user agent were to have a financial interest in either the sites or cookie issuers, we are concerned that this proposal would leave users at a disadvantage. While we don’t see evidence of this happening right now, this proposal would make that abuse possible. As is outlined in the W3C TAG’s Design Principles, the web should serve users first.
 
