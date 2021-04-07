@@ -45,12 +45,13 @@ The proposers have pointed out that other user agents already have curated allow
 
 The proposers [have](https://github.com/w3ctag/design-reviews/issues/342#issuecomment-799709089) [said](https://github.com/w3ctag/design-reviews/issues/342#issuecomment-801491303) that UA policy (which sets are allowed) should be a separate discussion. However, we note that the question of UA policy is fundamental to how this technology would work in practice, so we question whether you can really separate UA policy from the technical details of how a set is composed.
 
-## First Party Sets in Context
+## Redefining Third Party Cookies
 
 The First Party Sets proprosal is part of a raft of privacy-related proposals from Google which are collectively branded the ["Privacy Sandbox"](https://www.privacysandbox.com/). The TAG notes that there is an ecosystem of privacy-focused organisations, web browsers, privacy-enabling technology companies, industry experts and academics all working on issues related the privacy on the web, and that the topic of web privacy has gained a serious momentum in the mainstream of web users. It's good to see that First Party Sets is among the concrete privacy proposals being discussed as work items in the W3C Privacy Community Group, which can be one forum for focusing the power of this ecosystem.
 
-The "Privacy Sandbox" initiative proposes (among other things) to restrict "third-party cookies", which would align with other browsers and with general industry trends. However, this proposal seeks to move the goalposts of what it means to be a third-party cookie and that redefinition aligns strongly with the business model of large companies that also run ad networks. In that context, the efficacy of the "Privacy Sandbox" initiative is thrown into question.
-Web User Agents Serve Web Users
+The "Privacy Sandbox" initiative proposes (among other things) to restrict "third-party cookies", which would align with other browsers and with general industry trends. However, this proposal seeks to redefine what it means to be a third-party cookie. In that context, the efficacy of the "Privacy Sandbox" initiative is thrown into question.
+
+## Web User Agents Serve Web Users
 
 When people use the web they expect the user agent (browser) to not take away their choices due to commercial considerations. They do not expect the maker of the browser to have access to their bank balance or inject javascript into their pages that they did not ask for. This guarantee is written into the TAG's design principles - see [It should be safe to visit a web page](https://www.w3.org/TR/design-principles/#safe-to-browse). The web security model, based on origin, is key to enforcing this guarantee.
 
