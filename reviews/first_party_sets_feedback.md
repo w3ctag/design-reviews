@@ -1,17 +1,16 @@
 # TAG Review Feedback on First Party Sets
 
 This document is written in reference to a TAG [review request](https://github.com/w3ctag/design-reviews/issues/342) for the First Party Sets proposal. It has been reviewed by the TAG and represents a consensus view.
-Origin and the Security Model of the Web
 
-## The web's security model is based on origin. 
+## Origin and the Security Model of the Web
 
-Origin - which is built on top of DNS - is a clearly understood world-wide system which underpins the Internet as a whole. It's not perfect, but it works. And lots of web technologies depend on a stable concept of origin in order to make sense and mesh well, particularly when it comes to safeguarding users' security and privacy. 8 out of 18 questions in the security & privacy self-check specifically mention origin and one of the mitigation solutions proposed there is to explicitly limit features to "first party origins". [https://w3ctag.github.io/security-questionnaire/#restrict-to-first-party] 
+The web's security model is based on origin. Origin - which is built on top of DNS - is a clearly understood world-wide system which underpins the Internet as a whole. It's not perfect, but it works. And lots of web technologies depend on a stable concept of origin in order to make sense and mesh well, particularly when it comes to safeguarding users' security and privacy. 8 out of 18 questions in the security & privacy self-check specifically mention origin and one of the mitigation solutions proposed there is to explicitly limit features to "first party origins". [https://w3ctag.github.io/security-questionnaire/#restrict-to-first-party] 
 
 The "Security on the Web" TAG draft from 2011 goes over some of the history of how cookies became bound to origin:
 
 > “In order to ensure that a cookie was sent only to the originating domain, the browser needed to be able to determine the domain associated with a document - and thus, the "origin" was born - scheme, host and port defining a unique origin. The same-origin policy states that a document from one unique origin may only load resources from the origin from which the document was loaded.” 
-
-https://www.w3.org/2001/tag/2011/02/security-web.html
+> 
+> https://www.w3.org/2001/tag/2011/02/security-web.html
 
 Although the web has moved on in many respects since 2011, it's worth noting that the architectural plank of the origin has remained relatively steady. We, the web standards community, should therefore be especially careful before weakening or loosening how the concept of origin works and how it is applied. If, for example, the proposal were tightening the same-origin restriction on cookies, our concern would primarily be pragmatic—about the compatibility impact of the change—and not architectural.
 
