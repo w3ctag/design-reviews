@@ -66,7 +66,7 @@ This is a departure from how the web has worked for years from a user perspectiv
 
 ## Adding Complexity to the Web
 
-This proposal adds a complex configuration layer to the web - over and above what currently existing systems (e.g. privacy-enabling extensions) require. Does it provide enough value for web developers to justify this additional complexity? At this time, the TAG consensus is that there is not sufficient evidence for the need of this technology to warrant the additional complexity.
+This proposal adds a complex configuration layer to the web - over and above what currently existing systems (e.g. privacy-enabling extensions) require. Does it provide enough value for users or web developers to justify this additional complexity? At this time, the TAG consensus is that there is not sufficient evidence for the need of this technology to warrant the additional complexity.
 
 ## Is this Harmful to the Web?
 
