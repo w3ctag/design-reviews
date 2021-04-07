@@ -9,7 +9,7 @@ Origin - which is built on top of DNS - is a clearly understood world-wide syste
 
 The "Security on the Web" TAG draft from 2011 goes over some of the history of how cookies became bound to origin:
 
-“In order to ensure that a cookie was sent only to the originating domain, the browser needed to be able to determine the domain associated with a document - and thus, the "origin" was born - scheme, host and port defining a unique origin. The same-origin policy states that a document from one unique origin may only load resources from the origin from which the document was loaded.” 
+> “In order to ensure that a cookie was sent only to the originating domain, the browser needed to be able to determine the domain associated with a document - and thus, the "origin" was born - scheme, host and port defining a unique origin. The same-origin policy states that a document from one unique origin may only load resources from the origin from which the document was loaded.” 
 
 https://www.w3.org/2001/tag/2011/02/security-web.html
 
