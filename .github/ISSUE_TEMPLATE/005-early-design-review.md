@@ -15,6 +15,7 @@ I'm requesting a TAG review of [feature name].
 [One paragraph summary of idea, ideally copy-pasted from Explainer introduction]
 
   - Explainer¹ (minimally containing user needs and example code): [url]
+  - User research: [url to public summary/results of research]
   - Security and Privacy self-review²: [url]
   - GitHub repo (if you prefer feedback filed there): [url]
   - Primary contacts (and their relationship to the specification):
