@@ -3,7 +3,7 @@ name: Specification review
 about: If you want the TAG to review a specification for Web technology that you're
   working on
 title: ''
-labels: 'Progress: untriaged'
+labels: ''
 assignees: ''
 
 ---

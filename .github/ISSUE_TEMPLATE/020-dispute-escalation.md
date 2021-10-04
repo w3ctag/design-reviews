@@ -2,7 +2,7 @@
 name: Dispute escalation
 about: If you'd like the TAG to express an opinion on a current dispute
 title: ''
-labels: 'Progress: untriaged, Review type: conflict escalation'
+labels: ''
 assignees: ''
 
 ---
