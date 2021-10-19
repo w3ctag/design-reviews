@@ -25,7 +25,7 @@ I'm requesting a TAG review of [feature name].
 
 Further details:
 
-  - [ ] I have reviewed the TAG's [Web Platform Design Principles](https://w3ctag.github.io/design-principles/)
+  - [ ] I have reviewed the TAG's [Web Platform Design Principles](https://www.w3.org/TR/design-principles/)
   - The group where the incubation/design work on this is being done (or is intended to be done in the future):
   - The group where standardization of this work is intended to be done ("unknown" if not known):
   - Existing major pieces of multi-stakeholder review or discussion of this design:
