@@ -52,6 +52,6 @@ Please preview the issue and check that the links work before submitting.
 In particular:
 * if anything links to a URL which requires authentication (e.g. Google document), please make sure anyone with the link can access the document. We would prefer public documents though, since we work in the open.
 
-¹ For background, see our [explanation of how to write a good explainer](https://w3ctag.github.io/explainers). We recommend the explainer to be in [Markdown](https://github.github.com/gfm/).
+¹ For background, see our [explanation of how to write a good explainer](https://tag.w3.org/explainers/). We recommend the explainer to be in [Markdown](https://github.github.com/gfm/).
 
 ² Even for early-stage ideas, a Security and Privacy questionnaire helps us understand potential security and privacy issues and mitigations for your design, and can save us asking redundant questions. See https://www.w3.org/TR/security-privacy-questionnaire/.
