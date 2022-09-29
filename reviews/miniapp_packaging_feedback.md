@@ -18,7 +18,7 @@ The TAG notes that the work on [HTTP signed exchanges](https://wicg.github.io/we
 
 ## Proposal
 
-Specific recommendation: Miniapp community should examine making use of the packaging solution that preserves the origin model. Regarding lifecycle: miniapp apps should operate within that security model as well, preseving all the security benefits of the web while also enabling the use cases that the miniapp community envisions.  Bundling & signed exchanges proivide a promising path towards this outcome.
+Specific recommendation: Miniapp community should examine making use of a packaging solution that preserves the origin model. Regarding lifecycle: miniapp apps should operate within that security model as well, preseving all the security benefits of the web while also enabling the use cases that the miniapp community envisions.  Bundling & signed exchanges proivide a promising path towards this outcome. There may be other solutions in the market which can also play this role.
 
 ## References:
 * [Minutes from discussion with Fuqiao](https://github.com/w3ctag/meetings/blob/gh-pages/2022/telcons/08-29-minutes.md#second-half--mini-app-discussion-with-guests-1)
