@@ -1,4 +1,4 @@
-# MiniApp TAG Feedback Doc - DRAFT - September 2022
+# MiniApp TAG Feedback Doc - 29 September 2022
 
 ## Background
 
