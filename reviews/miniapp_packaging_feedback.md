@@ -10,7 +10,7 @@ The TAG's view is that the web security model helps to underpin a safe and secur
 
 As a recent example, we would like to draw the MiniApp community's attention to recent discussions around the security model of apps embedding a webview component, like [Inject custom JS scripts](https://github.com/WebView-CG/usage-and-challenges/issues/36) and [Apps can use WebViews to bypass web security standards, privacy standards, and user choice](https://github.com/WebView-CG/usage-and-challenges/issues/36) that are happening in the WebView Community Group. 
 
-The web security model is based on the concept of origin, which is a key architectural plank of the web.  As the web becomes more powerful, it has become increasingly important for these powerful features to operate in a secure context - that is, delivered over `https` with a clear crypographic chain of provenance (the certificate authority chain).  Any web packaging solution must therefore preserve mechanisms of origin and secure context so that from the web appliction's perspective it is operating in a trusted environment.
+The web security model is based on the concept of origin, which is a key architectural plank of the web.  As the web becomes more powerful, it has become increasingly important for these powerful features to operate in a secure context - that is, delivered over `https` with a clear crypographic chain of provenance (the certificate authority chain).  Any web packaging solution must therefore preserve mechanisms of origin and secure context so that from the web application's perspective it is operating in a trusted environment.
 
 Furthermore the TAG has concerns regarding the efficiency of the zip format for this use.
 
