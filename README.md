@@ -4,6 +4,8 @@ This repository is for specification reviews by the [W3C Technical Architecture 
 ## How reviews are performed/prioritized
 We use the [issues list](https://github.com/w3ctag/spec-reviews/issues) to track our reviews; you can request a review for your spec by adding a new issue. _Please include a link to the relevant specification(s)_. As well, please include info on timeliness of the required review, whether a security review / privacy been done and the expectation of what happens next after the review. We have included a useful template for new issues that should lead you through the process. In most cases the review will be completed and documented in the comments field of the issue itself.
 
+If you have general questions about the deisgn review process, the application of the Web Platform Design Principles or other aspects of web platform architecture or design, please feel free to [open up a discussion thread](https://github.com/w3ctag/design-reviews/discussions).
+
 Generally speaking, we will discuss and review in our own issue list and cross-link to relevant issues in the specs we are reviewing. See https://github.com/w3ctag/spec-reviews/issues/112
 
 ## Code of Conduct
