@@ -22,7 +22,7 @@ Some recent good examples of the designed-for-purpose approach include:
 
 * [FedCM](https://github.com/w3ctag/design-reviews/issues/718). Third-party cookies have been used to support single sign-on. FedCM is a set of technologies built to support single sign-on and identity federation, without replicating all functionality of third-party cookies.
 * [CHIPS](https://github.com/w3ctag/design-reviews/issues/654). The goal of CHIPS is to allow state, without supporting correlation or tracking between web sites which don't know they are collaborating, for example, when embedding third-party services like customer service webchat.
-* [Fenced Frames](https://github.com/w3ctag/design-reviews/issues/735). This provides a new top-level browsing contenxt which enables content from multiple parties to be embedded on a page, without the embedding site being able to communicate with the embedded site. 
+* [Fenced Frames](https://github.com/w3ctag/design-reviews/issues/735). This provides a new top-level browsing context which enables content from multiple parties to be embedded on a page, without the embedding site being able to communicate with the embedded site. 
 
 In all cases, it is important to continually review how such proposals might interact with other emerging or proposed APIs. Be aware that a set of new technologies which carry minimal risk individually, could be used in combination for tracking or profiling of web users.
 
