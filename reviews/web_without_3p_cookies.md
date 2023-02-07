@@ -28,7 +28,7 @@ In all cases, it is important to continually review how such proposals might int
 
 ## Leaving the web better than we found it
 
-We are strongly in favour of innovations in alternative ways to to build sustainable business models on the web platform. This could include forms of advertising that do not track or collect data about people, or other models entirely. Web standards should avoid encoding particular advertising models, as well as compelling user agents to constrain the business models that are available to authors, publishers, and web content creators.
+We are strongly in favour of innovations to build sustainable business models on the web platform, but an in-depth discussion of the various possibilities are outside of the scope of this document. From an architectural standpoint, web standards should avoid compelling user agents to constrain the business models, including encoding particular advertising models, that are available to authors, publishers, and web content creators.
 
 The TAG considers each new technology proposal *both* individually, *and* as they fit together with the web platform as a whole. The web must be cross-platform, so multi-stakeholder (in particular, multi-browser) support for privacy-related specifications is essential if they are going to achieve the goal of increasing privacy on the web. When we consider whether something makes the web platform better, we should be explicit about what the baseline for comparison is. Is a proposal better for privacy when compared to usage of third-party cookies? Or when compared with a web free from third-party cookies altogether? What about when some user agents restrict third-party cookies, but others do not?
 
