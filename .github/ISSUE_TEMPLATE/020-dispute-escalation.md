@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-Wotcher TAG!
+こんにちは TAG-さん!
 
 I'm requesting the TAG express an opinion on a dispute related to:
 
