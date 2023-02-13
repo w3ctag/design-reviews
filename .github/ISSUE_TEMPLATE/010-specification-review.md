@@ -8,7 +8,7 @@ assignees: ''
 
 ---
 
-Wotcher TAG!
+こんにちは TAG-さん!
 
 I'm requesting a TAG review of [feature name].
 
