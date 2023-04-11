@@ -1,3 +1,5 @@
+**_This draft has been moved to [its own repo](https://github.com/w3ctag/web-without-3p-cookies) and will no longer be updated here._**
+
 # Improving the web platform without third party cookies
 
 Many browsers are restricting or completely [deprecating the use of of third-party cookies](https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/). The TAG supports efforts to deprecate third-party cookies, as this provides an opportunity to further improve the privacy preserving features of the web platform.
