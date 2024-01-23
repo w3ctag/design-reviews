@@ -23,7 +23,7 @@ I'm requesting a TAG review of [feature name].
   - Primary contacts (and their relationship to the specification):
       - [name] ([github username]), [organization/s] (repeat as necessary, we recommend including group chairs and editors in this list)
   - Organization(s)/project(s) driving the specification: [organization and/or project name]
-  - Key pieces of existing multi-stakeholder (e.g. developers, implementers) support, review or discussion of this specification:
+  - Key pieces of existing multi-stakeholder (e.g. developers, implementers, civil society) support, review or discussion of this specification:
   - External status/issue trackers for this specification (publicly visible, e.g. Chrome Status):
 
 Further details:
