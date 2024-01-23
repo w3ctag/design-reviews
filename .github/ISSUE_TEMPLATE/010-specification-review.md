@@ -24,6 +24,10 @@ I'm requesting a TAG review of [feature name].
       - [name] ([github username]), [organization/s] (repeat as necessary, we recommend including group chairs and editors in this list)
   - Organization(s)/project(s) driving the specification: [organization and/or project name]
   - Key pieces of existing multi-stakeholder (e.g. developers, implementers, civil society) support, review or discussion of this specification:
+    - Chromium comments: [url]
+    - Mozilla comments: https://github.com/mozilla/standards-positions/issues/NNN
+    - WebKit comments: https://github.com/WebKit/standards-positions/issues/NNN
+    - Etc.
   - External status/issue trackers for this specification (publicly visible, e.g. Chrome Status):
 
 Further details:
@@ -57,3 +61,5 @@ In particular, if anything links to a URL which requires authentication (e.g. Go
 ¹ We require an explainer to give the relevant context for the spec review, even if the spec has some background information. For background, see our [explanation of how to write a good explainer](https://tag.w3.org/explainers/). We recommend the explainer to be in [Markdown](https://github.github.com/gfm/).
 
 ² A Security and Privacy questionnaire helps us understand potential security and privacy issues and mitigations for your design, and can save us asking redundant questions. See https://www.w3.org/TR/security-privacy-questionnaire/.
+
+³ For your own organization, you can simply state the organization's position instead of linking to it. Chromium doesn't have a standards-positions repository and [prefers](https://source.chromium.org/chromium/chromium/src/+/main:docs/standards/positions/GoogleChrome/README.md) to use comments from the teams that maintain the relevant area of their codebase.
