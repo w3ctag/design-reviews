@@ -36,14 +36,6 @@ You should also know that...
 
 [please tell us anything you think is relevant to this review]
 
-We'd prefer the TAG provide feedback as (please delete all but the desired option):
-
-  🐛 open issues in our GitHub repo for **each point of feedback**
-
-  ☂️ open a single issue in our GitHub repo **for the entire review**
-
-  💬 leave review feedback as a **comment in this issue** and @-notify [github usernames]
-
 ------------------------------------------------------------------------------------
 CAREFULLY READ AND DELETE CONTENT BELOW THIS LINE BEFORE SUBMITTING
 

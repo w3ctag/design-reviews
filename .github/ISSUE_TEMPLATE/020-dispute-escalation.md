@@ -30,12 +30,6 @@ Links to the positions of each side in the dispute (e.g., specific github commen
 
 What steps have already been taken to come to an agreement:
 
-We'd prefer the TAG provide feedback as (please select one):
-
-  - [ ] leave a comment in the following GitHub issue: [url]
-  - [ ] leave review feedback as a comment in this issue and @-notify [github usernames]
-  - [ ] open a new issue in our GitHub repo with the feedback
-
 --------------------------
 
 _Please preview the issue and check that the links work before submitting._ In particular, if anything links to a URL which requires authentication (e.g. Google document), please make sure anyone with the link can access the document.
