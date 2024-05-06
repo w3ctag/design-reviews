@@ -52,8 +52,8 @@ Please preview the issue and check that the links work before submitting.
 In particular:
 * if anything links to a URL which requires authentication (e.g. Google document), please make sure anyone with the link can access the document. We would prefer public documents though, since we work in the open.
 
-¹ For background, see our [explanation of how to write a good explainer](https://tag.w3.org/explainers/). We recommend the explainer to be in [Markdown](https://github.github.com/gfm/).
+¹ We require an explainer to give the relevant context for the spec review, even if the spec has some background information. For background, see our [explanation of how to write a good explainer](https://tag.w3.org/explainers/). We recommend the explainer to be in [Markdown](https://github.github.com/gfm/).
 
-² Even for early-stage ideas, a Security and Privacy questionnaire helps us understand potential security and privacy issues and mitigations for your design, and can save us asking redundant questions. See https://www.w3.org/TR/security-privacy-questionnaire/.
+² A Security and Privacy questionnaire helps us understand potential security and privacy issues and mitigations for your design, and can save us asking redundant questions. See https://www.w3.org/TR/security-privacy-questionnaire/.
 
 ³ For your own organization, you can simply state the organization's position instead of linking to it. Chromium doesn't have a standards-positions repository and [prefers](https://source.chromium.org/chromium/chromium/src/+/main:docs/standards/positions/GoogleChrome/README.md) to use comments from the teams that maintain the relevant area of their codebase.
