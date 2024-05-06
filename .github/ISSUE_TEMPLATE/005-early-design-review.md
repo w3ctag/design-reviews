@@ -3,7 +3,7 @@ name: Early design review
 about: 'If you''d like the TAG to offer thoughts and guidance on an early-stage design
   direction '
 title: ''
-labels: 'Progress: untriaged, Review type: early review'
+labels: 'Progress: untriaged, Review type: early review, Focus: API Design (pending), Focus: Accessibility (pending), Focus: Internationalization (pending), Focus: Web architecture (pending), Focus: Security (pending), Focus: Privacy (pending)'
 assignees: ''
 
 ---
@@ -15,26 +15,34 @@ I'm requesting a TAG review of [feature name].
 [One paragraph summary of idea, ideally copy-pasted from Explainer introduction]
 
   - Explainer¹ (minimally containing user needs and example code): [url]
-  - User research: [url to public summary/results of research]
   - Security and Privacy self-review²: [url]
-  - GitHub repo (if you prefer feedback filed there): [url]
+  - [ ] We have reviewed the TAG's [Web Platform Design Principles](https://www.w3.org/TR/design-principles/)
+
+**Discussion about the work:**
+
+  - User research: [url to public summary/results of research]
+  - Tests: [url] | [wpt folder(s), if available]
+  - Key pieces of existing multi-stakeholder³ (e.g. developers, implementers, civil society) support, review or discussion of this specification:
+    - Chromium comments: [url]
+    - Mozilla comments: https://github.com/mozilla/standards-positions/issues/NNN
+    - WebKit comments: https://github.com/WebKit/standards-positions/issues/NNN
+    - Etc.
+  - Major unresolved issues with or opposition to this design:
+
+**Where / by whom the work is being done:**
+
+  - GitHub repo: [url]
   - Primary contacts (and their relationship to the specification):
       - [name] ([github username]), [organization/s] (repeat as necessary, we recommend including group chairs and editors in this list)
   - Organization/project driving the design: [organization and/or project name]
   - External status/issue trackers for this feature (publicly visible, e.g. Chrome Status):
-
-Further details:
-
-  - [ ] I have reviewed the TAG's [Web Platform Design Principles](https://www.w3.org/TR/design-principles/)
   - The group where the incubation/design work on this is being done (or is intended to be done in the future):
   - The group where standardization of this work is intended to be done ("unknown" if not known):
-  - Existing major pieces of multi-stakeholder review or discussion of this design:
-  - Major unresolved issues with or opposition to this design:
   - This work is being funded by:
 
-You should also know that...
+**You should also know that:**
 
-[please tell us anything you think is relevant to this review]
+  - [please tell us anything else you think is relevant to this review]
 
 ------------------------------------------------------------------------------------
 CAREFULLY READ AND DELETE CONTENT BELOW THIS LINE BEFORE SUBMITTING
@@ -47,3 +55,5 @@ In particular:
 ¹ For background, see our [explanation of how to write a good explainer](https://tag.w3.org/explainers/). We recommend the explainer to be in [Markdown](https://github.github.com/gfm/).
 
 ² Even for early-stage ideas, a Security and Privacy questionnaire helps us understand potential security and privacy issues and mitigations for your design, and can save us asking redundant questions. See https://www.w3.org/TR/security-privacy-questionnaire/.
+
+³ For your own organization, you can simply state the organization's position instead of linking to it. Chromium doesn't have a standards-positions repository and [prefers](https://source.chromium.org/chromium/chromium/src/+/main:docs/standards/positions/GoogleChrome/README.md) to use comments from the teams that maintain the relevant area of their codebase.
