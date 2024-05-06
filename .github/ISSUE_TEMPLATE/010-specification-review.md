@@ -19,7 +19,7 @@ I'm requesting a TAG review of [feature name].
   - Tests: [wpt folder(s), if available]
   - User research: [url to public summary/results of research]
   - Security and Privacy self-review²: [url]
-  - GitHub repo (if you prefer feedback filed there): [url]
+  - GitHub repo: [url]
   - Primary contacts (and their relationship to the specification):
       - [name] ([github username]), [organization/s] (repeat as necessary, we recommend including group chairs and editors in this list)
   - Organization(s)/project(s) driving the specification: [organization and/or project name]
