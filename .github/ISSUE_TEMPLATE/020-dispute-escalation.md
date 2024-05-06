@@ -15,7 +15,7 @@ I'm requesting the TAG express an opinion on a dispute related to:
   - Specification URL: [spec url]
   - Explainer (containing user needs and example code)¹: [url]
   - User research: [url to public summary/results of research]
-  - GitHub issues (if you prefer feedback filed there): [url]
+  - GitHub issues: [url]
   - Primary contacts (and their relationship to the specification): [github usernames]
   - The group where the work on this specification is:
   - Links to major pieces of multi-stakeholder review or discussion of this specification: 
