@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: I have an API design question
+    url: https://github.com/w3ctag/design-reviews/discussions/categories/q-a
+    about: For lightweight feedback on specific low-level design decisions, use our Q&A section
