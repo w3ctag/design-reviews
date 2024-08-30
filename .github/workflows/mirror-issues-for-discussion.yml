@@ -1,0 +1,66 @@
+name: Mirror issues for brainstorming
+
+on:
+  issues:
+    types:
+      - reopened
+      - opened
+      - closed
+
+env:
+  ORG: w3ctag
+  SOURCE_REPO: design-reviews
+  MIRROR_REPO: design-reviews-private-brainstorming
+  # Requires Contents: read and Issues: read/write permissions on the MIRROR_REPO.
+  GH_TOKEN: ${{ secrets.PRIVATE_BRAINSTORMING_GITHUB_TOKEN }}
+
+jobs:
+  open:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.action == 'opened' }}
+    steps:
+      - name: "Copy issue #${{ github.event.issue.number }}: ${{ github.event.issue.title }}"
+        run: |
+          gh issue create --title "$TITLE" --body "Mirrored from: $ORG/$SOURCE_REPO#$ISSUE_ID
+
+          $ISSUE_BODY" --repo "$ORG/$MIRROR_REPO"
+        env:
+          TITLE: ${{ github.event.issue.title }}
+          ISSUE_ID: ${{ github.event.issue.number }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+
+  update-state:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.action != 'opened' }}
+    steps:
+      - name: Find mirrored issue number
+        run: |
+          mirroredIssue=$(gh api graphql -F q="\"Mirrored from: $ORG/$SOURCE_REPO#$ISSUE_ID\" in:body is:issue repo:$ORG/$MIRROR_REPO" -f query='
+            query($q: String!) {
+              search(type: ISSUE, query: $q, first: 1) {
+                nodes {
+                  ... on Issue {
+                    number
+                  }
+                }
+              }
+            }
+          ' --jq=.data.search.nodes[].number)
+          if [ -z "$mirroredIssue" ]; then
+            echo "::error ::Can't find a mirror of $ORG/$SOURCE_REPO#$ISSUE_ID."
+            exit 1
+          fi
+          echo 'MIRRORED_ISSUE='$mirroredIssue >> $GITHUB_ENV
+          echo "::debug::Found issue #$mirroredIssue."
+        env:
+          ISSUE_ID: ${{ github.event.issue.number }}
+      - if: ${{ github.event.action == 'closed' }}
+        name: Close mirrored issue
+        run: |
+          gh issue close $MIRRORED_ISSUE --repo "$ORG/$MIRROR_REPO"
+          echo "Closed issue $ORG/$MIRROR_REPO#$MIRRORED_ISSUE" >> $GITHUB_STEP_SUMMARY
+      - if: ${{ github.event.action == 'reopened' }}
+        name: Reopen mirrored issue
+        run: |
+          gh issue reopen $MIRRORED_ISSUE --repo "$ORG/$MIRROR_REPO"
+          echo "Reopened issue $ORG/$MIRROR_REPO#$MIRRORED_ISSUE" >> $GITHUB_STEP_SUMMARY
