@@ -24,7 +24,7 @@ I'm requesting a TAG review of {{feature}}.
       - $name (@-mention), $organization/s, $role in developing specification
       - {{repeat as necessary, we recommend including group chairs and editors in this list}}
   - Organization/project driving the specification:
-  - Key pieces of multi-stakeholder support³:
+  - Multi-stakeholder support³:
     - Chromium comments:
     - Mozilla comments: https://github.com/mozilla/standards-positions/issues/NNN
     - WebKit comments: https://github.com/WebKit/standards-positions/issues/NNN
@@ -57,6 +57,6 @@ In particular, if anything links to a URL which requires authentication (e.g. Go
 
 ² A Security and Privacy questionnaire helps us understand potential security and privacy issues and mitigations for your design, and can save us asking redundant questions. See https://www.w3.org/TR/security-privacy-questionnaire/.
 
-³ For your own organization, you can simply state the organization's position instead of linking to it. Chromium doesn't have a standards-positions repository and [prefers](https://source.chromium.org/chromium/chromium/src/+/main:docs/standards/positions/GoogleChrome/README.md) to use comments from the teams that maintain the relevant area of their codebase.
+³ For your own organization, you can simply state the organization's position instead of linking to it.  This includes items on [Mozilla standards-positions](https://github.com/mozilla/standards-positions), and [WebKit standards-positions](https://github.com/WebKit/standards-positions).  Chromium doesn't have a standards-positions repository and [prefers](https://source.chromium.org/chromium/chromium/src/+/main:docs/standards/positions/GoogleChrome/README.md) to use comments from the teams that maintain the relevant area of their codebase.
 
 ⁴ Include a link to [Chrome Status](https://chromestatus.com/), [Mozilla's](https://bugzilla.mozilla.org/), [WebKit's Bugzilla](https://bugs.webkit.org/), or trackers for other implementations if those are known to you.
