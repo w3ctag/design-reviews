@@ -20,7 +20,7 @@ I'm requesting an early TAG design review of {{feature}}.
   - GitHub repo:
   - Primary contacts:
       - $name (@-mention), $organization/s, $role in developing specification
-      - {{repeat as necessary, we recommend including group chairs and editors in this list}
+      - {{repeat as necessary, we recommend including group chairs and editors in this list}}
   - Organization/project driving the design:
   - External status/issue trackers for this feature³:
 
