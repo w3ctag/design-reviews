@@ -10,18 +10,19 @@ assignees: ''
 
 こんにちは TAG-さん!
 
-I'm requesting a TAG review of [feature name].
+I'm requesting an early TAG design review of {{feature}}.
 
-[One paragraph summary of idea, ideally copy-pasted from Explainer introduction]
+{{One paragraph summary of idea, ideally copy-pasted from your Explainer.}}
 
-  - Explainer¹ (minimally containing user needs and example code): [url]
-  - User research: [url to public summary/results of research]
-  - Security and Privacy self-review²: [url]
-  - GitHub repo: [url]
-  - Primary contacts (and their relationship to the specification):
-      - [name] ([github username]), [organization/s] (repeat as necessary, we recommend including group chairs and editors in this list)
-  - Organization/project driving the design: [organization and/or project name]
-  - External status/issue trackers for this feature (publicly visible, e.g. Chrome Status):
+  - Explainer¹:
+  - User research:
+  - Security and Privacy self-review²:
+  - GitHub repo:
+  - Primary contacts:
+      - $name (@-mention), $organization/s, $role in developing specification
+      - {{repeat as necessary, we recommend including group chairs and editors in this list}
+  - Organization/project driving the design:
+  - External status/issue trackers for this feature³:
 
 Further details:
 
@@ -34,7 +35,7 @@ Further details:
 
 You should also know that...
 
-[please tell us anything you think is relevant to this review]
+{{please tell us anything you think is relevant to this review}}
 
 ------------------------------------------------------------------------------------
 CAREFULLY READ AND DELETE CONTENT BELOW THIS LINE BEFORE SUBMITTING
@@ -44,6 +45,8 @@ Please preview the issue and check that the links work before submitting.
 In particular:
 * if anything links to a URL which requires authentication (e.g. Google document), please make sure anyone with the link can access the document. We would prefer public documents though, since we work in the open.
 
-¹ For background, see our [explanation of how to write a good explainer](https://tag.w3.org/explainers/). We recommend the explainer to be in [Markdown](https://github.github.com/gfm/).
+¹ An explainer must address user needs and contain examples of use. See our [explanation of how to write a good explainer](https://tag.w3.org/explainers/). We recommend the explainer to be in [Markdown](https://github.github.com/gfm/).
 
 ² Even for early-stage ideas, a Security and Privacy questionnaire helps us understand potential security and privacy issues and mitigations for your design, and can save us asking redundant questions. See https://www.w3.org/TR/security-privacy-questionnaire/.
+
+³ This includes items on [Chrome Status](https://chromestatus.com/roadmap), [Mozilla standards-positions](https://github.com/mozilla/standards-positions), and [WebKit standards-positions](https://github.com/WebKit/standards-positions).
