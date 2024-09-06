@@ -47,11 +47,9 @@ You should also know that...
 ------------------------------------------------------------------------------------
 CAREFULLY READ AND DELETE CONTENT BELOW THIS LINE BEFORE SUBMITTING
 
-Please preview the issue and check that the links work before submitting.
+Use links to content rather than pasting text into this issue. Issues are ephemeral and most of the material we are asking for has long term value.
 
-Use links to content rather than pasting text into this issue.  Issues are ephemeral and most of the material we are asking for has long term value.
-
-In particular, if anything links to a URL which requires authentication (e.g. Google document), please make sure anyone with the link can access the document. We would prefer fully public documents though, since we work in the open.
+Please preview the issue and check that the links work before submitting. Please make sure anyone with the link can access the document. We may refuse to review anything that is not public.
 
 ¹ We require an explainer to give the relevant context for the spec review, even if the spec has some background information. An explainer must address user needs and contain examples of use.  For more information, see our [explanation of how to write a good explainer](https://tag.w3.org/explainers/).
 
