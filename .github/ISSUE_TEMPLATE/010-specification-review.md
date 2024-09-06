@@ -36,7 +36,7 @@ Further details:
   - [ ] I have reviewed the TAG's [Web Platform Design Principles](https://www.w3.org/TR/design-principles/)
   - Relevant time constraints or deadlines:
   - The group where the work on this specification is currently being done:
-  - The group where standardization of this work is intended to be done:
+  - The group where standardization of this work is intended to be done (if different from the current group):
   - Major unresolved issues with or opposition to this specification:
   - This work is being funded by:
 
@@ -59,4 +59,4 @@ In particular, if anything links to a URL which requires authentication (e.g. Go
 
 ³ For your own organization, you can simply state the organization's position instead of linking to it.  This includes items on [Mozilla standards-positions](https://github.com/mozilla/standards-positions), and [WebKit standards-positions](https://github.com/WebKit/standards-positions).  Chromium doesn't have a standards-positions repository and [prefers](https://source.chromium.org/chromium/chromium/src/+/main:docs/standards/positions/GoogleChrome/README.md) to use comments from the teams that maintain the relevant area of their codebase.
 
-⁴ Include a link to [Chrome Status](https://chromestatus.com/), [Mozilla's](https://bugzilla.mozilla.org/), [WebKit's Bugzilla](https://bugs.webkit.org/), or trackers for other implementations if those are known to you.
+⁴ Include links to [Chrome Status](https://chromestatus.com/), [Mozilla's](https://bugzilla.mozilla.org/), [WebKit's Bugzilla](https://bugs.webkit.org/), and trackers for other implementations if those are known to you.
