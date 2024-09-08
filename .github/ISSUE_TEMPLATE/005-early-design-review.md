@@ -10,18 +10,23 @@ assignees: ''
 
 こんにちは TAG-さん!
 
-I'm requesting a TAG review of [feature name].
+I'm requesting an early TAG design review of {{feature}}.
 
-[One paragraph summary of idea, ideally copy-pasted from Explainer introduction]
+{{One paragraph summary of idea, ideally copy-pasted from your Explainer.}}
 
-  - Explainer¹ (minimally containing user needs and example code): [url]
-  - User research: [url to public summary/results of research]
-  - Security and Privacy self-review²: [url]
-  - GitHub repo: [url]
-  - Primary contacts (and their relationship to the specification):
-      - [name] ([github username]), [organization/s] (repeat as necessary, we recommend including group chairs and editors in this list)
-  - Organization/project driving the design: [organization and/or project name]
-  - External status/issue trackers for this feature (publicly visible, e.g. Chrome Status):
+  - Explainer¹:
+  - User research:
+  - Security and Privacy self-review²:
+  - GitHub repo:
+  - Primary contacts:
+      - $name (@-mention), $organization/s, $role in developing specification
+      - {{repeat as necessary, we recommend including group chairs and editors in this list}}
+  - Organization/project driving the design:
+  - Multi-stakeholder feedback³:
+    - Chromium comments:
+    - Mozilla comments: https://github.com/mozilla/standards-positions/issues/NNN
+    - WebKit comments: https://github.com/WebKit/standards-positions/issues/NNN
+    - {{...include feedback/review from developers, implementers, civil society, and others}}
 
 Further details:
 
@@ -34,16 +39,17 @@ Further details:
 
 You should also know that...
 
-[please tell us anything you think is relevant to this review]
+{{Please tell us anything else you think is relevant to this review.}}
 
 ------------------------------------------------------------------------------------
 CAREFULLY READ AND DELETE CONTENT BELOW THIS LINE BEFORE SUBMITTING
 
-Please preview the issue and check that the links work before submitting.
+Use links to content rather than pasting text into this issue. Issues are ephemeral and most of the material we are asking for has long term value.
 
-In particular:
-* if anything links to a URL which requires authentication (e.g. Google document), please make sure anyone with the link can access the document. We would prefer public documents though, since we work in the open.
+Please preview the issue and check that the links work before submitting. Please make sure anyone with the link can access the document. We may refuse to review anything that is not public.
 
-¹ For background, see our [explanation of how to write a good explainer](https://tag.w3.org/explainers/). We recommend the explainer to be in [Markdown](https://github.github.com/gfm/).
+¹ An explainer must address user needs and contain examples of use. See our [explanation of how to write a good explainer](https://tag.w3.org/explainers/).
 
 ² Even for early-stage ideas, a Security and Privacy questionnaire helps us understand potential security and privacy issues and mitigations for your design, and can save us asking redundant questions. See https://www.w3.org/TR/security-privacy-questionnaire/.
+
+³ For your own organization, you can simply state the organization's position instead of linking to it.  This includes items on [Mozilla standards-positions](https://github.com/mozilla/standards-positions), and [WebKit standards-positions](https://github.com/WebKit/standards-positions).  Chromium doesn't have a standards-positions repository and [prefers](https://source.chromium.org/chromium/chromium/src/+/main:docs/standards/positions/GoogleChrome/README.md) to use comments from the teams that maintain the relevant area of their codebase.
