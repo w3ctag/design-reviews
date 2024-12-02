@@ -1,4 +1,4 @@
-# TAG Review Feedback on First Party Sets
+# TAG Review Feedback on Related Website Sets (originally named "First Party Sets")
 
 This document is written in reference to a TAG [review request](https://github.com/w3ctag/design-reviews/issues/342) for the First Party Sets proposal. It has been reviewed by the TAG and represents a consensus view.
 
