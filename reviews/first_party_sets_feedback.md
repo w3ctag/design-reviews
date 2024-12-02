@@ -2,6 +2,8 @@
 
 This document is written in reference to a TAG [review request](https://github.com/w3ctag/design-reviews/issues/342) for the First Party Sets proposal. It has been reviewed by the TAG and represents a consensus view.
 
+*Note (2-December-2024): this text was written as a response to the original version of the proposal. The proposal has subsequently been updated, but the feedback has not substantially changed. This is reflected in the [closing comment](https://github.com/w3ctag/design-reviews/issues/342#issuecomment-1967579230) of the issues.*
+
 ## Origin and the Security Model of the Web
 
 The web's security model is based on origin. Origin - which is built on top of DNS - is a clearly understood world-wide system which underpins the Internet as a whole. It's not perfect, but it works. And lots of web technologies depend on a stable concept of origin in order to make sense and mesh well, particularly when it comes to safeguarding users' security and privacy. 8 out of 18 questions in the security & privacy self-check specifically mention origin and one of the mitigation solutions proposed there is to explicitly limit features to "[first party origins](https://w3ctag.github.io/security-questionnaire/#restrict-to-first-party)". 
