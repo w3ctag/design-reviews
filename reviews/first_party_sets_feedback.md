@@ -1,6 +1,8 @@
-# TAG Review Feedback on First Party Sets
+# TAG Review Feedback on Related Website Sets (originally named "First Party Sets")
 
 This document is written in reference to a TAG [review request](https://github.com/w3ctag/design-reviews/issues/342) for the First Party Sets proposal. It has been reviewed by the TAG and represents a consensus view.
+
+*Note (2024-12-02): this text was written as a response to the original version of the proposal. The proposal has subsequently been updated. This feedback is still mostly relevant to the updated proposal, aside from some minor details. This is reflected in our [closing comment](https://github.com/w3ctag/design-reviews/issues/342#issuecomment-1967579230) of the issues.*
 
 ## Origin and the Security Model of the Web
 
