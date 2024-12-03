@@ -1,8 +1,7 @@
 ---
 name: Ask the TAG a question
 about: >
-  If there is an issue or question that the TAG might be able to help with,
-  please ask using this option.
+  If there is an issue or question that the TAG might be able to help with
 labels: "Review type: question"
 title: "Question:"
 ---
