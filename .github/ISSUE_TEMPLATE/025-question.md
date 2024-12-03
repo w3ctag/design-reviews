@@ -3,8 +3,8 @@ name: Ask the TAG a question
 about: >
   If there is an issue or question that the TAG might be able to help with,
   please ask using this option.
-labels: Review Type: Question
-title: Question:
+labels: "Review type: question"
+title: "Question:"
 ---
 
 Ask your question.
