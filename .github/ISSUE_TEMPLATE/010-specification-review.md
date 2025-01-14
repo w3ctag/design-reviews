@@ -34,6 +34,7 @@ I'm requesting a TAG review of {{feature}}.
 Further details:
 
   - [ ] I have reviewed the TAG's [Web Platform Design Principles](https://www.w3.org/TR/design-principles/)
+  - Previous early design review, if any: https://github.com/w3ctag/design-reviews/issues/####
   - Relevant time constraints or deadlines:
   - The group where the work on this specification is currently being done:
   - The group where standardization of this work is intended to be done (if different from the current group):
