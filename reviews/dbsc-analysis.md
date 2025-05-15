@@ -1,0 +1,158 @@
+# Device-Bound Session Credentials: Analysis and Alternative
+
+The purpose of this feature is to bind active sessions with websites to an asymmetric key pair that is stored by the browser. The expectation is that this makes it harder for an attacker to move sessions.
+
+This is a reasonable goal. The end-user benefit is less vulnerability to cookie theft. Other benefits are somewhat uncertain, as we aren’t sure if this will change how sites ask people to re-authenticate. 
+
+The high-level approach seems generally in the right direction, but we think that this could be dramatically simplified from what is proposed.
+
+# Overview
+
+This is based on the idea that stealing a key pair — especially one that can be saved in a trusted platform module (TPM) — is much harder to steal than cookies. Cookies are necessarily sent between client and server all the time, whereas private keys never need to move.
+
+This does not use WebAuthn for storing keys, but rather depends on an unspecified key storage location. This is primarily due to some inherent inflexibility in WebAuthn around how tokens require user interaction for enrollment and (sometimes) usage. The goal is to make keys available for use transparently, so that sites can activate the feature without any additional user interaction.
+
+Part of the reason for this feature is to allow sites to extend login times, so that people that visit sites need to reauthenticate less often. Short cookie lifetimes are often driven by a desire to manage the risk of cookie theft. The need to refresh logins on sites is not the only reason that sites time sessions out, but it is a major factor driving the need to enter passwords. This would not guarantee that sites would ask for passwords less often, but it would be good if it had that effect.
+
+There are two major parts to the design of this feature: enrollment and usage.  This document will first look at usage, because that is the part that could be simplest.
+
+# The Proposed Design
+
+Preconditions for usage of this feature is that the browser has generated a key pair for an origin and the public key is known to that origin.
+
+The goal is to have the browser regularly prove to the site that it continues to be able to access the secret key.
+
+## Usage
+
+In the proposed design, the browser is given three things during enrollment:
+
+* a “session” resource that it can use for protocol interactions,  
+* which resources use cookies that are provided using the protocol, plus  
+* the set of cookies that can be produced.
+
+The site is given the public key from the site-specific key pair that the browser holds.
+
+In the proposed design, the browser understands that when it makes a request to one of the resources that participates in the protocol, it is expected to hold refreshed versions of the identified cookies.
+
+These cookies are expected to have very short validity periods. The browser is able to refresh those cookies automatically by interacting with the session resource. The main part of the protocol is the interactions between the browser and that session resource.
+
+Interactions with the session resource is a two-step process. The first is a simple request that requests a fresh challenge, the second posts a signature from the secret key over that challenge, thereby proving to the server that the browser still has access to the key pair.  This response also refreshes any of the affected cookies.
+
+This adds two round trips of latency every time that a cookie refresh is needed. While some amount of delay is likely unavoidable, having two additional requests is fairly heavyweight.
+
+We have an alternative below that doesn't require an interactive exchange (though it could be made interactive).  It also includes a redundant new field in requests that lists a session identifier. That new field could be replaced either with a per-account resource URL parameter or a non-DBSC cookie.
+
+This process addresses an important concern about the frequency with which the browser needs to access the secret key.  Sites are able to control how often something is signed by setting the expiration date of the cookies they produce. The browser only needs to use the secret key when cookies expire.  Expirations are naturally limited because servers are unable to set extremely short expiration times without risking the cookies being completely useless to clients with bad clock skew; the granularity of expiration dates for cookies is also extremely limited in expressiveness.
+
+That uncertainty is another problem with the design. Due to that clock skew on clients, servers cannot be sure when clients will expire their cookies and initiate the update process.
+
+## Enrollment
+
+The design proposes the use of a new HTTP header field. If a server ever sent this field, in any HTTP response, that would initiate the enrollment process.
+
+This new field identifies the session resource. It also includes a challenge that needs to be signed to complete enrollment[^1]. The server also lists the types of keys it supports.
+
+To complete enrollment, the browser needs to generate a key pair, sign the challenge, and post the signature to the session resource. The content of that response is a JSON document that describes the rest of the protocol: which resources and cookies are governed by this resource.
+
+It’s not clear what it means to have multiple sessions concurrently active. There’s some mention of this, but it’s not fully developed. At least theoretically, there is no need to limit the number of sessions, other than to limit the work that browser and server both do and to reduce the state they both need to track.
+
+## Too Complex
+
+Overall, this creates a new set of interaction paradigms between the browser and websites.  We think that there are easier ways to achieve the same basic goals without too much disruption to the existing cookie handling arrangements. That design is sketched below.
+
+# An Alternative Design
+
+This is a sketch of an alternative approach that is far closer to how the web platform currently handles cookies.
+
+The core requirement for the usage part is that the site is able to regularly request that the browser demonstrate that it has access to the private key that was registered through the enrollment process.  Ideally, that access is not required for most interactions, because generating and validating a digital signature is somewhat expensive for both client and server.
+
+Justin Richer hinted at an alternative pattern that is worth exploring in [issue 112](https://github.com/w3c/webappsec-dbsc/issues/112). [HTTP Message Signatures](https://datatracker.ietf.org/doc/html/rfc9421) is not a directly usable standard, but more of a framework for applying signatures to content.  A signature that covered cookies, URL, date, and other information might be the core of a more complete design.
+
+## Signed Cookies
+
+That design might include a new `Signed` parameter for cookies in `Set-Cookie`. That attribute would request that, whenever the cookie is sent to the server, the client would cover that cookie with a signature.
+
+The use of the `Path` cookie parameter would ensure that `Signed` cookies are only sent when requests are made to specific resources. That would allow servers to limit how often they ask clients to generate signatures by limiting how often the client requests the identified resources. Those requests could be initiated through a redirect, fetch, or any other request, as needed.
+
+The choice of what fields to include under the signature is very important.  It is not likely to be sufficient to just cover `Cookie` in the list of signed content in `Signature-Input`. Including a date (the `created` parameter), the method (`@method`), and the URL (`@target-uri`) seem to be the minimum set of things that will prevent the signature from being reused, but it's possible that a more thorough security analysis will notice some other fields that need to be covered in order to be secure.
+
+## Some Challenges
+
+A potential challenge then is coordinating those requests so that different origins within the site, which might be only loosely coordinated through a central authentication/authorization system, don’t generate more requests too often. That can be managed by directing refresh requests to a resource on that system that does not have `Signed` cookies associated with it. That resource can coordinate any cookie refreshes, forwarding requests to the affected path as necessary.
+
+Another challenge is in demonstrating liveness for the signature. TPMs don’t generally have clocks, so if a device is compromised so that an attacker gains access to the TPM, the attacker could generate an arbitrary number of signatures for future use. However, this requires that the attacker predict the times and URLs where those signatures would be needed. This suggests a similar pattern to solve that potential problem also: the server redirects to a new endpoint with fresh randomness in the URL for signing.
+
+For example, both requirements could be addressed as shown below.  This example is expanded to include the maximum number of exchanges possible to fully illustrate all of the capabilities.
+
+```http
+GET /some/resource
+Cookie: login=expired
+```
+
+Which results in a redirection to a login endpoint, as would be part of a normal centralized login flow (i.e., this would be a perfectly normal part of refreshing cookies):
+
+```http
+303 Over Yonder
+Location: /login
+```
+
+Consequently, the client follows the redirect.
+
+```http
+GET /login
+Cookie: login=expired
+```
+
+This resource then makes a call about the freshness of the login cookies and determines that a signature is needed.  It initiates another redirect, including fresh entropy in the URL to guarantee that the client has live TPM access.
+
+```http
+303 Over There Now
+Location: /login/1EU9jsh07pci6Cgk9Bh0
+```
+
+After a request that includes the signed cookie,
+
+```http
+GET /login/1EU9jsh07pci6Cgk9Bh0
+Cookie: login=expired; signed=ok
+Signature-Input: (...)
+Signature: :...:
+```
+
+That resource then can validate the signature and produce an updated cookie.  And likely redirect back to the original resource.
+
+```http
+303 Finally
+Location: /some/resource
+Set-Cookie: login=refreshed; Secure; HttpOnly; etc=etc
+```
+
+Note that the server does not need to refresh the signed cookie.  That cookie could be a stub that only exists to elicit a signature, so it could have a very long lifetime.
+
+These multi-step arrangements would result in similar amounts of delay as the process in the proposal. This approach is still better, because it follows fairly ordinary cookie handling for the most part. Any additional steps would be discretionary on the part of servers, which could sometimes choose to accept either the extra requests with signatures[^2] or the heightened risk of TPM compromise. Alternatively, servers could streamline the overall process by combining steps, at the cost of additional coordination between the different resources. In comparison, the proposed design makes an extra step unavoidable, so making this discretionary is strictly better.
+
+## Communicating Keys
+
+Enrollment can almost be a side effect of creating and first use of a `Signed` cookie.  The only requirement here is that the browser learns what types of keys are acceptable to the server and that the server learns the public key that the client uses.
+
+Any `Set-Cookie` header that establishes a `Signed` cookie could list the key types in the `Signed` attribute, but the `Accept-Signature` field exists for negotiating the use of signature keys. The server should therefore use `Accept-Signature`.
+
+The `Cookie` header that the browser subsequently sends will be signed.  That same message can include the public key from the key pair.  That’s usually not something that can be included in the signature as defined in the current RFC. For that, we might define a new `Signature-Public-Key` field to carry the necessary information. We could define a new `Signature` field parameter, but that could be confused with `keyid`.
+
+One nice thing about this is that the server can choose the `keyid` value that is used when it sends `Accept-Signature`, which provides the server with certainty about how keys are identified. That key identifier is a form of cookie also; or an extension to the information stored for the `Signed` cookie. That means it needs to be cleared along with the cookie if someone asks the browser to clear state. Of course, state clearing already requires that the key pair also be cleared.
+
+The only thing remaining is to maybe avoid sending the public key when the browser sends a `Signed` cookie subsequent to enrollment. This can be as simple as remembering the last request that was made with that cookie.  If the cookie has changed, or the last request made with that cookie received a 4xx HTTP status code in response, the browser can add the public key to the next request. Of course, this doesn’t matter for some signature schemes as much as others. A browser might choose to send an Ed25519 or P-256 ECDSA public key with every request because the cost of those bytes is far outweighed by the cost of computing the signature itself[^3]; that obviously changes significantly with post-quantum signature algorithms, which are much larger.
+
+# The “Enterprise” Edition
+
+We only looked briefly at the “enterprise” extension to this feature, DBSC(E).  These extensions to the enrollment process increase the overall complexity considerably. This includes several new actors, device-level attestation, and adds the requirement to have keys held by a specialized service that replaces the TPM.
+
+We believe that these same basic approaches can be handled in our alternative design, as they only relate to the enrollment process and which key pairs the server is willing to accept. A more involved enrollment process can easily be substituted for the simple one we describe. That makes the attestations and key management functions largely separable from the protocol operation.
+
+We have not explored this process in any more detail.
+
+[^1]:  I don’t understand why this needs to turn a non-interactive proof of knowledge into an interactive one; there are other ways to establish liveness, as the alternative design shows.
+
+[^2]:  For a browser, the extra cost of an occasional signature is trivial, relative to the many other tasks it performs.
+
+[^3]:  The “weight” here is not so much about size, as the key is only smaller than a signature for Ed25519 and both are small, even if there are considerable overheads involved. This is mostly about the non-trivial computation involved.
