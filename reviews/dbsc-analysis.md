@@ -215,13 +215,14 @@ including fresh entropy in the URL to guarantee that the client has live TPM acc
 
 ```http
 303 See Other
-Location: /login/1EU9jsh07pci6Cgk9Bh0?r=/some/resource
+Location: /login/sign/1EU9jsh07pci6Cgk9Bh0?r=/some/resource
 ```
 
 After a request that includes the signed cookie,
+which is bound to a `Path` prefix of `/login/sign`:
 
 ```http
-GET /login/1EU9jsh07pci6Cgk9Bh0?r=/some/resource
+GET /login/sign/1EU9jsh07pci6Cgk9Bh0?r=/some/resource
 Cookie: login=expired; signed=ok
 Signature-Input: (...)
 Signature: :...:
@@ -252,7 +253,7 @@ that being the first in the example above.
 
 The first and most obvious way to reduce latency is to have all resources be able to redirect
 to the high entropy resource that requires a signature.
-That is, the server redirects directly from `/some/resource` to `/login/1EU9jsh07pc...`.
+That is, the server redirects directly from `/some/resource` to `/login/sign/...`.
 That optimization “only” requires coordination in the server,
 to ensure that redirects are not triggered by multiple fetches.
 
