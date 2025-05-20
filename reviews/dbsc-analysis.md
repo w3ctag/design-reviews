@@ -73,7 +73,6 @@ thereby proving to the server that the browser still has access to the key pair.
 The response to the second request refreshes any of the affected cookies.
 
 This adds two round trips of latency every time that a cookie refresh is needed.
-While some amount of delay is likely unavoidable, having two additional requests is fairly heavyweight.
 
 We have an alternative below that doesn't require an interactive exchange.
 However, given that TPMs generally don't have a clock,
