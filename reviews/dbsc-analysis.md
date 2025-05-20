@@ -85,8 +85,8 @@ noting that the alternative offers servers more options to combine requests to r
 where the proposal cannot.
 
 The proposal includes a redundant new session identifier field in requests.
-That new field could be replaced either with a per-account resourc.
-URL parameter or a non-DBSC cookie.
+That new field could be replaced either with a per-account resource-URL
+parameter or a non-DBSC cookie.
 
 The alternative also provides the server better control over when the browser supplies signatures.
 The current design relies on expiring cookies to trigger signatures.
