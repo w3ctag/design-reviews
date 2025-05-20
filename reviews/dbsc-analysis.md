@@ -83,7 +83,7 @@ That's something we address in more detail in the alternative design below,
 noting that the alternative offers servers more options to combine requests to reduce latency,
 where the proposal cannot.
 
-The proposal includes a redundant new session identifier field in requests.
+The proposal includes a new session identifier field in requests.
 That new field could be replaced either with a per-account resource-URL
 parameter or a non-DBSC cookie.
 
