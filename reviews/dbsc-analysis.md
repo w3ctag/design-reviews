@@ -291,8 +291,7 @@ The server should therefore use `Accept-Signature`.
 
 The `Cookie` header that the browser subsequently sends will be signed.
 That same message can include the public key from the key pair.
-That’s usually not something that can be included in the signature as defined in the curren.
-RFC.
+That’s usually not something that can be included in the signature as defined in the current RFC.
 
 For that, we might define a new `Signature-Public-Key` field to carry the necessary information.
 That would be a new piece of specification, but a simple one.
