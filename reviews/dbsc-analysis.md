@@ -4,7 +4,8 @@ Issue: https://github.com/w3ctag/design-reviews/issues/1052
 Explainer: https://github.com/w3c/webappsec-dbsc/blob/main/README.md
 Specification: https://w3c.github.io/webappsec-dbsc/
 
-The purpose of this feature is to bind active sessions with websites to an asymmetric key pair that is stored by the browser.
+The purpose of this feature is to bind active sessions with websites
+to an asymmetric key pair that is stored by the browser.
 The expectation is that this makes it harder for an attacker to move sessions.
 
 This is a reasonable goal.
@@ -14,7 +15,7 @@ Other benefits are somewhat uncertain, as we aren’t sure if this will change h
 The high-level approach seems generally in the right direction,
 but we think that this could be made more consistent with existing cookie-handling.
 
-# Overview
+## Overview
 
 This is based on the idea that stealing a key pair —
 especially one that can be saved in a trusted platform module (TPM) —
@@ -47,7 +48,7 @@ Preconditions for usage of this feature are that:
 
 The goal is to have the browser regularly prove to the site that it continues to be able to access the secret key.
 
-## Usage
+### Usage
 
 In the proposed design, the browser is given three things during enrollment:
 
@@ -104,7 +105,7 @@ and involves less overall complexity as it is left to servers to decide when sig
 That comes with a potential latency penalty, which is discussed below.
 
 
-## Enrollment
+### Enrollment
 
 The design proposes the use of a new HTTP header field.
 If a server ever sent this field, in an HTTP response, that would initiate the enrollment process.
@@ -123,14 +124,14 @@ The content of that response is a JSON document that describes the rest of the p
 which resources and cookies are governed by this resource.
 
 
-## Complexity
+### Complexity
 
 Overall, this creates a new set of interaction paradigms between the browser and websites.
 We think that there are easier ways to achieve the same basic goals
 without too much disruption to the existing cookie handling arrangements.
 That design is sketched below.
 
-# An Alternative Design
+## An Alternative Design
 
 This is a sketch of an alternative approach that is closer to how the web platform currently handles cookies.
 
@@ -147,7 +148,7 @@ in [issue 112](https://github.com/w3c/webappsec-dbsc/issues/112).
 but more of a framework for applying signatures to content.
 A signature that covered cookies, URL, date, and other information might be the core of a more complete design.
 
-## Signed Cookies
+### Signed Cookies
 
 That design might include a new `Signed` parameter for cookies in `Set-Cookie`.
 That attribute would request that, whenever the cookie is sent to the server,
@@ -165,7 +166,8 @@ Including a date (the `created` parameter), the method (`@method`), and the URL 
 seem to be the minimum set of things that will prevent the signature from being reused.
 It's possible that a more thorough security analysis will identify other fields that need to be covered.
 
-## Some Challenges
+
+### Handling Common Scenarios
 
 A potential challenge then is coordinating those requests so that different origins within the site,
 which might be only loosely coordinated through a central authentication/authorization system,
@@ -183,7 +185,10 @@ However, this requires that the attacker predict the times any URLs where those 
 This suggests a similar pattern to solve that potential problem also:
 the server redirects to a new endpoint with fresh randomness in the URL for signing.
 
-For example, both requirements could be addressed as shown below.
+
+#### Complete Example
+
+The complete set of requirements could be addressed as shown below.
 This example is expanded to include the maximum number of exchanges possible
 to fully illustrate all of the capabilities.
 A discussion of how to reduce or hide latency is included below.
@@ -241,7 +246,7 @@ Note that the server does not need to refresh the signed cookie.
 That cookie could be a stub that only exists to elicit a signature, so it could have a very long lifetime.
 
 
-## Reducing Latency
+#### Reducing Latency
 
 The need to manage liveness,
 centralize the management of login refreshing,
@@ -280,7 +285,7 @@ Resources can then trigger asynchronous fetches to refresh cookies,
 ahead of when any critical resources need to be fetched.
 
 
-## Communicating Keys
+### Communicating Keys
 
 Enrollment can almost be a side effect of creating and first use of a `Signed` cookie.
 The only requirement here is that the browser learns what types of keys are acceptable to the server
