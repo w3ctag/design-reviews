@@ -38,7 +38,7 @@ This would not guarantee that sites would ask for passwords less often, but it w
 There are two major parts to the design of this feature: enrollment and usage.
 This document will first look at usage, because that is the part that could be simplest.
 
-# The Proposed Design
+## Restatement of the webappsec-dbsc Proposal
 
 Preconditions for usage of this feature are that:
 
@@ -138,7 +138,8 @@ The core requirement for the usage part is that the site is able to
 regularly request that the browser demonstrate that it has access to the private key
 that was registered through the enrollment process.
 Ideally, that access is not required for most interactions,
-because generating and validating a digital signature is somewhat expensive for both client and server.
+because generating and validating a digital signature is somewhat expensive for both client and server,
+especially, for the client, if the key is stored in a TPM.
 
 Justin Richer hinted at an alternative pattern that is worth exploring
 in [issue 112](https://github.com/w3c/webappsec-dbsc/issues/112).
@@ -162,7 +163,7 @@ The choice of what fields to include under the signature is very important.
 It is not likely to be sufficient to just cover `Cookie` in the list of signed content in `Signature-Input`.
 Including a date (the `created` parameter), the method (`@method`), and the URL (`@target-uri`)
 seem to be the minimum set of things that will prevent the signature from being reused.
-It's possible that a more thorough security analysis will identifier other fields that need to be covered.
+It's possible that a more thorough security analysis will identify other fields that need to be covered.
 
 ## Some Challenges
 
@@ -286,7 +287,8 @@ The only requirement here is that the browser learns what types of keys are acce
 and that the server learns the public key that the client uses.
 
 Any `Set-Cookie` header that establishes a `Signed` cookie could list the key types in the `Signed` attribute,
-but the `Accept-Signature` field exists for negotiating the use of signature keys.
+but the [`Accept-Signature` field](https://www.rfc-editor.org/rfc/rfc9421.html#name-requesting-signatures)
+exists for negotiating the use of signature keys.
 The server should therefore use `Accept-Signature`.
 
 The `Cookie` header that the browser subsequently sends will be signed.
