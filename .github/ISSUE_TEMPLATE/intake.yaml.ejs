@@ -1,0 +1,173 @@
+<% if (type == "incubation") { -%>
+name: Early design/incubation review
+description: >
+  If you'd like the TAG to offer thoughts and guidance
+  on an early-stage design direction.
+title: "Incubation: "
+<% } else if (type == "wg-new") { -%>
+name: Review of a new feature by a WG
+description: >
+  If your WG has a new specification or a discrete new feature in an existing specification,
+  and is looking for architectural review as part of wide review.
+title: "WG New Feature: "
+<% } else if (type == "wg-revision") { -%>
+name: Review of a spec revision by a WG
+description: >
+  If your WG has a new version of an existing specification,
+  and is looking for architectural review as part of wide review.
+title: "WG New Feature: "
+<% } else if (type == "browser") { -%>
+name: Browser-driven specification review
+description: >
+  If your browser is considering shipping a feature
+  that hasn't had a Working Group take it through wide review,
+  please use this form.
+title: "Browser review: "
+<% } -%>
+labels:
+  - "Progress: untriaged"
+<% if (type == "incubation") { -%>
+  - "Review type: CG early review"
+<% } else if (type.startsWith("wg-")) { -%>
+  - "Review type: horizontal review"
+<% } else if (type == "browser") { -%>
+  - "Review type: later review"
+<% } -%>
+body:
+  - type: markdown
+    attributes:
+      value: |
+<% if (type == "incubation") { -%>
+        Thank you for sending us your design review.
+<% } else if (type.startsWith("wg-")) { -%>
+        Thank you for sending us your specification review.
+<% } else if (type == "browser") { -%>
+        Thank you for sending us your specification review. If a Working Group generally agrees about this feature, we prefer to have them take it through wide review. If they're willing to do that, please [switch to the WG new specification review template](https://github.com/w3ctag/design-reviews/issues/new?template=005-wg-new-spec-review.yaml). Otherwise, if you're planning to ship the feature anyway, please continue to file the review with this form.
+<% } -%>
+
+        Use links to content rather than pasting text into this issue. Issues are ephemeral and most of the material we are asking for has long term value.
+
+        Please preview the issue and check that the links work before submitting. Please make sure anyone with the link can access the document. We may refuse to review anything that is not public.
+
+  - type: input
+    attributes:
+<% if (type == "incubation") { -%>
+      label: Explainer
+      description: An explainer must address user needs and contain examples of use. See our [explanation of how to write a good explainer](https://w3ctag.github.io/explainer-explainer/#introduction).
+<% } else { -%>
+      label: Specification
+<% } -%>
+      placeholder: Enter a URL.
+      value: "https://"
+    validations:
+      required: true
+
+<% if (type !== "incubation") { -%>
+  - type: textarea
+    attributes:
+      label: Other documents
+      description: List any other documents that are relevant to our review.
+      value: |
+<% if (type == "wg-revision") { -%>
+        - A description of what has changed since our previous review: <!-- URL -->
+        - Explainer(s) for specifically the changed features: <!-- Based on https://w3ctag.github.io/explainer-explainer/. If sections of that have moved to the specification, link directly to those sections or risk getting feedback on the whole spec. -->
+<% } else { -%>
+        - Start the review by reading: <!-- URL; especially if the spec's introduction isn't aimed at unfamiliar audiences -->
+        - Explainer: <!-- Based on https://w3ctag.github.io/explainer-explainer/, minus any sections that have moved to the specification. -->
+<% } -%>
+        - Web Platform Tests:
+        - Previous early design review, if any: https://github.com/w3ctag/design-reviews/issues/####
+
+<% } -%>
+  - type: checkboxes
+    attributes:
+<% if (type == "incubation") { -%>
+      label: The explainer
+<% } else { -%>
+      label: The specification and other documents
+<% } -%>
+      options:
+<% if (type == "incubation") { -%>
+        - label: Includes the information requested by the [Explainer Explainer](https://w3ctag.github.io/explainer-explainer/#introduction).
+          required: true
+        - label: Follows the [Web Platform Design Principles](https://www.w3.org/TR/design-principles/).
+        - label: Includes or links to answers to the [Security/Privacy Questionnaire](https://www.w3.org/TR/security-privacy-questionnaire/).
+        - label: Describes user research you did to validate the problem and/or design.
+<% } else { -%>
+        - label: Include an introduction that's understandable by people who weren't familiar with the problem space.
+          required: true
+        - label: Describe [the problems that end-users were facing](https://w3ctag.github.io/explainer-explainer/#end-user-need) before this proposal.
+          required: true
+        - label: Describe the [alternatives that you considered](https://w3ctag.github.io/explainer-explainer/#alternatives).
+          required: true
+        - label: Give [examples of how to use the proposal to solve the end-users' problems, and what the end-users wind up experiencing](https://w3ctag.github.io/explainer-explainer/#describe-proposal).
+        - label: Describe user research you did to validate the problem and/or design.
+        - label: Follow the [Web Platform Design Principles](https://www.w3.org/TR/design-principles/).
+        - label: Include Security and Privacy Considerations sections based on answers to the [Security/Privacy Questionnaire](https://www.w3.org/TR/security-privacy-questionnaire/).
+<% } -%>
+
+<% if (type.startsWith("wg-")) { -%>
+  - type: textarea
+    attributes:
+      label: Concurrent horizontal reviews
+      description: Link to where the [other horizontal review groups](https://www.w3.org/guide/documentreview/#how-to-get-horizontal-review) have been asked for feedback.
+      value: |
+        - Accessibility: https://github.com/w3c/a11y-request/issues/###
+        - Internationalization: https://github.com/w3c/i18n-request/issues/###
+        - Privacy: https://github.com/w3cping/privacy-request/issues/###
+        - Security: https://github.com/w3c/security-request/issues/###
+        <!-- Or if you have a single issue that links to all of your wide review issues, like https://github.com/webmachinelearning/webnn/issues/239, you can just link to that here. -->
+    validations:
+      required: true
+
+<% } -%>
+  - type: textarea
+    attributes:
+      label: Where and by whom is the work is being done?
+      value: |
+        - GitHub repo:
+        - Primary contacts:
+          - $name (@-mention), $organization/s, $role in developing <%- type == "incubation" ? "feature" : "specification" %>
+          - <!-- repeat as necessary, we recommend including group chairs and editors in this list -->
+        - Organization/project driving the <%- type == "incubation" ? "design" : "specification" %>:
+        - This work is being funded by:
+<% if (type != "incubation") { -%>
+        - Primary standards group developing this feature:
+<%   if (type == "browser") { -%>
+        - Group intended to standardize this work: <!-- if different from the current group -->
+<% }} -%>
+        - Incubation and standards groups that have discussed the design:
+          - {{ABC CG}} <!-- Include a link to minutes or issues in this group if possible. -->
+          - {{DEF WG}}
+<% if (type == "incubation") { -%>
+        - Standards group(s) that you expect to discuss and/or adopt this work when it's
+          ready: <!-- "unknown" if not known -->
+<% } -%>
+
+  - type: textarea
+    attributes:
+      label: Feedback so far
+      description: |
+        For your own organization, you can simply state the organization's position instead of linking to it.  This includes items on [Mozilla standards-positions](https://github.com/mozilla/standards-positions), and [WebKit standards-positions](https://github.com/WebKit/standards-positions).  Chromium doesn't have a standards-positions repository and [prefers](https://source.chromium.org/chromium/chromium/src/+/main:docs/standards/positions/GoogleChrome/README.md) to use comments from the teams that maintain the relevant area of their codebase.
+      value: |
+        - Multi-stakeholder feedback:
+          - Chromium comments:
+          - Mozilla comments: https://github.com/mozilla/standards-positions/issues/NNN <!-- And/or other places they've given feedback -->
+          - WebKit comments: https://github.com/WebKit/standards-positions/issues/NNN <!-- And/or other places they've given feedback -->
+          - {{...include feedback/review from developers, implementers, civil society, and others}}
+        - Major unresolved issues with or opposition to this <%- type == "incubation" ? "design" : "specification" %>:
+<% if (type != "incubation") { -%>
+        - Status/issue trackers for implementations⁴: <!-- Include links to [Chrome Status](https://chromestatus.com/), [Mozilla's](https://bugzilla.mozilla.org/), [WebKit's Bugzilla](https://bugs.webkit.org/), and trackers for other implementations if those are known to you. -->
+<% } -%>
+
+  - type: textarea
+    attributes:
+      label: You should also know that...
+      description: |
+        Please tell us anything else you think is relevant to this review.
+
+<% if (type == "incubation") { -%>
+        If you have any other documents that you want us to read, link them here, especially if they're not obvious from the explainer. If you've started a specification, link it here too.
+<% } else { -%>
+        If there are time constraints on our review, describe them here.
+<% } -%>
