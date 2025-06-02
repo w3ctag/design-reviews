@@ -19,7 +19,7 @@ but we think that this could be made more consistent with existing cookie-handli
 
 This is based on the idea that stealing a key pair —
 especially one that can be saved in a trusted platform module (TPM) —
-is much harder to steal than cookies.
+is much harder than stealing cookies.
 Cookies are necessarily sent between client and server all the time,
 whereas private keys never need to move.
 
@@ -256,7 +256,7 @@ each potentially add latency.
 In the original proposal, reliance on the client clock potentially removed one round trip,
 that being the first in the example above.
 
-The first and most obvious way to reduce latency is to have all resources be able to redirect
+The first way to reduce latency is to have all resources be able to redirect
 to the high entropy resource that requires a signature.
 That is, the server redirects directly from `/some/resource` to `/login/sign/...`.
 That optimization “only” requires coordination in the server,
@@ -265,7 +265,9 @@ to ensure that redirects are not triggered by multiple fetches.
 The scoping arrangement in the JSON session description potentially gave servers
 the option to make a cookie that triggered a signature refresh on some requests and not others,
 though this is inflexible due to overlap between the scoping in that session description and in cookies.
-That is, the session description could ask for refreshes on `/foo/bar` for cookies with a path of `/foo`.
+That is, the session description could ask that cookies with a
+[`Path`](https://datatracker.ietf.org/doc/html/rfc6265#section-5.2.4) of `/foo`
+be refreshed using a request to `/foo/bar`.
 
 That arrangement can be used to hide latency.
 Consider that a site could serve up HTML for `/foo/page.html`,
@@ -275,7 +277,7 @@ and force a fetch for a resource at `/foo/bar` in the background.
 That fetch would cause the session refresh to occur,
 without necessarily delaying the page load.
 
-A similar approach is possibly under the alternative design.
+A similar approach is possible under the alternative design.
 Any resource could accept a cookie that the server wants to refresh
 if that resource is less critical to protect.
 This is more flexible because it is not tied to specific path prefixes.
