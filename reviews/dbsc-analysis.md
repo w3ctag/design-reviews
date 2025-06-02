@@ -324,7 +324,7 @@ Of course, state clearing already requires that the key pair also be cleared.
 The only thing remaining is to maybe avoid sending the public key
 when the browser sends a `Signed` cookie subsequent to enrollment.
 This can be as simple as remembering the last request that was made with that cookie.
-If the cookie has changed, or the last request made with that cookie received a 4x.
+If the cookie has changed, or the last request made with that cookie received a 4xx
 HTTP status code in response, the browser can add the public key to the next request.
 Of course, this doesn’t matter for some signature schemes as much as others.
 A browser might choose to send an Ed25519 or P-256 ECDSA public key with every request
