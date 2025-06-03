@@ -286,6 +286,21 @@ such as whether the request is for protected information or actions.
 Resources can then trigger asynchronous fetches to refresh cookies,
 ahead of when any critical resources need to be fetched.
 
+#### Clearing State
+
+The explainer suggests that `Clear-Site-Data`
+with either the `cookies` or `storage` tokens
+causes the session to terminate.
+We think that if this is logically a cookie,
+then only the `cookies` token needs to act on that state.
+
+It might be reasonable to specify a new token for clearing the signature key,
+so that cookies might be cleared independently.
+As the original proposal didn't include that option, we haven't either.
+We can see how the DBSC(E) extension —
+which has a more complex enrollment process —
+might benefit from key retention.
+
 
 ### Communicating Keys
 
