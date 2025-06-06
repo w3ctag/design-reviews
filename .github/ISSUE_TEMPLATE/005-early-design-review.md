@@ -17,6 +17,7 @@ I'm requesting an early TAG design review of {{feature}}.
   - Explainer¹:
   - User research:
   - Security and Privacy self-review²:
+  - Accessibility self-review: <!-- If the feature adds any visual or audible user interface, passes visual or audible data through a protocol, or changes anything about user input, copy the checklist from https://w3c.github.io/fast/checklist.html into your repository, fill it out, and link to it here. Otherwise replace this with "N/A". -->
   - GitHub repo:
   - Primary contacts:
       - $name (@-mention), $organization/s, $role in developing specification
