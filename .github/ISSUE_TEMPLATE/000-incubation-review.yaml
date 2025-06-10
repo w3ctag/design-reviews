@@ -10,16 +10,17 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thank you for sending us your design review.
+        Thank you for sending us your design for review.
 
-        Use links to content rather than pasting text into this issue. Issues are ephemeral and most of the material we are asking for has long term value.
-
-        Please preview the issue and check that the links work before submitting. Please make sure anyone with the link can access the document. We may refuse to review anything that is not public.
+        * Use links to content rather than pasting text into this issue. Issues are ephemeral and most of the material we are asking for has long term value.
+        * Please preview the issue and check that the links work before submitting.
+        * Please make sure anyone with the link can access the document. We may refuse to review anything that is not public.
 
   - type: input
     attributes:
       label: Explainer
-      description: An explainer must address user needs and contain examples of use. See our [explanation of how to write a good explainer](https://w3ctag.github.io/explainer-explainer/#introduction).
+      description: |
+        An explainer must describe the problem that your proposed feature aims to solve **from an end-user's perspective**. It must also show example pieces of code that use the proposed solution to solve the user-facing problems. See our [explanation of how to write a good explainer](https://w3ctag.github.io/explainer-explainer/#introduction).
       placeholder: Enter a URL.
       value: "https://"
     validations:

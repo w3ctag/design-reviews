@@ -10,11 +10,11 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thank you for sending us your specification review.
+        Thank you for sending us your specification for review.
 
-        Use links to content rather than pasting text into this issue. Issues are ephemeral and most of the material we are asking for has long term value.
-
-        Please preview the issue and check that the links work before submitting. Please make sure anyone with the link can access the document. We may refuse to review anything that is not public.
+        * Use links to content rather than pasting text into this issue. Issues are ephemeral and most of the material we are asking for has long term value.
+        * Please preview the issue and check that the links work before submitting.
+        * Please make sure anyone with the link can access the document. We may refuse to review anything that is not public.
 
   - type: input
     attributes:
@@ -24,43 +24,44 @@ body:
     validations:
       required: true
 
+  - type: input
+    attributes:
+      label: Explainer
+      description: |
+        An explainer must describe the problem that your proposed feature aims to solve **from an end-user's perspective**. It must also show example pieces of code that use the proposed solution to solve the user-facing problems. See our [explanation of how to write a good explainer](https://w3ctag.github.io/explainer-explainer/#introduction).
+
+        If all of this information is contained in your specification or other documents and will be readable by people who aren't fluent in your domain, you don't need a separate explainer.
+      placeholder: Enter a URL.
+      value: "https://"
+
   - type: textarea
     attributes:
-      label: Other documents
-      description: List any other documents that are relevant to our review.
+      label: Links
+      description: Link to the sections of documents that are relevant to our review.
       value: |
-        - A description of what has changed since our previous review: <!-- URL -->
-        - Explainer(s) for specifically the changed features: <!-- Based on https://w3ctag.github.io/explainer-explainer/. If sections of that have moved to the specification, link directly to those sections or risk getting feedback on the whole spec. -->
-        - Web Platform Tests:
-        - Previous early design review, if any: https://github.com/w3ctag/design-reviews/issues/####
+        - TAG review of the previous version of this specification, if any: https://github.com/w3ctag/design-reviews/issues/####
+        - A description of what has changed since our previous review: https://...#section
+
+        <!-- Make a copy of the below items for each distinct feature that
+         has changed since our previous review, and fill in links to
+         describe that feature. For small changes, these may all be included
+         in the issue that motivated the change, but please double-check that
+         all the answers are actually there. -->
+        - An introduction to the feature, aimed at unfamiliar audiences: https://  <!-- Can be the specification's introduction, but can also be another section or document. -->
+        - A description of the problems that end-users were facing before this proposal: https://  <!-- See https://w3ctag.github.io/explainer-explainer/#end-user-need -->
+        - Alternatives considered: https://  <!-- See https://w3ctag.github.io/explainer-explainer/#alternatives -->
+        - Examples of how to use the proposal to solve the end-users' problems: https://  <!-- See https://w3ctag.github.io/explainer-explainer/#describe-proposal -->
+        - What do the end-users experience with this proposal: https://  <!-- See https://w3ctag.github.io/explainer-explainer/#describe-proposal -->
+        - User research you did to validate the problem and/or design, if any: https://
+
+        - Web Platform Tests:  <!-- Or other tests if this is not a web platform feature. -->
 
   - type: checkboxes
     attributes:
-      label: The specification and other documents
+      label: The specification
       options:
-        - label: Include an introduction that's understandable by people who weren't familiar with the problem space.
-          required: true
-        - label: Describe [the problems that end-users were facing](https://w3ctag.github.io/explainer-explainer/#end-user-need) before this proposal.
-          required: true
-        - label: Describe the [alternatives that you considered](https://w3ctag.github.io/explainer-explainer/#alternatives).
-          required: true
-        - label: Give [examples of how to use the proposal to solve the end-users' problems, and what the end-users wind up experiencing](https://w3ctag.github.io/explainer-explainer/#describe-proposal).
-        - label: Describe user research you did to validate the problem and/or design.
-        - label: Follow the [Web Platform Design Principles](https://www.w3.org/TR/design-principles/).
-        - label: Include Security and Privacy Considerations sections based on answers to the [Security/Privacy Questionnaire](https://www.w3.org/TR/security-privacy-questionnaire/).
-
-  - type: textarea
-    attributes:
-      label: Concurrent horizontal reviews
-      description: Link to where the [other horizontal review groups](https://www.w3.org/guide/documentreview/#how-to-get-horizontal-review) have been asked for feedback.
-      value: |
-        - Accessibility: https://github.com/w3c/a11y-request/issues/###
-        - Internationalization: https://github.com/w3c/i18n-request/issues/###
-        - Privacy: https://github.com/w3cping/privacy-request/issues/###
-        - Security: https://github.com/w3c/security-request/issues/###
-        <!-- Or if you have a single issue that links to all of your wide review issues, like https://github.com/webmachinelearning/webnn/issues/239, you can just link to that here. -->
-    validations:
-      required: true
+        - label: Follows the [Web Platform Design Principles](https://www.w3.org/TR/design-principles/).
+        - label: Includes Security and Privacy Considerations sections based on answers to the [Security/Privacy Questionnaire](https://www.w3.org/TR/security-privacy-questionnaire/).
 
   - type: textarea
     attributes:
@@ -83,13 +84,14 @@ body:
       description: |
         For your own organization, you can simply state the organization's position instead of linking to it.  This includes items on [Mozilla standards-positions](https://github.com/mozilla/standards-positions), and [WebKit standards-positions](https://github.com/WebKit/standards-positions).  Chromium doesn't have a standards-positions repository and [prefers](https://source.chromium.org/chromium/chromium/src/+/main:docs/standards/positions/GoogleChrome/README.md) to use comments from the teams that maintain the relevant area of their codebase.
       value: |
+        - Active horizontal reviews: https:// <!-- Link to an issue like https://github.com/webmachinelearning/webnn/issues/239, https://github.com/WebAssembly/spec/issues/1804, or https://github.com/w3c/did/issues/885, which itself links to the other horizontal reviews. -->
         - Multi-stakeholder feedback:
           - Chromium comments:
           - Mozilla comments: https://github.com/mozilla/standards-positions/issues/NNN <!-- And/or other places they've given feedback -->
           - WebKit comments: https://github.com/WebKit/standards-positions/issues/NNN <!-- And/or other places they've given feedback -->
           - {{...include feedback/review from developers, implementers, civil society, and others}}
         - Major unresolved issues with or opposition to this specification:
-        - Status/issue trackers for implementations⁴: <!-- Include links to [Chrome Status](https://chromestatus.com/), [Mozilla's](https://bugzilla.mozilla.org/), [WebKit's Bugzilla](https://bugs.webkit.org/), and trackers for other implementations if those are known to you. -->
+        - Status/issue trackers for implementations: <!-- Include links to [Chrome Status](https://chromestatus.com/), [Mozilla's](https://bugzilla.mozilla.org/), [WebKit's Bugzilla](https://bugs.webkit.org/), and trackers for other implementations if those are known to you. -->
 
   - type: textarea
     attributes:
