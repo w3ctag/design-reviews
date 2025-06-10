@@ -3,7 +3,7 @@ description: >
   If you're considering shipping a feature
   that hasn't had a Working Group take it through wide review,
   please use this form.
-title: "Other spec review: "
+title: "Other Spec Review: "
 labels:
   - "Progress: untriaged"
   - "Review type: later review"

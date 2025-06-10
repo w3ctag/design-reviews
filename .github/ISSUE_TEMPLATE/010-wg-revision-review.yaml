@@ -2,7 +2,7 @@ name: Review of a spec revision by a WG
 description: >
   If your WG has a new version of an existing specification,
   and is looking for architectural review as part of wide review.
-title: "WG New Feature: "
+title: "WG Revision: "
 labels:
   - "Progress: untriaged"
   - "Review type: horizontal review"

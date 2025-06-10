@@ -2,7 +2,7 @@ name: Review of a new feature by a WG
 description: >
   If your WG has a new specification or a discrete new feature in an existing specification,
   and is looking for architectural review as part of wide review.
-title: "WG New Feature: "
+title: "WG New Spec: "
 labels:
   - "Progress: untriaged"
   - "Review type: horizontal review"
