@@ -7,21 +7,21 @@ title: "Incubation: "
 <% } else if (type == "wg-new") { -%>
 name: Review of a new feature by a WG
 description: >
-  If your WG has a new specification or a discrete new feature in an existing specification,
-  and is looking for architectural review as part of wide review.
+  If your WG has a new specification
+  or a discrete new feature in an existing specification,
+  and is looking for architectural review.
 title: "WG New Spec: "
 <% } else if (type == "wg-revision") { -%>
 name: Review of a spec revision by a WG
 description: >
   If your WG has a new version of an existing specification,
-  and is looking for architectural review as part of wide review.
+  and is looking for architectural review.
 title: "WG Revision: "
 <% } else if (type == "other") { -%>
 name: Other specification review
 description: >
   If you're considering shipping a feature
-  without a Working Group's endorsement,
-  please use this form.
+  without a Working Group's endorsement.
 title: "Other Spec Review: "
 <% } -%>
 labels:
@@ -42,14 +42,14 @@ body:
 <% } else if (type.startsWith("wg-")) { -%>
         Thank you for sending us your specification for review.
 <% } else if (type == "other") { -%>
-        Thank you for sending us your specification for review. If a Working Group generally agrees about this feature, we prefer to have them take it through wide review. If they're willing to do that, please [switch to the WG new specification review template](https://github.com/w3ctag/design-reviews/issues/new?template=005-wg-new-spec-review.yaml). Otherwise, if you're planning to ship the feature anyway, please continue to file the review with this form.
+        Thank you for sending us your specification for review. If a Working Group generally agrees about this feature, we prefer to have them ask us for review. If they're willing to do that, please [switch to the WG new specification review template](https://github.com/w3ctag/design-reviews/issues/new?template=005-wg-new-spec-review.yaml). Otherwise, if you're planning to ship the feature anyway, please continue to file the review with this form.
 
         Please ensure that your specification has been adopted by a group at least as standards-oriented as a [W3C Community Group](https://www.w3.org/community/about/) (or the equivalent in other standards bodies). We will usually decline reviews of features that have only been developed by a single organization.
 <% } -%>
 
         * Use links to content rather than pasting text into this issue. Issues are ephemeral and most of the material we are asking for has long term value.
         * Please preview the issue and check that the links work before submitting.
-        * Please make sure anyone with the link can access the document. We may refuse to review anything that is not public.
+        * Please make sure anyone with the link can access the document, especially if you've used Google Docs. We may refuse to review anything that is not public.
 
 <% if (type != "incubation") { -%>
   - type: input
@@ -83,7 +83,10 @@ body:
       label: Links
       description: Link to the sections of documents that are relevant to our review.
       value: |
-<% if (type == "wg-revision") { -%>
+<%   if (type.startsWith("wg-")) { -%>
+        - The WG's request for this TAG review: https://  <!-- Usually a deep link into minutes or an email thread. -->
+<%   } -%>
+<%   if (type == "wg-revision") { -%>
         - TAG review of the previous version of this specification, if any: https://github.com/w3ctag/design-reviews/issues/####
         - A description of what has changed since our previous review: https://...#section
 
@@ -92,10 +95,10 @@ body:
          describe that feature. For small changes, these may all be included
          in the issue that motivated the change, but please double-check that
          all the answers are actually there. -->
-<% } else { -%>
+        Feature 1:
+<%   } -%>
         - Previous early design review, if any: https://github.com/w3ctag/design-reviews/issues/####
-<% } -%>
-        - An introduction to the feature, aimed at unfamiliar audiences: https://  <!-- Can be the specification's introduction, but can also be another section or document. -->
+        - An introduction to the feature, aimed at unfamiliar audiences: https://  <!-- Can be the specification's or explainer's introduction, or another section. -->
         - A description of the problems that end-users were facing before this proposal: https://  <!-- See https://w3ctag.github.io/explainer-explainer/#end-user-need -->
         - Alternatives considered: https://  <!-- See https://w3ctag.github.io/explainer-explainer/#alternatives -->
         - Examples of how to use the proposal to solve the end-users' problems: https://  <!-- See https://w3ctag.github.io/explainer-explainer/#describe-proposal -->
@@ -153,7 +156,7 @@ body:
         For your own organization, you can simply state the organization's position instead of linking to it.  This includes items on [Mozilla standards-positions](https://github.com/mozilla/standards-positions), and [WebKit standards-positions](https://github.com/WebKit/standards-positions).  Chromium doesn't have a standards-positions repository and [prefers](https://source.chromium.org/chromium/chromium/src/+/main:docs/standards/positions/GoogleChrome/README.md) to use comments from the teams that maintain the relevant area of their codebase.
       value: |
 <% if (type.startsWith("wg-")) { -%>
-        - Active horizontal reviews: https:// <!-- Link to an issue like https://github.com/webmachinelearning/webnn/issues/239, https://github.com/WebAssembly/spec/issues/1804, or https://github.com/w3c/did/issues/885, which itself links to the other horizontal reviews. -->
+        - Active horizontal reviews: https:// <!-- Link to an issue like https://github.com/webmachinelearning/webnn/issues/239, https://github.com/WebAssembly/spec/issues/1804, or https://github.com/w3c/did/issues/885, which itself links to the other horizontal reviews. If you haven't started the rest of the wide reviews, please consider doing so. -->
 <% } -%>
         - Multi-stakeholder feedback:
           - Chromium comments:
