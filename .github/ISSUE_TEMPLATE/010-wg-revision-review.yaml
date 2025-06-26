@@ -86,7 +86,7 @@ body:
       description: |
         For your own organization, you can simply state the organization's position instead of linking to it.  This includes items on [Mozilla standards-positions](https://github.com/mozilla/standards-positions), and [WebKit standards-positions](https://github.com/WebKit/standards-positions).  Chromium doesn't have a standards-positions repository and [prefers](https://source.chromium.org/chromium/chromium/src/+/main:docs/standards/positions/GoogleChrome/README.md) to use comments from the teams that maintain the relevant area of their codebase.
       value: |
-        - Active horizontal reviews: https:// <!-- Link to an issue like https://github.com/webmachinelearning/webnn/issues/239, https://github.com/WebAssembly/spec/issues/1804, or https://github.com/w3c/did/issues/885, which itself links to the other horizontal reviews. If you haven't started the rest of the wide reviews, please consider doing so. -->
+        - Active horizontal reviews: https:// <!-- Link to an issue like https://github.com/webmachinelearning/webnn/issues/239, https://github.com/WebAssembly/spec/issues/1804, or https://github.com/w3c/did/issues/885, which itself links to the other horizontal reviews. If you haven't started the rest of the horizontal reviews, please consider doing so. -->
         - Multi-stakeholder feedback:
           - Chromium comments:
           - Mozilla comments: https://github.com/mozilla/standards-positions/issues/NNN <!-- And/or other places they've given feedback -->
