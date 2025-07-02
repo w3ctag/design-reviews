@@ -1,0 +1,96 @@
+name: Other specification review
+description: >
+  If you're considering shipping a feature
+  without a Working Group's endorsement.
+title: "Other Spec Review: "
+labels:
+  - "Progress: untriaged"
+  - "Review type: later review"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for sending us your specification for review. If a Working Group generally agrees about this feature, we prefer to have them ask us for review. If they're willing to do that, please [switch to the WG new specification review template](https://github.com/w3ctag/design-reviews/issues/new?template=005-wg-new-spec-review.yaml). Otherwise, if you're planning to ship the feature anyway, please continue to file the review with this form.
+
+        Please ensure that your specification has been adopted by a group at least as standards-oriented as a [W3C Community Group](https://www.w3.org/community/about/) (or the equivalent in other standards bodies). We will usually decline reviews of features that have only been developed by a single organization.
+
+        * Use links to content rather than pasting text into this issue. Issues are ephemeral and most of the material we are asking for has long term value.
+        * Please preview the issue and check that the links work before submitting.
+        * Please make sure anyone with the link can access the document, especially if you've used Google Docs. We may refuse to review anything that is not public.
+
+  - type: input
+    attributes:
+      label: Specification
+      placeholder: Enter a URL.
+      value: "https://"
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Explainer
+      description: |
+        An explainer must describe the problem that your proposed feature aims to solve **from an end-user's perspective**. It must also show example pieces of code that use the proposed solution to solve the user-facing problems. See our [explanation of how to write a good explainer](https://w3ctag.github.io/explainer-explainer/#introduction).
+
+        If all of this information is contained in your specification or other documents and will be readable by people who aren't fluent in your domain, you don't need a separate explainer.
+      placeholder: Enter a URL.
+      value: "https://"
+
+  - type: textarea
+    attributes:
+      label: Links
+      description: Link to the sections of documents that are relevant to our review.
+      value: |
+        - Previous early design review, if any: https://github.com/w3ctag/design-reviews/issues/####
+        - An introduction to the feature, aimed at unfamiliar audiences: https://  <!-- Can be the specification's or explainer's introduction, or another section. -->
+        - A description of the problems that end-users were facing before this proposal: https://  <!-- See https://w3ctag.github.io/explainer-explainer/#end-user-need -->
+        - Alternatives considered: https://  <!-- See https://w3ctag.github.io/explainer-explainer/#alternatives -->
+        - Examples of how to use the proposal to solve the end-users' problems: https://  <!-- See https://w3ctag.github.io/explainer-explainer/#describe-proposal -->
+        - What do the end-users experience with this proposal: https://  <!-- See https://w3ctag.github.io/explainer-explainer/#describe-proposal -->
+        - User research you did to validate the problem and/or design, if any: https://
+        - Web Platform Tests:  <!-- Or other tests if this is not a web platform feature. -->
+
+  - type: checkboxes
+    attributes:
+      label: The specification
+      options:
+        - label: Follows the [Web Platform Design Principles](https://www.w3.org/TR/design-principles/).
+        - label: Includes Security and Privacy Considerations sections based on answers to the [Security/Privacy Questionnaire](https://www.w3.org/TR/security-privacy-questionnaire/).
+
+  - type: textarea
+    attributes:
+      label: Where and by whom is the work is being done?
+      value: |
+        - GitHub repo:
+        - Primary contacts:
+          - $name (@-mention), $organization/s, $role in developing specification
+          - <!-- repeat as necessary, we recommend including group chairs and editors in this list -->
+        - Organization/project driving the specification:
+        - This work is being funded by:
+        - Primary standards group developing this feature:
+        - Group intended to standardize this work: <!-- if different from the current group -->
+        - Incubation and standards groups that have discussed the design:
+          - {{ABC CG}} <!-- Include a link to minutes or issues in this group if possible. -->
+          - {{DEF WG}}
+
+  - type: textarea
+    attributes:
+      label: Feedback so far
+      description: |
+        For your own organization, you can simply state the organization's position instead of linking to it.  This includes items on [Mozilla standards-positions](https://github.com/mozilla/standards-positions), and [WebKit standards-positions](https://github.com/WebKit/standards-positions).  Chromium doesn't have a standards-positions repository and [prefers](https://source.chromium.org/chromium/chromium/src/+/main:docs/standards/positions/GoogleChrome/README.md) to use comments from the teams that maintain the relevant area of their codebase.
+      value: |
+        - Multi-stakeholder feedback:
+          - Chromium comments:
+          - Mozilla comments: https://github.com/mozilla/standards-positions/issues/NNN <!-- And/or other places they've given feedback -->
+          - WebKit comments: https://github.com/WebKit/standards-positions/issues/NNN <!-- And/or other places they've given feedback -->
+          - {{...include feedback/review from developers, implementers, civil society, and others}}
+        - Major unresolved issues with or opposition to this specification:
+        - Status/issue trackers for implementations: <!-- Include links to [Chrome Status](https://chromestatus.com/), [Mozilla's](https://bugzilla.mozilla.org/), [WebKit's Bugzilla](https://bugs.webkit.org/), and trackers for other implementations if those are known to you. -->
+
+  - type: textarea
+    attributes:
+      label: You should also know that...
+      description: |
+        Please tell us anything else you think is relevant to this review.
+
+        If there are time constraints on our review, describe them here.
