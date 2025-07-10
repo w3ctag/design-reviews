@@ -36,6 +36,15 @@ body:
         - label: Includes or links to answers to the [Security/Privacy Questionnaire](https://www.w3.org/TR/security-privacy-questionnaire/).
         - label: Describes user research you did to validate the problem and/or design.
 
+  - type: checkboxes
+    attributes:
+      label: What horizontal reviews might be necessary?
+      options:
+        - label: Security and Privacy (link?)
+        - label: Accessibility (ask [APA](https://github.com/w3c/a11y-longituidinal-tracking/issues))
+        - label: Internationalization (link?)
+        - label: Others (please specify)
+
   - type: textarea
     attributes:
       label: Where and by whom is the work is being done?
