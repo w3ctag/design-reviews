@@ -16,6 +16,8 @@ body:
         * Please preview the issue and check that the links work before submitting.
         * Please make sure anyone with the link can access the document, especially if you've used Google Docs. We may refuse to review anything that is not public.
 
+        If you encounter any problems with this form, please file [issues in our process repository](https://github.com/w3ctag/process/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22design%20reviews%22).
+
   - type: input
     attributes:
       label: Explainer
