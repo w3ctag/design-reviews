@@ -42,7 +42,7 @@ body:
       label: Links
       description: Link to the sections of documents that are relevant to our review.
       value: |
-        - The WG's request for this TAG review: https://  <!-- Usually a deep link into minutes or an email thread. -->
+        - The WG's request for this TAG review: https://  <!-- If the WG didn't express consensus to ask the TAG for a review, use the "Other Specification Review" template instead, at https://github.com/w3ctag/design-reviews/issues/new?template=015-other-spec-review.yaml. This is usually a deep link into minutes or an email thread. -->
         - Previous early design review, if any: https://github.com/w3ctag/design-reviews/issues/####
         - An introduction to the feature, aimed at unfamiliar audiences: https://  <!-- Can be the specification's or explainer's introduction, or another section. -->
         - A description of the problems that end-users were facing before this proposal: https://  <!-- See https://w3ctag.github.io/explainer-explainer/#end-user-need -->
