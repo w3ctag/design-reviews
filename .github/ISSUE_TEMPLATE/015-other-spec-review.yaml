@@ -1,8 +1,8 @@
-name: Other specification review
+name: Browser implementation pre-launch review
 description: >
   If you're considering shipping a feature
   without a Working Group's endorsement.
-title: "Other Spec Review: "
+title: "Browser Implementation Review: "
 labels:
   - "Progress: untriaged"
   - "Review type: later review"
